@@ -6,13 +6,13 @@ import './index.css';
 
 import App from './containers/App/App';
 import Greeting from './components/Greeting/Greeting';
-import Post from './components/Post/Post';
+import PostList from './components/PostList/PostList';
 
 ReactDOM.render((
-    <Router history={browserHistory}>
-        <Route path="/" component={App}>
-            <IndexRoute component={Greeting} />
-            <Route path="/posts/:id" component={Post}/>
-        </Route>
-    </Router>
+  <Router history={browserHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={Greeting} />
+      <Route path="/posts" component={PostList} />
+    </Route>
+  </Router>
 ), document.getElementById('root'));
