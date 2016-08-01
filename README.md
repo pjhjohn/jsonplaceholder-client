@@ -1,9 +1,7 @@
-Below you will find some information on how to perform common tasks.  
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/template/README.md).
 
-## Sending Feedback
+# jsonplaceholder-client
 
-We are always open to [your feedback](https://github.com/facebookincubator/create-react-app/issues).
+Client program for fetching data from [Dummy REST API](http://jsonplaceholder.typicode.com/) using React & Redux based on [create-react-app](https://github.com/facebookincubator/create-react-app)
 
 ## Folder Structure
 
@@ -17,11 +15,14 @@ my-app/
   node_modules/
   package.json
   src/
-    App.css
-    App.js
-    index.css
+    assets/         # images, fonts, etc.
+    components/
+    containers/
+    helpers/
+    utils/
     index.js
-    logo.svg
+    index.css       # global css for index.js
+    README.md
 ```
 
 For the project to build, **these files must exist with exact filenames**:
