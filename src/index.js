@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, broswerHistory, IndexRoute } from 'react-router';
+import {Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 import './index.css';
 
@@ -9,10 +9,9 @@ import Greeting from './components/Greeting/Greeting';
 import Post from './components/Post/Post';
 
 ReactDOM.render((
-    <Router history={broswerHistory}>
+    <Router history={browserHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={Greeting} />
-            <Route path="/aaa" component={Post}/>
             <Route path="/posts/:id" component={Post}/>
         </Route>
     </Router>
