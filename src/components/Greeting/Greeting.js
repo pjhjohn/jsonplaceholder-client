@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'react-router';
 import logo from './../../assets/images/logo.svg';
 import './Greeting.css';
 
@@ -8,6 +9,7 @@ class Greeting extends React.Component {
       <div className="Greeting-header">
         <img src={logo} className="Greeting-logo" alt="logo" />
         <h2>Welcome to React</h2>
+
       </div>
     )
   }
