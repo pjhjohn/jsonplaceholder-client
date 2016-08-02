@@ -26,7 +26,7 @@ class PostList extends React.Component {
     let posts = mockPost.map(post => <Post key={post.id} {...post} />);
     return (
       <div>
-        <h1>this is posts</h1>
+        <h1> {window.location.pathname} </h1>
         {posts}
       </div>
     );
