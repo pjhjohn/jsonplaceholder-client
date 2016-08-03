@@ -13,6 +13,7 @@ ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Greeting} />
+      <Route path="/Home" component={Greeting} />
       <Route path="/posts" component={PostList} />
       <Route path="/posts/:id" component={Post} />
     </Route>
