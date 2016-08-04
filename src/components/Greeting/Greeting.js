@@ -4,7 +4,7 @@ import logo from './../../assets/images/logo.svg';
 import './Greeting.css';
 import '../Spectre.css';
 
-import Tap from '../Tap/Tap';
+import Tab from '../Tab/Tab';
 
 class Greeting extends React.Component {
   render() {
@@ -12,14 +12,14 @@ class Greeting extends React.Component {
       <div>
         <div className="Greeting-header text-center">
           <img src={logo} className="Greeting-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2 className="margin_zero">Welcome to React</h2>
         </div>
         <ul className="tab tab-block">
-          <Tap menuName="Home"/>
-          <Tap menuName="Artist"/>
-          <Tap menuName="Posts"/>
-          <Tap menuName="Apply"/>
-          <Tap menuName="Support"/>
+          <Tab menuName="Home"/>
+          <Tab menuName="Artist"/>
+          <Tab menuName="Posts"/>
+          <Tab menuName="Apply"/>
+          <Tab menuName="Support"/>
         </ul>
       </div>
     )

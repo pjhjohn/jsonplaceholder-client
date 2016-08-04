@@ -1,11 +1,7 @@
 import React from 'react';
 
 import '../Spectre.css';
-import '../Cool.css';
-
-// const divstyle = {
-//     backgorundColor: '#0066FF'
-// };
+import './Post.css';
 
 class Post extends React.Component {
   render() {

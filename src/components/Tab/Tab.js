@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../Spectre.css';
 
-class Tap extends React.Component {
+class Tab extends React.Component {
   render() {
     return(
       <li className="tab-item">
@@ -12,4 +12,4 @@ class Tap extends React.Component {
   }
 }
 
-export default Tap;
+export default Tab;
