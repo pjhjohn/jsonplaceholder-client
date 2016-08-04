@@ -1,10 +1,11 @@
 import React, {Component} from "react";
-import "./App.css";
+import Greeting from '../../components/Greeting/Greeting';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="container grid-960">
+        <Greeting />
         {this.props.children}
       </div>
     );

@@ -1,6 +1,8 @@
 import React from 'react';
 import Post from '../Post/Post'
 
+import '../Spectre.css'
+
 let mockPost = [
 {
   "userId": 1,
@@ -19,15 +21,24 @@ let mockPost = [
   "id": 3,
   "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
   "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut"
-}]
+},
+{
+  "userId": 1,
+  "id": 4,
+  "title": "eum et est occaecati",
+  "body": "ullam et saepe reiciendis voluptatem adipisci\nsit amet autem assumenda provident rerum culpa\nquis hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt voluptatem rerum illo velit"
+}
+]
 
 class PostList extends React.Component {
   render() {
     let posts = mockPost.map(post => <Post key={post.id} {...post} />);
     return (
       <div>
-        <h1>this is posts</h1>
-        {posts}
+        <h1 className="text-center"> {window.location.pathname} </h1>
+        <div className="columns">
+          {posts}
+        </div>
       </div>
     );
   }
