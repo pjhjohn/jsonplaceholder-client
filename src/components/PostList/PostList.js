@@ -2,7 +2,6 @@ import React from 'react';
 
 import Post from '../Post/Post';
 
-import '../../Spectre.css';
 import './PostList.css';
 
 let mockPost = [

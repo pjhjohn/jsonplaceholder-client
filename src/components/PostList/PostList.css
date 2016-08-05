@@ -1,1 +1,11 @@
-/* TODO : Implement Style */
+.text-center {
+  text-align: center;
+}
+
+.columns {
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  margin-left: -1rem;
+  margin-right: -1rem;
+}

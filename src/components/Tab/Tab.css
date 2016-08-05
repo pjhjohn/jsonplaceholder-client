@@ -1,1 +1,39 @@
-/* TODO : Implement Style */
+.base {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .base {
+    float: left
+  }
+}
+
+.link {
+  padding: 10px 15px;
+  line-height: 20px;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  text-decoration: none;
+  background-color: transparent;
+  color: #00AAFF;
+}
+
+.link :hover {
+  color: #333;
+  background-color: transparent
+}
+
+.link :focus {
+  color: #333;
+  background-color: transparent
+}
+
+@media (min-width: 768px) {
+  .link{
+    padding-top: 15px;
+    padding-bottom: 15px
+  }
+}
