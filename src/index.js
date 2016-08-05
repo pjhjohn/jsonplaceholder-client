@@ -6,7 +6,7 @@ import './index.css';
 
 import App from './containers/App/App';
 import Greeting from './components/Greeting/Greeting';
-import PostList from './components/PostList/PostList';
+import PostIndex from './components/PostIndex/PostIndex';
 import Post from './components/Post/Post';
 import Error404 from './components/Error404/Error404';
 
@@ -15,7 +15,7 @@ ReactDOM.render((
     <Route path="/" component={App}>
       <IndexRoute component={Greeting} />
       <Route path="home" component={Greeting} />
-      <Route path="posts" component={PostList} />
+      <Route path="posts" component={PostIndex} />
       <Route path="posts/:id" component={Post} />
       <Route path="*" component={Error404} />
     </Route>
