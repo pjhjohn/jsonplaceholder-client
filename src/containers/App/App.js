@@ -1,11 +1,12 @@
 import React, {Component} from "react";
-import Greeting from '../../components/Greeting/Greeting';
+
+import Navbar from '../../containers/Navbar/Navbar';
 
 class App extends Component {
   render() {
     return (
       <div className="container grid-960">
-        <Greeting />
+        <Navbar />
         {this.props.children}
       </div>
     );
