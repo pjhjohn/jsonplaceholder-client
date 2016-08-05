@@ -5,24 +5,39 @@ Client program for fetching data from [Dummy REST API](http://jsonplaceholder.ty
 
 ## Folder Structure
 
-After creation, your project should look like this:
-
 ```
-my-app/
-  README.md
-  index.html
-  favicon.ico
+jsonplaceholder-client/
+  config/
+    flow/
+      css.js.flow
+      file.js.flow
+    babel.dev.js
+    babel.prod.js
+    eslint.js
+    paths.js
+    polyfills.js
+    webpack.config.dev.js
+    webpack.config.prod.js
   node_modules/
-  package.json
+    ...
+  scripts/
+    utils/
+      chrome.applescript
+      prompt.js
+    build.js
+    start.js
   src/
-    assets/         # images, fonts, etc.
+    assets/         # Asset files including images, fonts, etc.
     components/
     containers/
-    helpers/
-    utils/
+    index.css
     index.js
-    index.css       # global css for index.js
     README.md
+  .gitignore
+  favicon.ico
+  index.html
+  package.json
+  README.md
 ```
 
 For the project to build, **these files must exist with exact filenames**:
@@ -65,13 +80,7 @@ Your app is ready to be deployed!
 
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**Already ejected from create-react-app**
 
 ## How To...
 

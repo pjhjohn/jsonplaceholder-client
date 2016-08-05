@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
-import './index.css';
-
 import { App } from './containers';
+
 import { Greeting, PostIndex, Post, Error404 } from './components';
+
+import './index.css';
 
 ReactDOM.render((
   <Router history={browserHistory}>
