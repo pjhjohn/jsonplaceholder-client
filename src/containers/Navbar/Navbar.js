@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Tab from '../../components/Tab/Tab';
+import { Tab } from './../../components';
 
 class Navbar extends React.Component {
   render() {

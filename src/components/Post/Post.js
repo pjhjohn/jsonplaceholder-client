@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../Spectre.css';
+import './../../Spectre.css';
 import './Post.css';
 
 class Post extends React.Component {

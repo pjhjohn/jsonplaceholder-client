@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Post from '../Post/Post';
+import { Post } from './..';
 
-import '../../Spectre.css';
+import './../../Spectre.css';
 import './PostList.css';
 
 class PostList extends React.Component {

@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, browserHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 import './index.css';
 
-import App from './containers/App/App';
-import Greeting from './components/Greeting/Greeting';
-import PostIndex from './components/PostIndex/PostIndex';
-import Post from './components/Post/Post';
-import Error404 from './components/Error404/Error404';
+import { App } from './containers';
+import { Greeting, PostIndex, Post, Error404 } from './components';
 
 ReactDOM.render((
   <Router history={browserHistory}>

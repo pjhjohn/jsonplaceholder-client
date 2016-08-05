@@ -1,6 +1,7 @@
 module.exports = {
   babelrc: false,
   presets: [
+    'babel-preset-stage-0',
     'babel-preset-es2015',
     'babel-preset-es2016',
     'babel-preset-react'

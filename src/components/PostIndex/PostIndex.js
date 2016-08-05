@@ -1,7 +1,8 @@
 import React from 'react';
-import PostList from '../PostList/PostList';
 
-import '../../Spectre.css';
+import { PostList } from './..';
+
+import './../../Spectre.css';
 import './PostIndex.css';
 
 let mockPost = [
