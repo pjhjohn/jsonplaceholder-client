@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'; // glue for redux and react
 
 import { Post } from './..';
+
 import './../../Spectre.css';
 import './PostList.css';
 
