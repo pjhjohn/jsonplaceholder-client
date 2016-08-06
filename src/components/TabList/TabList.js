@@ -15,7 +15,7 @@ class TabList extends React.Component {
           <ul className="base">
             <span className="pseudoBefore" />
               <Tab name="Home" />
-              <Tab name="Artist" />
+              <Tab name="Artists" />
               <Tab name="Posts" />
               <Tab name="Apply" />
               <Tab name="Support" />
