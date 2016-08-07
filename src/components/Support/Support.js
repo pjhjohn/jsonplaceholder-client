@@ -12,8 +12,7 @@ class Support extends React.Component {
       <div>
         <h1 className="text-center"> This is Support page </h1>
         <h4 className="text-center"> ↓ If you want to help, please contact to here ↓ </h4>
-        <h1 className="text-center"> support@3000won.com </h1>
-        /* Need inquire form (for example, text input box) */
+        <h1 className="text-center"> * support@nofetan.com * </h1>
       </div>
     )
   }

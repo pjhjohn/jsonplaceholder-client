@@ -11,7 +11,6 @@ class Artists extends React.Component {
     return (
       <div>
         <h1 className="text-center"> This is a Artists page </h1>
-        /* Need artists form. But where? */
       </div>
     )
   }
