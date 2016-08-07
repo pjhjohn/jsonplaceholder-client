@@ -1,7 +1,6 @@
 import React from 'react';
 
-import './../../Spectre.css';
-import './Post.css';
+import './Post.scss';
 
 class Post extends React.Component {
   render() {
