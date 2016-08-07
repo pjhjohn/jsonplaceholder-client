@@ -30,7 +30,6 @@ class PostList extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log('mapStateToProps',state.posts);
   return {
     posts: state.posts
   };
