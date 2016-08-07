@@ -55,7 +55,7 @@ module.exports = {
       {
         test: /\.scss$/,
         include: [paths.appSrc, paths.appNodeModules],
-        loader: 'style!css!postcss!sass'
+        loader: 'style!css?sourceMap!postcss!sass?sourceMap'
       },
       {
         test: /\.json$/,
