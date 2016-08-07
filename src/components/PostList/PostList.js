@@ -1,12 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux'; // glue for redux and react
+import { bindActionCreators } from 'redux';
 
+import { fetchPosts } from '../../actions/index';
 import { Post } from './..';
 
 import './../../Spectre.css';
 import './PostList.css';
 
+
 class PostList extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.props.fetchPosts();
+  }
+
   render() {
     let posts = this.props.posts.map(post => <Post key={post.id} {...post} />);
     return (
@@ -21,9 +30,14 @@ class PostList extends React.Component {
 }
 
 function mapStateToProps(state) {
+  console.log('mapStateToProps',state.posts);
   return {
     posts: state.posts
   };
 }
 
-export default connect(mapStateToProps)(PostList);
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ fetchPosts }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostList);
