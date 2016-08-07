@@ -1,5 +1,8 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
+// Load variables and base styles
+@import './_variables.scss';
+
+// Component Styles
+@import './components/index.scss';
+
+// Container Styles
+@import './containers/index.scss';

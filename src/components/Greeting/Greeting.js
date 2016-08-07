@@ -2,8 +2,6 @@ import React from 'react';
 
 import logo from './../../assets/images/logo.svg';
 
-import './Greeting.scss';
-
 class Greeting extends React.Component {
   render() {
     return (

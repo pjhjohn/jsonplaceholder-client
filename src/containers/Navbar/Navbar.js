@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Tab } from './../../components';
 
-import './Navbar.scss';
-
 class Navbar extends React.Component {
   render() {
     return (

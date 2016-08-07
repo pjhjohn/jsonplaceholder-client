@@ -3,8 +3,6 @@ import { connect } from 'react-redux'; // glue for redux and react
 
 import { Post } from './..';
 
-import './PostList.scss';
-
 class PostList extends React.Component {
   render() {
     let posts = this.props.posts.map(post => <Post key={post.id} {...post} />);

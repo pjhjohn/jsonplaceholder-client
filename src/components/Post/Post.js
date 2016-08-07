@@ -1,20 +1,16 @@
 import React from 'react';
 
-import './Post.scss';
-
 class Post extends React.Component {
   render() {
     return (
-      <div className="col-2_5 centered">
+      <div className="column col-3">
         <div className="card">
           <div className="card-header">
-            <div className="card-title text-center"> Post Title : {this.props.title} </div>
-            <div className="card-meta text-center"> Post Number : {this.props.id} </div>
+            <div className="card-title"> #{this.props.id} : {this.props.title} </div>
           </div>
         <div className="card-body">
-          Post : {this.props.body}
+          {this.props.body}
         </div>
-        <button className="btn btn-sm centered"> IINE! </button>
       </div>
       </div>
     )

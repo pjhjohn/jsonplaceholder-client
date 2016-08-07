@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import './Tab.scss';
-
 class Tab extends React.Component {
   render() {
     return (

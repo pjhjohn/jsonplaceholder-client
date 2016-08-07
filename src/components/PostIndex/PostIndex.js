@@ -2,13 +2,11 @@ import React from 'react';
 
 import { PostList } from './..';
 
-import './PostIndex.scss';
-
 class PostIndex extends React.Component {
   render() {
     return (
       <div>
-        <h1>this is post </h1>
+        <h1 className="text-center">PostIndex</h1>
         <PostList />
       </div>
     );
