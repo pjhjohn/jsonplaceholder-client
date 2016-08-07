@@ -1,18 +1,23 @@
 import React from 'react';
 
-import { Tab } from './../../components';
+import './Navbar.css';
+
+import { TabList } from './../../components';
+
 
 class Navbar extends React.Component {
   render() {
     return (
-      <ul className="tab tab-block">
-        <Tab menuName="Home"/>
-        <Tab menuName="Artist"/>
-        <Tab menuName="Posts"/>
-        <Tab menuName="Apply"/>
-        <Tab menuName="Support"/>
-      </ul>
-    );
+      <nav className="navbar">
+        <span className="pseudoBefore" />
+          <div className="container">
+            <span className="pseudoBefore" />
+              <TabList />
+            <span className="pseudoAfter" />
+          </div>
+        <span className="pseudoAfter" />
+      </nav>
+    )
   }
 }
 

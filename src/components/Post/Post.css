@@ -1,23 +1,90 @@
 .card {
-    border-color: #0000FF;
-    padding-bottom: .5em;
+  background: #fff;
+  border: .1rem solid #0000FF;
+  border-radius: .3rem;
+  display: block;
+  margin: 0;
+  text-align: left;
+  z-index: 999;
+  padding-bottom: .5em;
+}
+
+.card .card-header,
+.card .card-body,
+.card .card-footer {
+  padding: 1.5rem 1.5rem 0 1.5rem;
+}
+
+.card .card-header:last-child,
+.card .card-body:last-child,
+.card .card-footer:last-child {
+  padding-bottom: 1.5rem;
+}
+
+.card .card-image {
+  padding-top: 1.5rem;
 }
 
 .card .card-title {
-    background-color: rgba(0, 106, 255, .5);
-    padding-bottom: 3px;
-    border-radius: .3rem;
+  font-size: 1.4em;
+  line-height: 1;
+  margin-bottom: .5rem;
+  margin-top: 0;
+  background-color: rgba(0, 106, 255, .5);
+  padding-bottom: 3px;
+  border-radius: .3rem;
 }
-
 .card .card-meta {
-    background-color: rgba(0, 106, 255, .9);
-    border-radius: .7rem;
+  color: #b3b3b3;
+  font-size: 1em;
+  margin-bottom: 0;
+  margin-top: 0;
+  background-color: rgba(0, 106, 255, .9);
+  border-radius: .7rem;
 }
 
 .card .card-body {
-    padding-bottom : .5em;
+  padding-bottom : .5em;
 }
 
 .col-2_5 {
-    width: 20.83333333333333%;
+  width: 20.83333333333333%;
+}
+
+.btn {
+  -webkit-appearance: none;
+  background: transparent;
+  border: .1rem solid #5764c6;
+  border-radius: .3rem;
+  color: #5764c6;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.4rem;
+  height: 3.2rem;
+  line-height: 1.6rem;
+  outline: 0;
+  padding: .7rem 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.btn.btn-sm {
+  border-radius: .2rem;
+  font-size: 1.2rem;
+  height: 2.4rem;
+  line-height: 1.4rem;
+  padding: .4rem 1rem;
+}
+
+.centered {
+  display: block;
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
 }

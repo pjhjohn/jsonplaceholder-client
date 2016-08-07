@@ -2,7 +2,6 @@ import React from 'react';
 
 import { PostList } from './..';
 
-import './../../Spectre.css';
 import './PostIndex.css';
 
 class PostIndex extends React.Component {

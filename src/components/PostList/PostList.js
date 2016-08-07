@@ -3,7 +3,6 @@ import { connect } from 'react-redux'; // glue for redux and react
 
 import { Post } from './..';
 
-import './../../Spectre.css';
 import './PostList.css';
 
 class PostList extends React.Component {
