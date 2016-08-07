@@ -1,8 +1,9 @@
 import React from 'react';
 
-import TabList from '../../components/TabList/TabList';
-
 import './Navbar.css';
+
+import { TabList } from './../../components';
+
 
 class Navbar extends React.Component {
   render() {

@@ -1,6 +1,10 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# production
+# Sourcemap
+*-compiled.js
+*-compiled.js.map
+
+# Production
 build
 
 # Created by https://www.gitignore.io/api/webstorm,node,windows,linux,macos
