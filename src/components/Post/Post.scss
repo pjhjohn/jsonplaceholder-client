@@ -1,0 +1,50 @@
+.col-3 {
+  width: 25%;
+}
+
+.card {
+  background: #fff;
+  border: .1rem solid #efefef;
+  border-radius: .3rem;
+  display: block;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  z-index: 999;
+}
+.card .card-header,
+.card .card-body,
+.card .card-footer {
+  padding: 1.5rem 1.5rem 0 1.5rem;
+}
+.card .card-header:last-child,
+.card .card-body:last-child,
+.card .card-footer:last-child {
+  padding-bottom: 1.5rem;
+}
+.card .card-image {
+  padding-top: 1.5rem;
+}
+.card .card-image:first-child {
+  padding-top: 0;
+}
+.card .card-image:first-child img {
+  border-top-left-radius: .3rem;
+  border-top-right-radius: .3rem;
+}
+.card .card-image:last-child img {
+  border-bottom-left-radius: .3rem;
+  border-bottom-right-radius: .3rem;
+}
+.card .card-title {
+  font-size: 1.4em;
+  line-height: 1;
+  margin-bottom: .5rem;
+  margin-top: 0;
+}
+.card .card-meta {
+  color: #b3b3b3;
+  font-size: 1em;
+  margin-bottom: 0;
+  margin-top: 0;
+}

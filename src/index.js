@@ -11,7 +11,7 @@ import { App } from './containers';
 
 import { Greeting, PostIndex, Post, Error404 } from './components';
 
-import './index.css';
+import './index.scss';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 

@@ -5,10 +5,6 @@ import { bindActionCreators } from 'redux';
 import { fetchPosts } from '../../actions/index';
 import { Post } from './..';
 
-import './../../Spectre.css';
-import './PostList.css';
-
-
 class PostList extends React.Component {
   constructor(props){
     super(props);
