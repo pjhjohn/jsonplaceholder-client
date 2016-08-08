@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux'; // glue for redux and react
 import { bindActionCreators } from 'redux';
 
@@ -16,6 +17,9 @@ class PostList extends React.Component {
     let posts = this.props.posts.map(post => <Post key={post.id} {...post} />);
     return (
       <div>
+        <Helmet
+          title="PostList"
+        />
         <h1 className="text-center"> {window.location.pathname} </h1>
         <div className="row">
           {posts}
