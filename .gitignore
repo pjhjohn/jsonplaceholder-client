@@ -1,6 +1,14 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# production
+# Use .scss
+src/*.css
+src/*.css.map
+
+# Sourcemap
+*-compiled.js
+*-compiled.js.map
+
+# Production
 build
 
 # Created by https://www.gitignore.io/api/webstorm,node,windows,linux,macos

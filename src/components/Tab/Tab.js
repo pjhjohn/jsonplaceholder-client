@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import '../../Spectre.css';
-import './Tab.css';
-
 class Tab extends React.Component {
   render() {
     return (

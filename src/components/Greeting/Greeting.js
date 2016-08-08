@@ -3,8 +3,6 @@ import Helmet from 'react-helmet';
 
 import logo from './../../assets/images/logo.svg';
 
-import './Greeting.css';
-
 class Greeting extends React.Component {
   render() {
     return (

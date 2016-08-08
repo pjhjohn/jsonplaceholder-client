@@ -1,23 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, browserHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
-import './index.css';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxPromise from 'redux-promise';
 
-import App from './containers/App/App';
-import Greeting from './components/Greeting/Greeting';
-import PostList from './components/PostList/PostList';
-import Post from './components/Post/Post';
-import Error404 from './components/Error404/Error404';
+import reducers from './reducers';
+import { App } from './containers';
+
+import { Greeting, PostIndex, Error404, PostSingle } from './components';
+
+import './index.scss';
+
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+
 
 ReactDOM.render((
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute component={Greeting} />
-      <Route path="home" component={Greeting} />
-      <Route path="posts" component={PostList} />
-      <Route path="posts/:id" component={Post} />
-      <Route path="*" component={Error404} />
-    </Route>
-  </Router>
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Greeting} />
+        <Route path="home" component={Greeting} />
+        <Route path="posts" component={PostIndex} />
+        <Route path="posts/:id" component={PostSingle} />
+        <Route path="*" component={Error404} />
+      </Route>
+    </Router>
+  </Provider>
 ), document.getElementById('root'));

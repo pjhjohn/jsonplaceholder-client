@@ -1,0 +1,11 @@
+// Load global-customized bootstrap
+@import './_bootstrap.scss';
+
+// Load variables and base styles
+@import './_variables.scss';
+
+// Component Styles
+@import './components/index.scss';
+
+// Container Styles
+@import './containers/index.scss';
