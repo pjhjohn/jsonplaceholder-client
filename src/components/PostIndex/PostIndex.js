@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PostList } from './..';
+import PostList from './../PostList/PostList';
 
 class PostIndex extends React.Component {
   render() {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'; // glue for redux and react
 import { bindActionCreators } from 'redux';
 
 import { fetchSinglePost } from './../../actions';
-import { Post } from './..';
+import Post from './../Post/Post';
 
 class PostSingle extends React.Component {
   constructor(props){
