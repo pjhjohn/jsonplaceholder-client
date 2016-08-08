@@ -1,10 +1,7 @@
 import React from 'react';
-<<<<<<< HEAD
 import Helmet from 'react-helmet';
-=======
 import { connect } from 'react-redux'; // glue for redux and react
 import { bindActionCreators } from 'redux';
->>>>>>> 588940f53b408bf355382fdda9a207cef3758b7d
 
 import { fetchPosts } from './../../actions';
 import { Post } from './..';
