@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import Post from '../Post/Post';
 
@@ -37,6 +38,9 @@ class PostList extends React.Component {
     let posts = mockPost.map(post => <Post key={post.id} {...post} />);
     return (
       <div>
+        <Helmet
+          title="PostList"
+        />
         <h1 className="text-center"> {window.location.pathname} </h1>
         <div className="columns">
           {posts}
