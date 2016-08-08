@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'; // glue for redux and react
 import { bindActionCreators } from 'redux';
 
-import { fetchSinglePost } from '../../actions/index';
+import { fetchSinglePost } from './../../actions';
 import { Post } from './..';
 
 class PostSingle extends React.Component {
@@ -16,7 +16,7 @@ class PostSingle extends React.Component {
     return (
       <div>
         <h1 className="text-center"> {window.location.pathname} </h1>
-        <div className="columns">
+        <div className="row">
           <Post key={this.props.post.id} {...this.props.post} />
         </div>
       </div>

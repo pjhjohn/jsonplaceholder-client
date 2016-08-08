@@ -9,7 +9,7 @@ import ReduxPromise from 'redux-promise';
 import reducers from './reducers';
 import { App } from './containers';
 
-import { Greeting, PostIndex, Post, Error404, PostSingle } from './components';
+import { Greeting, PostIndex, Error404, PostSingle } from './components';
 
 import './index.scss';
 

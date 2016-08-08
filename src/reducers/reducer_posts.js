@@ -1,4 +1,4 @@
-import { FETCH_POSTS, FETCH_SINGLE_POST } from '../actions/index';
+import { FETCH_POSTS, FETCH_SINGLE_POST } from './../actions';
 
 export default function (state=[], action){
   switch (action.type) {
@@ -6,6 +6,7 @@ export default function (state=[], action){
       return action.payload.data;
     case FETCH_SINGLE_POST:
       return action.payload.data;
+    default:
+      return state;
   }
-  return state;
 }

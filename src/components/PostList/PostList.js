@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'; // glue for redux and react
 import { bindActionCreators } from 'redux';
 
-import { fetchPosts } from '../../actions/index';
+import { fetchPosts } from './../../actions';
 import { Post } from './..';
 
 class PostList extends React.Component {
@@ -17,7 +17,7 @@ class PostList extends React.Component {
     return (
       <div>
         <h1 className="text-center"> {window.location.pathname} </h1>
-        <div className="columns">
+        <div className="row">
           {posts}
         </div>
       </div>
