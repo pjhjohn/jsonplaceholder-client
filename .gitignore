@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Use .scss
+src/*.css
+src/*.css.map
+
 # Sourcemap
 *-compiled.js
 *-compiled.js.map
