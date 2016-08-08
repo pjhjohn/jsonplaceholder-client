@@ -17,7 +17,7 @@ class PostSingle extends React.Component {
       <div>
         <h1 className="text-center"> {window.location.pathname} </h1>
         <div className="columns">
-          <Post id={this.props.posts.id} title={this.props.posts.title} body={this.props.posts.body} />
+          <Post key={this.props.post.id} {...this.props.post} />
         </div>
       </div>
     );
@@ -26,7 +26,7 @@ class PostSingle extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts
+    post: state.posts
   };
 }
 
