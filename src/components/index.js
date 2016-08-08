@@ -4,3 +4,4 @@ export Post from './Post/Post';
 export PostIndex from './PostIndex/PostIndex';
 export PostList from './PostList/PostList';
 export Tab from './Tab/Tab';
+export PostSingle from './PostSingle/PostSingle';
