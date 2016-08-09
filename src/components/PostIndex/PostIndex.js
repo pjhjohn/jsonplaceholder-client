@@ -7,9 +7,7 @@ class PostIndex extends React.Component {
   render() {
     return (
       <div>
-        <Helmet
-          title="Posts"
-        />
+        <Helmet title="Posts" />
         <h1 className="text-center">PostIndex</h1>
         <PostList />
       </div>

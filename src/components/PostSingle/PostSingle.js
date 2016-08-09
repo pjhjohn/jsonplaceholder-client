@@ -16,9 +16,7 @@ class PostSingle extends React.Component {
   render() {
     return (
       <div>
-        <Helmet
-          title={this.props.post.title}
-        />
+        <Helmet title={this.props.post.title} />
         <h1 className="text-center"> {window.location.pathname} </h1>
         <div className="row">
           <Post key={this.props.post.id} {...this.props.post} />
