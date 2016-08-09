@@ -5,7 +5,7 @@ class Tab extends React.Component {
   render() {
     return (
       <li className="tab-item">
-        <Link to={this.props.menuName}> {this.props.menuName} </Link>
+        <Link to={this.props.menuName.toLowerCase()}> {this.props.menuName} </Link>
       </li>
     )
   }
