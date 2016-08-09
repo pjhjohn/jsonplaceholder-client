@@ -6,7 +6,7 @@ class Error404 extends React.Component {
     return (
       <div>
         <Helmet title="Not Found" />
-        <h1 className="text-center"> Not Founded! </h1>
+        <h1 className="text-center"> Not Found! </h1>
       </div>
     )
   }
