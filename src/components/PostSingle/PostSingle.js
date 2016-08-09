@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux'; // glue for redux and react
 import { bindActionCreators } from 'redux';
 
@@ -15,6 +16,9 @@ class PostSingle extends React.Component {
   render() {
     return (
       <div>
+        <Helmet
+          title={this.props.post.title}
+        />
         <h1 className="text-center"> {window.location.pathname} </h1>
         <div className="row">
           <Post key={this.props.post.id} {...this.props.post} />
