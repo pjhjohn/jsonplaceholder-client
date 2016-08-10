@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux'; // glue for redux and react
 import { bindActionCreators } from 'redux';
 
-import { fetchPosts } from './../../actions';
+import { fetchAllPosts } from './../../actions';
 import Post from './../Post/Post';
 
 class PostList extends React.Component {
   constructor(props){
     super(props);
 
-    this.props.fetchPosts();
+    this.props.fetchAllPosts();
   }
 
   render() {
@@ -32,7 +32,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchPosts }, dispatch);
+  return bindActionCreators({ fetchAllPosts }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);
