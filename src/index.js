@@ -9,7 +9,7 @@ import ReduxPromise from 'redux-promise';
 import reducers from './reducers';
 import { App } from './containers';
 
-import { Greeting, PostIndex, Error404, PostSingle } from './components';
+import { Greeting, PostIndex, Error404, PostSingle, Posting } from './components';
 
 import './index.scss';
 
@@ -24,6 +24,7 @@ ReactDOM.render((
         <Route path="home" component={Greeting} />
         <Route path="posts" component={PostIndex} />
         <Route path="posts/:id" component={PostSingle} />
+        <Route path="posting" component={Posting} />
         <Route path="*" component={Error404} />
       </Route>
     </Router>
