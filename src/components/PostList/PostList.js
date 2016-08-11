@@ -9,17 +9,28 @@ class PostList extends React.Component {
   constructor(props){
     super(props);
 
-    this.props.fetchPosts();
+    this.props.fetchPosts(0);
+    this.onFetchPosts = this.onFetchPosts.bind(this);
+  }
+
+  onFetchPosts(postLength) {
+    this.props.fetchPosts(postLength)
   }
 
   render() {
-    let posts = this.props.posts.map(post => <Post key={post.id} {...post} />);
+    let posts = this.props.posts.map((post) => <Post key={post.id} {...post} />);
+    let postLength = this.props.posts.length;
     return (
       <div>
         <h1 className="text-center"> {window.location.pathname} </h1>
         <div className="row">
           {posts}
         </div>
+
+        <button className="col-md-12"
+          onClick={() => this.onFetchPosts(postLength)}>
+          로오딩
+        </button>
       </div>
     );
   }
