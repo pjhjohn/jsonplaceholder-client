@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux'; // glue for redux and react
 import { bindActionCreators } from 'redux';
 
-import { fetchInitPosts } from './../../actions';
 import { fetchPosts } from './../../actions';
 import Post from './../Post/Post';
 
@@ -10,7 +9,7 @@ class PostList extends React.Component {
   constructor(props){
     super(props);
 
-    this.props.fetchInitPosts();
+    this.props.fetchPosts(0);
     this.onFetchPosts = this.onFetchPosts.bind(this);
   }
 
@@ -19,8 +18,7 @@ class PostList extends React.Component {
   }
 
   render() {
-    const { dispatch } = this.props;
-    let posts = this.props.posts.map(post => <Post key={post.id} {...post} />);
+    let posts = this.props.posts.map((post, i) => <Post key={i} {...post} />);
     let postLength = this.props.posts.length;
     return (
       <div>
@@ -30,7 +28,7 @@ class PostList extends React.Component {
         </div>
 
         <button className="col-md-12"
-          onClick={postLength => dispatch(this.onFetchPosts(postLength))}>
+          onClick={() => this.onFetchPosts(postLength)}>
           로오딩
         </button>
       </div>
@@ -45,7 +43,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchInitPosts,fetchPosts }, dispatch);
+  return bindActionCreators({ fetchPosts }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);

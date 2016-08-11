@@ -1,20 +1,9 @@
 import axios from 'axios';
 
-export const FETCH_INIT_POSTS = 'FETCH_INIT_POSTS';
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const FETCH_SINGLE_POST = 'FETCH_SINGLE_POST';
 
 const ROOT_URL = 'https://jsonplaceholder.typicode.com';
-
-export function fetchInitPosts(){
-  const url = `${ROOT_URL}/posts?_end=8`;
-  const request = axios.get(url);
-
-  return {
-    type: FETCH_INIT_POSTS,
-    payload: request
-  };
-}
 
 const OFFSET = 16;
 export function fetchPosts(start){
@@ -22,7 +11,7 @@ export function fetchPosts(start){
   const request = axios.get(url);
 
   return {
-    type: FETCH_INIT_POSTS,
+    type: FETCH_POSTS,
     payload: request
   };
 }
