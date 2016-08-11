@@ -4,7 +4,6 @@
 import React from 'react';
 
 import './Posting.scss';
-import Post from './../Post/Post';
 
 class Posting extends React.Component {
 
