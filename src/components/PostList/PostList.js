@@ -18,7 +18,7 @@ class PostList extends React.Component {
   }
 
   render() {
-    let posts = this.props.posts.map((post, i) => <Post key={i} {...post} />);
+    let posts = this.props.posts.map((post) => <Post key={post.id} {...post} />);
     let postLength = this.props.posts.length;
     return (
       <div>
