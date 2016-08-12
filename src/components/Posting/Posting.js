@@ -5,18 +5,19 @@ import React from 'react';
 import { connect } from 'react-redux'; // glue for redux and react
 import { bindActionCreators } from 'redux';
 
-import { pushPost, fetchPosts } from './../../actions';
+import { pushPost, loadPost } from './../../actions';
 
 import './Posting.scss';
 
 class Posting extends React.Component {
   constructor(props){
     super(props);
-
+    this.props.loadPost();
     this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.props.fetchPosts();
   }
+
   onFormSubmit() {
+
     var post = {userId: "", id: "", title: "", body: ""};
     post.userId = document.getElementById("userId").value;
     post.id = document.getElementById("id").value;
@@ -53,6 +54,7 @@ class Posting extends React.Component {
     )
   }
 }
+
 export default Posting;
 
 function mapStateToProps(state) {
@@ -61,8 +63,8 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({ pushPost, fetchPosts }, dispatch);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ pushPost, loadPost }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posting);
