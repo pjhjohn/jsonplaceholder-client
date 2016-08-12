@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const FETCH_SINGLE_POST = 'FETCH_SINGLE_POST';
+export const PUSH_POST = 'PUSH_POST';
 
 export function fetchPosts(){
   const url = 'http://localhost:3001/posts';
@@ -14,11 +15,19 @@ export function fetchPosts(){
 }
 
 export function fetchSinglePost(postId){
-  const url = 'http://localhost:3001/posts' + postId;
+  const url = 'http://localhost:3001/posts/' + postId;
   const request = axios.get(url);
-
   return {
     type: FETCH_SINGLE_POST,
+    payload: request
+  };
+}
+
+export function pushPost(post){
+  const url = 'http://localhost:3001/posts/';
+  const request = axios.post(url, post, {headers : {'Content-Type': 'application/json'}});
+  return {
+    type: PUSH_POST,
     payload: request
   };
 }
