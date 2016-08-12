@@ -18,7 +18,6 @@ jsonplaceholder-client/
     polyfills.js
     webpack.config.dev.js
     webpack.config.prod.js
-  localServerDB/    # Database for running local server.
     ...
   node_modules/
     ...
