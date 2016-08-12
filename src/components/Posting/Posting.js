@@ -2,11 +2,10 @@
  * Created by lanie on 2016-08-10.
  */
 import React from 'react';
-
 import { connect } from 'react-redux'; // glue for redux and react
 import { bindActionCreators } from 'redux';
 
-import { pushPost } from './../../actions';
+import { pushPost, fetchPosts } from './../../actions';
 
 import './Posting.scss';
 
@@ -15,6 +14,7 @@ class Posting extends React.Component {
     super(props);
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.props.fetchPosts();
   }
   onFormSubmit() {
     var post = {userId: "", id: "", title: "", body: ""};
@@ -53,7 +53,6 @@ class Posting extends React.Component {
     )
   }
 }
-
 export default Posting;
 
 function mapStateToProps(state) {
@@ -63,7 +62,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ pushPost }, dispatch);
+  return bindActionCreators({ pushPost, fetchPosts }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posting);
