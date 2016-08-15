@@ -18,6 +18,7 @@ jsonplaceholder-client/
     polyfills.js
     webpack.config.dev.js
     webpack.config.prod.js
+    ...
   node_modules/
     ...
   scripts/
@@ -91,6 +92,37 @@ The generated project includes React and ReactDOM as dependencies. It also inclu
 ```
 npm install --save <library-name>
 ```
+
+### Run a Local Server for Local Database
+
+If you need to run a local server, you may install npm json-server.
+
+```
+$ npm install -g json-server
+```
+
+and running
+
+```
+$json-server --watch db.json
+```
+
+db.json is database file name that you want to use.
+And if you want change a port number to open local server,
+
+```
+$json-server --watch db.json --port 3001
+```
+
+Also, if you want to change a port number to access local server, change url codes in action functions. (src/actions/index.js)
+For example:
+
+```
+export function fetchPosts(){
+  const url = 'http://localhost:3001/posts'; // Change '3001' to port number you want.
+```
+
+Port number for local server of this project is set 3001.
 
 ### Import a Component
 
@@ -359,3 +391,6 @@ You may copy and paste them, or put them into a custom shell script. You may als
 ### Something Missing?
 
 If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebookincubator/create-react-app/issues) or [contribute some!](https://github.com/facebookincubator/create-react-app/edit/master/template/README.md)
+
+
+
