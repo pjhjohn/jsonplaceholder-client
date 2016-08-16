@@ -19,6 +19,7 @@
     "babel-runtime": "6.11.6",
     "bootstrap-sass": "^3.3.7",
     "chalk": "1.1.3",
+    "concurrently": "^2.2.0",
     "cross-spawn": "4.0.0",
     "css-loader": "0.23.1",
     "detect-port": "0.1.4",
@@ -58,7 +59,9 @@
     "redux-promise": "^0.5.3"
   },
   "scripts": {
-    "start": "node ./scripts/start.js",
+    "start:client": "node ./scripts/start.js",
+    "start:json-server": "json-server --watch data.json --port 3001",
+    "start": "concurrently --kill-others 'npm run start:client' 'npm run start:json-server'",
     "build": "node ./scripts/build.js"
   },
   "eslintConfig": {

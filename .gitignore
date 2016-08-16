@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Dummy DB seed file used by json-server
+/data.json
+
 # Use .scss
 src/*.css
 src/*.css.map
