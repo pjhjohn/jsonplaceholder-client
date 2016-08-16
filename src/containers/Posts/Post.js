@@ -3,14 +3,14 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux'; // glue for redux and react
 import { bindActionCreators } from 'redux';
 
-import { fetchSinglePost } from './../../actions';
-import Post from './../Post/Post';
+import { fetchPost } from './../../actions';
+import { Post as PostComponent } from './../../components';
 
-class PostSingle extends React.Component {
-  constructor(props){
+class Post extends React.Component {
+  constructor(props) {
     super(props);
 
-    this.props.fetchSinglePost(this.props.params.id);
+    this.props.fetchPost(this.props.params.id);
   }
 
   render() {
@@ -19,7 +19,7 @@ class PostSingle extends React.Component {
         <Helmet title={this.props.post.title} />
         <h1 className="text-center"> {window.location.pathname} </h1>
         <div className="row">
-          <Post key={this.props.post.id} {...this.props.post} />
+          <PostComponent key={this.props.post.id} {...this.props.post} />
         </div>
       </div>
     );
@@ -32,8 +32,8 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({ fetchSinglePost }, dispatch);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchPost }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostSingle);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

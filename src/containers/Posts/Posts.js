@@ -3,9 +3,9 @@ import { connect } from 'react-redux'; // glue for redux and react
 import { bindActionCreators } from 'redux';
 
 import { fetchPosts } from './../../actions';
-import Post from './../Post/Post';
+import { Post } from './../../components';
 
-class PostList extends React.Component {
+class Posts extends React.Component {
   constructor(props){
     super(props);
 
@@ -14,7 +14,7 @@ class PostList extends React.Component {
   }
 
   onFetchPosts(postLength) {
-    this.props.fetchPosts(postLength)
+    this.props.fetchPosts(postLength);
   }
 
   render() {
@@ -27,7 +27,7 @@ class PostList extends React.Component {
           {posts}
         </div>
 
-        <button className="col-md-12"
+        <button className="col-md-12 btn btn-default"
           onClick={() => this.onFetchPosts(postLength)}>
           로오딩
         </button>
@@ -46,4 +46,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({ fetchPosts }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostList);
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);
