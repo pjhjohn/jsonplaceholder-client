@@ -1,3 +1,6 @@
+```
+DO NOT MODIFY UNLESS NECESSARY
+```
 
 # scripts
 
@@ -11,4 +14,14 @@ Corresponding build scripts used by following `package.json`
 }
 ```
 
-## Warning : DO NOT MODIFY UNLESS NECESSARY
+### Structure
+
+```
+scripts/
+  utils/
+    chrome.applescript
+    prompt.js
+  build.js
+  start.js
+  README.md
+```

@@ -2,11 +2,15 @@
 
 ```
 src/
+  actions/
   assets/         # Asset files including images, fonts, etc.
   components/
   containers/
+  reducers/
+  _bootstrap.scss
+  _variables.scss
   index.js
-  index.css
+  index.scss
   README.md
 ```
 
@@ -18,7 +22,8 @@ You can delete or rename the other files.
 
 ## Code Style
 
-Following Code Styles are recommended
+Following Code Styles are recommended.  
+This sections will be updated considering [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) 
 
 #### Import
 > **Library Path :** `'module_name'` *(e.g. `import React from 'react'`)*  

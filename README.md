@@ -3,37 +3,14 @@
 
 Client program for fetching data from [Dummy REST API](http://jsonplaceholder.typicode.com/) using React & Redux based on [create-react-app](https://github.com/facebookincubator/create-react-app)
 
-## Folder Structure
+## Structure
 
 ```
 jsonplaceholder-client/
   config/
-    flow/
-      css.js.flow
-      file.js.flow
-    babel.dev.js
-    babel.prod.js
-    eslint.js
-    paths.js
-    polyfills.js
-    webpack.config.dev.js
-    webpack.config.prod.js
-    ...
   node_modules/
-    ...
   scripts/
-    utils/
-      chrome.applescript
-      prompt.js
-    build.js
-    start.js
   src/
-    assets/         # Asset files including images, fonts, etc.
-    components/
-    containers/
-    index.css
-    index.js
-    README.md
   .gitignore
   favicon.ico
   index.html
