@@ -1,7 +1,7 @@
 
 # jsonplaceholder-client
 
-Client program for fetching data from [Dummy REST API](http://jsonplaceholder.typicode.com/) using React & Redux based on [create-react-app](https://github.com/facebookincubator/create-react-app)
+Client program for [Dummy REST API](http://jsonplaceholder.typicode.com/) using React & Redux based on [create-react-app](https://github.com/facebookincubator/create-react-app)
 
 ## Structure
 
@@ -24,7 +24,7 @@ For the project to build, **these files must exist with exact filenames**:
 * `favicon.ico` is the icon you see in the browser tab;
 * `src/index.js` is the JavaScript entry point.
 
-You can delete or rename the other files.
+You can **delete** or **rename** the other files.
 
 You may create subdirectories inside `src`. For faster rebuilds, only files inside `src` are processed by Webpack.  
 You need to **put any JS and CSS files inside `src`**, or Webpack won’t see them.
@@ -40,58 +40,35 @@ They will not be included in the production build so you can use them for things
 
 In the project directory, you can run:
 
-### `npm start`
-
+### `npm run start:client`
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### `npm run start:json-server`
+Runs the json-server using local db using `./data.json` as seed data
+Open [http://localhost:3001](http://localhost:3001) to view it in the browser.  
+
+> **Prerequisites**  
+Install json-server in globally with `npm install -g json-server`  
+Seed data can be downloaded using following commands at project top-level directory.
+```
+# using wget
+wget https://raw.githubusercontent.com/typicode/jsonplaceholder/master/data.json
+# using curl
+curl https://raw.githubusercontent.com/typicode/jsonplaceholder/master/data.json >> data.json
+```
+
+### `npm start`
+Runs both `npm run start:client` and `npm run start:json-server` simultaneously
 
 ### `npm run build`
-
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-### `npm run eject`
-
-**Already ejected from create-react-app**
-
 ## How To...
-
-### Run a Local Server for Local Database
-
-If you need to run a local server, you may install npm json-server.
-
-```
-$ npm install -g json-server
-```
-
-and running
-
-```
-$json-server --watch db.json
-```
-
-db.json is database file name that you want to use.
-And if you want change a port number to open local server,
-
-```
-$json-server --watch db.json --port 3001
-```
-
-Also, if you want to change a port number to access local server, change url codes in action functions. (src/actions/index.js)
-For example:
-
-```
-export function fetchPosts(){
-  const url = 'http://localhost:3001/posts'; // Change '3001' to port number you want.
-```
-
-Port number for local server of this project is set 3001.
 
 ### Add Images and Fonts
 
