@@ -3,36 +3,14 @@
 
 Client program for fetching data from [Dummy REST API](http://jsonplaceholder.typicode.com/) using React & Redux based on [create-react-app](https://github.com/facebookincubator/create-react-app)
 
-## Folder Structure
+## Structure
 
 ```
 jsonplaceholder-client/
   config/
-    flow/
-      css.js.flow
-      file.js.flow
-    babel.dev.js
-    babel.prod.js
-    eslint.js
-    paths.js
-    polyfills.js
-    webpack.config.dev.js
-    webpack.config.prod.js
   node_modules/
-    ...
   scripts/
-    utils/
-      chrome.applescript
-      prompt.js
-    build.js
-    start.js
   src/
-    assets/         # Asset files including images, fonts, etc.
-    components/
-    containers/
-    index.css
-    index.js
-    README.md
   .gitignore
   favicon.ico
   index.html
@@ -84,126 +62,36 @@ Your app is ready to be deployed!
 
 ## How To...
 
-### Install a Dependency
+### Run a Local Server for Local Database
 
-The generated project includes React and ReactDOM as dependencies. It also includes a set of scripts used by Create React App as a development dependency. You may install other dependencies (for example, React Router) with `npm`:
+If you need to run a local server, you may install npm json-server.
 
 ```
-npm install --save <library-name>
+$ npm install -g json-server
 ```
 
-### Import a Component
+and running
 
-This project setup supports ES6 modules thanks to Babel.  
-While you can still use `require()` and `module.exports`, we encourage you to use [`import` and `export`](http://exploringjs.com/es6/ch_modules.html) instead.
+```
+$json-server --watch db.json
+```
 
+db.json is database file name that you want to use.
+And if you want change a port number to open local server,
+
+```
+$json-server --watch db.json --port 3001
+```
+
+Also, if you want to change a port number to access local server, change url codes in action functions. (src/actions/index.js)
 For example:
 
-### `Button.js`
-
-```js
-import React, { Component } from 'react';
-
-class Button extends Component {
-  render() {
-    // ...
-  }
-}
-
-export default Button; // Don’t forget to use export default!
+```
+export function fetchPosts(){
+  const url = 'http://localhost:3001/posts'; // Change '3001' to port number you want.
 ```
 
-### `DangerButton.js`
-
-```js
-import React, { Component } from 'react';
-import Button from './Button'; // Import a component from another file
-
-class DangerButton extends Component {
-  render() {
-    return <Button color="red" />;
-  }
-}
-
-export default DangerButton;
-```
-
-Be aware of the [difference between default and named exports](http://stackoverflow.com/questions/36795819/react-native-es-6-when-should-i-use-curly-braces-for-import/36796281#36796281). It is a common source of mistakes.
-
-We suggest that you stick to using default imports and exports when a module only exports a single thing (for example, a component). That’s what you get when you use `export default Button` and `import Button from './Button'`.
-
-Named exports are useful for utility modules that export several functions. A module may have at most one default export and as many named exports as you like.
-
-Learn more about ES6 modules:
-
-* [When to use the curly braces?](http://stackoverflow.com/questions/36795819/react-native-es-6-when-should-i-use-curly-braces-for-import/36796281#36796281)
-* [Exploring ES6: Modules](http://exploringjs.com/es6/ch_modules.html)
-* [Understanding ES6: Modules](https://leanpub.com/understandinges6/read#leanpub-auto-encapsulating-code-with-modules)
-
-### Add a Stylesheet
-
-This project setup uses [Webpack](https://webpack.github.io/) for handling all assets. Webpack offers a custom way of “extending” the concept of `import` beyond JavaScript. To express that a JavaScript file depends on a CSS file, you need to **import the CSS from the JavaScript file**:
-
-#### `Button.css`
-
-```css
-.Button {
-  padding: 20px;
-}
-```
-
-#### `Button.js`
-
-```js
-import React, { Component } from 'react';
-import './Button.css'; // Tell Webpack that Button.js uses these styles
-
-class Button extends Component {
-  render() {
-    // You can use them as regular CSS styles
-    return <div className="Button" />;
-  }
-}
-```
-
-**This is not required for React** but many people find this feature convenient. You can read about the benefits of this approach [here](https://medium.com/seek-ui-engineering/block-element-modifying-your-javascript-components-d7f99fcab52b). However you should be aware that this makes your code less portable to other build tools and environments than Webpack.
-
-In development, expressing dependencies this way allows your styles to be reloaded on the fly as you edit them. In production, all CSS files will be concatenated into a single minified `.css` file in the build output.
-
-If you are concerned about using Webpack-specific semantics, you can put all your CSS right into `src/index.scss`. It would still be imported from `src/index.js`, but you could always remove that import if you later migrate to a different build tool.
-
-### Post-Process CSS
-
-This project setup minifies your CSS and adds vendor prefixes to it automatically through [Autoprefixer](https://github.com/postcss/autoprefixer) so you don’t need to worry about it.
-
-For example, this:
-
-```css
-.App {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-```
-
-becomes this:
-
-```css
-.App {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-```
-
-There is currently no support for preprocessors such as Less, or for sharing variables across CSS files.
+Port number for local server of this project is set 3001.
 
 ### Add Images and Fonts
 
@@ -327,35 +215,3 @@ module.name_mapper='^\(.*\)\.\(jpg\|png\|gif\|eot\|svg\|ttf\|woff\|woff2\|mp4\|w
 ```
 
 We will consider integrating more tightly with Flow in the future so that you don’t have to do this.
-
-### Deploy to GitHub Pages
-
->Note: this feature is available with `react-scripts@0.2.0` and higher.
-
-First, open your `package.json` and add a `homepage` field.
-It could look like this:
-
-```js
-{
-  "name": "my-app",
-  "homepage": "http://myusername.github.io/my-app",
-  // ...
-}
-```
-
-Now, whenever you run `npm run build`, you will see a cheat sheet with a sequence of commands to deploy to GitHub pages:
-
-```sh
-git checkout -B gh-pages
-git add -f build
-git commit -am "Rebuild website"
-git push origin :gh-pages
-git subtree push --prefix build origin gh-pages
-git checkout -
-```
-
-You may copy and paste them, or put them into a custom shell script. You may also customize them for another hosting provider.
-
-### Something Missing?
-
-If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebookincubator/create-react-app/issues) or [contribute some!](https://github.com/facebookincubator/create-react-app/edit/master/template/README.md)
