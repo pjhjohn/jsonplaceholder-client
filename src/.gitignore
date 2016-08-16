@@ -1,0 +1,3 @@
+# Use .scss only
+*.css
+*.css.map
