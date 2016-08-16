@@ -7,9 +7,10 @@ src/
   components/
   containers/
   reducers/
+  index.js
+  routes.js
   _bootstrap.scss
   _variables.scss
-  index.js
   index.scss
   README.md
 ```
