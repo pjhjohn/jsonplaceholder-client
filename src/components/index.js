@@ -1,4 +1,4 @@
-export Error404 from './Error404/Error404';
+export HttpCatError from './Error/HttpCatError';
 export Greeting from './Greeting/Greeting';
 export Post from './Posts/Post';
 export PostForm from './Posts/PostForm';

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import { App, Posts, Post, PostNew } from './containers';
+import { App, Posts, Post, PostNew, Error404 } from './containers';
 
-import { Greeting, Error404 } from './components';
+import { Greeting } from './components';
 
 export default(
   <Route path="/" component={App}>

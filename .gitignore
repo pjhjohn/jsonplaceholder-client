@@ -3,10 +3,6 @@
 # Dummy DB seed file used by json-server
 /data.json
 
-# Use .scss
-src/*.css
-src/*.css.map
-
 # Sourcemap
 *-compiled.js
 *-compiled.js.map
