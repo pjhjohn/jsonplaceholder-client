@@ -1,16 +1,16 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { connect } from 'react-redux'; // glue for redux and react
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { fetchPost } from './../../actions';
+import { readPost } from './../../actions';
+
 import { Post as PostComponent } from './../../components';
 
 class Post extends React.Component {
   constructor(props) {
     super(props);
-
-    this.props.fetchPost(this.props.params.id);
+    this.props.readPost(this.props.params.id);
   }
 
   render() {
@@ -28,12 +28,12 @@ class Post extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    post: state.posts
+    post: state.post.item
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPost }, dispatch);
+  return bindActionCreators({ readPost }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

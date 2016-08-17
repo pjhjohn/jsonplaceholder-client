@@ -1,15 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux'; // glue for redux and react
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { pushPost, loadPost } from './../../actions';
+import { createPost } from './../../actions';
 
 import { PostForm } from './../../components';
 
 class PostNew extends React.Component {
   constructor(props){
     super(props);
-    this.props.loadPost();
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
@@ -19,7 +18,7 @@ class PostNew extends React.Component {
     post.id = document.getElementById("id").value;
     post.title = document.getElementById("title").value;
     post.body = document.getElementById("body").value;
-    this.props.pushPost(post);
+    this.props.createPost(post);
   }
 
   render() {
@@ -35,12 +34,12 @@ class PostNew extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    post: state.posts
+    post: state.post.list
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ pushPost, loadPost }, dispatch);
+  return bindActionCreators({ createPost }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostNew);
