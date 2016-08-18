@@ -1,4 +1,4 @@
-import { CREATE_POST, READ_POSTS, READ_POST, DELETE_POST} from '../actions/types';
+import { CREATE_POST, READ_POSTS, READ_POST, DELETE_POST } from './../actions';
 
 const INITIAL_POST_STATE = { list: [], item: {} };
 
