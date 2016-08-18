@@ -5,8 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import { readPost, readComments } from './../../actions';
 
-import { Post as PostComponent } from './../../components';
-import { Comment } from './../../components'
+import { Post as PostComponent, Comment } from './../../components';
 
 class Post extends React.Component {
   constructor(props) {
