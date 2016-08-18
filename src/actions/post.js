@@ -1,4 +1,3 @@
-import { ROOT_URL } from './api';
 import { api } from  './api';
 import { CREATE_POST, READ_POSTS, READ_POST, DELETE_POST} from './types';
 

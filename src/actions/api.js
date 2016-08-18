@@ -1,7 +1,7 @@
-import {create} from 'apisauce'
+import { create } from 'apisauce'
 
-const ROOT_URL = 'http://localhost:3001';
+const BASE_URL = 'http://localhost:3001';
 
 export const api = create({
-  baseURL: `${ROOT_URL}`
+  baseURL: `${BASE_URL}`
 })
