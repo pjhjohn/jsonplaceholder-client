@@ -1,10 +1,6 @@
 import { ROOT_URL } from './api';
 import { api } from  './api';
-
-export const CREATE_POST = 'CREATE_POST';
-export const READ_POSTS = 'READ_POSTS';
-export const READ_POST  = 'READ_POST';
-export const DELETE_POST = 'DELETE_POST';
+import { CREATE_POST, READ_POSTS, READ_POST, DELETE_POST} from './types';
 
 const OFFSET = 16;
 
