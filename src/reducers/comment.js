@@ -1,6 +1,6 @@
 import { READ_COMMENTS } from './../actions';
 
-const INITIAL_COMMENT_STATE = { list: [], item: {} };
+const INITIAL_COMMENT_STATE = { list: [], detail: {} };
 
 export default function (state = INITIAL_COMMENT_STATE, action) {
   switch(action.type) {

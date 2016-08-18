@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 
 import { readPosts } from './../../actions';
 
-import { Post } from './../../components';
+import { PostItem } from './../../components';
 
 class Posts extends React.Component {
   constructor(props){
@@ -20,7 +20,7 @@ class Posts extends React.Component {
   }
 
   render() {
-    let posts = this.props.posts.map((post) => <Post key={post.id} {...post} />);
+    let posts = this.props.posts.map((post) => <PostItem key={post.id} {...post} />);
     let startId = this.props.posts.length;
     return (
       <div>

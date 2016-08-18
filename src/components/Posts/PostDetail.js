@@ -1,9 +1,9 @@
 import React from 'react';
 
-class Post extends React.Component {
+class PostDetail extends React.Component {
   render() {
     return (
-      <div className="col-md-3">
+      <div className="col-md-12">
         <div className="card">
           <div className="card-header">
             <div className="card-title"> #{this.props.id} : {this.props.title} </div>
@@ -17,4 +17,4 @@ class Post extends React.Component {
   }
 }
 
-export default Post;
+export default PostDetail;

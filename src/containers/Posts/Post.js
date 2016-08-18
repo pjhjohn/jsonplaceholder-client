@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import { readPost, readComments } from './../../actions';
 
-import { Post as PostComponent, Comment } from './../../components';
+import { PostDetail, Comment } from './../../components';
 
 class Post extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class Post extends React.Component {
         <Helmet title={this.props.post.title} />
         <h1 className="text-center"> {window.location.pathname} </h1>
         <div className="row">
-          <PostComponent key={this.props.post.id} {...this.props.post} />
+          <PostDetail key={this.props.post.id} {...this.props.post} />
         </div>
         <div> {comments} </div>
       </div>
@@ -31,7 +31,7 @@ class Post extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    post: state.post.item,
+    post: state.post.detail,
     comments: state.comment.list
   };
 }
