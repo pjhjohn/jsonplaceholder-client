@@ -49,6 +49,7 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
+    "apisauce": "^0.4.0",
     "axios": "^0.13.1",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
