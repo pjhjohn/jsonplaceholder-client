@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-import * as C from './const';
+import { api } from  './api';
 
 export const CREATE_POST = 'CREATE_POST';
 export const READ_POSTS = 'READ_POSTS';
@@ -10,7 +8,7 @@ export const DELETE_POST = 'DELETE_POST';
 const OFFSET = 16;
 
 export function createPost(post) {
-  const request = axios.post(`${C.ROOT_URL}/posts`, post, {headers : {'Content-Type': 'application/json'}});
+  const request = api.post(`/posts`, post, {headers : {'Content-Type': 'application/json'}});
   return {
     type: CREATE_POST,
     payload: request
@@ -18,7 +16,7 @@ export function createPost(post) {
 }
 
 export function readPosts(startId) {
-  const request = axios.get(`${C.ROOT_URL}/posts?_start=${startId}&_limit=${OFFSET}`);
+  const request = api.get(`/posts?_start=${startId}&_limit=${OFFSET}`)
   return {
     type: READ_POSTS,
     payload: request
@@ -26,7 +24,7 @@ export function readPosts(startId) {
 }
 
 export function readPost(postId) {
-  const request = axios.get(`${C.ROOT_URL}/posts/${postId}`);
+  const request = api.get(`/posts/${postId}`);
   return {
     type: READ_POST,
     payload: request
@@ -34,7 +32,7 @@ export function readPost(postId) {
 }
 
 export function deletePost(postId){
-  const request = axios.delete(`${C.ROOT_URL}/posts/${postId}`);
+  const request = api.delete(`/posts/${postId}`);
   return {
     type: DELETE_POST,
     payload: request
