@@ -5,3 +5,4 @@ export PostForm from './Posts/PostForm';
 export PostItem from './Posts/PostItem';
 export Tab from './Tab/Tab';
 export Comment from './Comment/Comment';
+export Carousel from './Carousel/Carousel';

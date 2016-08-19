@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "autoprefixer": "6.3.7",
+    "babel-cli": "^6.11.4",
     "babel-core": "6.11.4",
     "babel-eslint": "6.1.2",
     "babel-loader": "6.2.4",
@@ -52,6 +53,7 @@
     "apisauce": "^0.4.0",
     "axios": "^0.13.1",
     "react": "^15.2.1",
+    "react-bootstrap": "^0.30.2",
     "react-dom": "^15.2.1",
     "react-helmet": "^3.1.0",
     "react-inspector": "^1.1.0",
