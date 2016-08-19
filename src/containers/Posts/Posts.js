@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
 
-import { readPosts } from './../../actions';
+import { readPosts, readMorePosts } from './../../actions';
 
 import { PostItem } from './../../components';
 
@@ -11,17 +11,21 @@ class Posts extends React.Component {
   constructor(props){
     super(props);
 
-    this.props.readPosts(0);
     this.onReadPosts = this.onReadPosts.bind(this);
   }
 
-  onReadPosts(postLength) {
-    this.props.readPosts(postLength);
+  componentWillMount(){
+    this.props.readPosts();
+  }
+
+  onReadPosts() {
+    let startId = this.props.posts.length;
+    console.log(startId);
+    this.props.readMorePosts(startId);
   }
 
   render() {
     let posts = this.props.posts.map((post) => <PostItem key={post.id} {...post} />);
-    let startId = this.props.posts.length;
     return (
       <div>
         <h1 className="text-center"> {window.location.pathname} </h1>
@@ -35,7 +39,7 @@ class Posts extends React.Component {
         </div>
 
         <button className="col-md-12 btn btn-default"
-          onClick={() => this.onReadPosts(startId)}>
+          onClick={() => this.onReadPosts()}>
           로오딩
         </button>
       </div>
@@ -50,7 +54,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ readPosts }, dispatch);
+  return bindActionCreators({ readPosts, readMorePosts }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
