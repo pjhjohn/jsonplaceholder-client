@@ -2,6 +2,7 @@ import { api } from  './api';
 
 export const CREATE_POST = 'CREATE_POST';
 export const READ_POSTS = 'READ_POSTS';
+export const READ_MORE_POSTS = 'READ_MORE_POSTS';
 export const READ_POST  = 'READ_POST';
 export const DELETE_POST = 'DELETE_POST';
 
@@ -15,10 +16,18 @@ export function createPost(post) {
   }
 }
 
-export function readPosts(startId) {
-  const request = api.get(`/posts?_start=${startId}&_limit=${OFFSET}`)
+export function readPosts() {
+  const request = api.get(`/posts?_start=0&_limit=${OFFSET}`)
   return {
     type: READ_POSTS,
+    payload: request
+  };
+}
+
+export function readMorePosts(startId) {
+  const request = api.get(`/posts?_start=${startId}&_limit=${OFFSET}`)
+  return {
+    type: READ_MORE_POSTS,
     payload: request
   };
 }
