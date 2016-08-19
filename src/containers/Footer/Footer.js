@@ -3,8 +3,12 @@ import React from 'react';
 class Footer extends React.Component {
   render() {
     return (
-      <div>
-        <h1>I have big foot.</h1>
+      <div className="footer">
+          <h1>
+            &lt;footer&gt;
+              I have big foot.
+            &lt;/footer&gt;
+          </h1>
       </div>
     );
   }
