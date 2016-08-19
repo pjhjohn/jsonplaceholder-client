@@ -19,8 +19,7 @@ class Posts extends React.Component {
   }
 
   onReadPosts() {
-    let startId = this.props.posts.length;
-    console.log(startId);
+    const startId = this.props.posts.length;
     this.props.readMorePosts(startId);
   }
 

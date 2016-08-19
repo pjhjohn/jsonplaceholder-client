@@ -25,7 +25,6 @@ export function readPosts() {
 }
 
 export function readMorePosts(startId) {
-  console.log('readMorePosts',startId);
   const request = api.get(`/posts?_start=${startId}&_limit=${OFFSET}`)
   return {
     type: READ_MORE_POSTS,
