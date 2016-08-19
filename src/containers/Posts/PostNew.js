@@ -1,45 +1,50 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { PropTypes } from 'react';
+import { reduxForm } from 'redux-form';
+import { Link } from 'react-router';
 
 import { createPost } from './../../actions';
 
-import { PostForm } from './../../components';
-
 class PostNew extends React.Component {
-  constructor(props){
-    super(props);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-  }
+  static contextTypes = {
+    router: PropTypes.object
+  };
 
-  onFormSubmit() {
-    var post = {userId: "", id: "", title: "", body: ""};
-    post.userId = document.getElementById("userId").value;
-    post.id = document.getElementById("id").value;
-    post.title = document.getElementById("title").value;
-    post.body = document.getElementById("body").value;
-    this.props.createPost(post);
+  onSubmit(props) {
+    this.props.createPost(props).then(() => {
+      this.context.router.push('/posts');
+    });
   }
 
   render() {
+    const { fields: { userId, id, title, body }, handleSubmit } = this.props;
     return (
-      <div className="container text-center">
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <h1>PostNew Test Page</h1>
         <p> Please input user-id, id, title and body </p>
-        <PostForm onSubmit={this.onFormSubmit} />
-      </div>
+        <div className="form-group">
+          <label>User Id</label>
+          <input className="form-control" type="text" {...userId } />
+        </div>
+        <div className="form-group">
+          <label>Id</label>
+          <input className="form-control" type="text" {...id } />
+        </div>
+        <div className="form-group">
+          <label>Title</label>
+          <input className="form-control" type="text" {...title } />
+        </div>
+        <div className="form-group">
+          <label>Body</label>
+          <textarea className="form-control" type="text" {...body } />
+        </div>
+        <button className="btn btn-primary" type="submit" >Submit</button>
+        <Link to="/posts" className="btn btn-danger">Cancel</Link>
+      </form>
     )
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    post: state.post.list
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ createPost }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostNew);
+export default reduxForm({
+  form: 'PostsNewForm',
+  fields: ['userId', 'id', 'title', 'body']
+}, null, { createPost })(PostNew);
