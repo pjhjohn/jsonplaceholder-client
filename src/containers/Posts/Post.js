@@ -14,11 +14,6 @@ class Post extends React.Component {
     this.props.readComments(this.props.params.id);
   }
 
-  onDeleteClick() {
-    this.props.deletePost(this.props.params.id)
-      .then(() => { this.context.router.push('/posts')});
-  }
-
   render() {
     let comments = this.props.comments.map((comment) => <Comment key={comment.id} {...comment} />);
     return (
