@@ -30,9 +30,6 @@ class Posts extends React.Component {
     || (JSON.stringify(nextProps) !== JSON.stringify(this.props));
   }
 
-  componentDidMount() { // after first rendering
-  }
-
   componentDidUpdate() { // after rendering when props or state changes
     if(Boolean(this.props.posts[0])) // when first post exist, set state 'startPostId'.
       this.setState({
