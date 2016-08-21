@@ -7,16 +7,57 @@ import { readPosts } from './../../actions';
 
 import { PostItem } from './../../components';
 
+const START_INDEX = 0;
+
 class Posts extends React.Component {
   constructor(props){
     super(props);
 
-    this.props.readPosts(0);
+    this.state = {
+      initialStateLoaded: Boolean(this.props.posts.length),
+      startPostId: this.props.startPostId,
+      endPostId: this.props.endPostId,
+      limit : this.props.endPostId - this.props.startPostId + 1
+    }
     this.onReadPosts = this.onReadPosts.bind(this);
+  }
+
+  componentWillMount() {
+    if(!this.state.initialStateLoaded) {
+      this.props.readPosts(START_INDEX);
+      this.setState({initialStateLoaded: true})
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) { // if state or props not changes, return false (not re-rendering);
+    return (JSON.stringify(nextState) !== JSON.stringify(this.state))
+    || (JSON.stringify(nextProps) !== JSON.stringify(this.props));
+  }
+
+  componentDidMount() { // after first rendering
+    this.setState({
+      startPostId: 0,
+      endPostId: 0
+    })
+  }
+
+  componentDidUpdate() { // after rendering when props or state changes
+    if(Boolean(this.props.posts[START_INDEX])) // when first post exist, set state 'startPostId'.
+      this.setState({ startPostId: this.props.posts[START_INDEX].id })
+    this.setState({
+      endPostId: this.props.endPostId,
+      limit : this.props.endPostId - this.props.startPostId + 1
+    })
+    console.log(this.state);
   }
 
   onReadPosts(postLength) {
     this.props.readPosts(postLength);
+    this.setState({
+      startPostId: this.props.posts[START_INDEX].id,
+      endPostId: this.props.endPostId,
+      limit : this.props.endPostId - this.props.startPostId + 1
+    })
   }
 
   render() {
@@ -45,7 +86,9 @@ class Posts extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    posts: state.post.list
+    posts: state.post.list,
+    startPostId: state.post.startIndex,
+    endPostId: state.post.endIndex
   };
 }
 

@@ -16,7 +16,7 @@ export function createPost(post) {
 }
 
 export function readPosts(startId) {
-  const request = api.get(`/posts?_start=${startId}&_limit=${OFFSET}`)
+  const request = api.get(`/posts?_start=${startId}&_limit=${OFFSET}`);
   return {
     type: READ_POSTS,
     payload: request
