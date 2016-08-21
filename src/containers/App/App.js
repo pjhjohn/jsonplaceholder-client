@@ -8,12 +8,15 @@ class App extends Component {
   render() {
     return (
       <div>
+        {/* React Helmet */}
+        <Helmet
+          defaultTitle="jsonplaceholder-client"
+          titleTemplate="%s | jsonplaceholder-client"
+        />
+
+        {/* Application Body */}
+        <Navbar />
         <div className="container">
-          <Helmet
-            defaultTitle="jsonplaceholder-client"
-            titleTemplate="%s | jsonplaceholder-client"
-          />
-          <Navbar />
           {this.props.children}
         </div>
         <Footer />
