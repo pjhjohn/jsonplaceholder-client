@@ -15,7 +15,6 @@ class Post extends React.Component {
   }
 
   render() {
-    let comments = this.props.comments.map((comment) => <Comment key={comment.id} {...comment} />);
     return (
       <div>
         <Helmet title={this.props.post.title} />
@@ -24,7 +23,11 @@ class Post extends React.Component {
         <div className="row">
           <PostDetail key={this.props.post.id} {...this.props.post} />
         </div>
-        <div> {comments} </div>
+        <div>
+        { this.props.comments.map((comment) =>
+          <Comment key={comment.id} {...comment} />
+        )}
+        </div>
       </div>
     );
   }
