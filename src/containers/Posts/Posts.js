@@ -20,7 +20,8 @@ class Posts extends React.Component {
   }
 
   render() {
-    let posts = this.props.posts.map((post) => <PostItem key={post.id} {...post} />);
+    let posts = this.props.posts.map((post) =>
+      <Link to={"/posts/" + post.id} ><PostItem key={post.id} {...post} /></Link>);
     let startId = this.props.posts.length;
     return (
       <div>
