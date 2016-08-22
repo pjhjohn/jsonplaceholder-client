@@ -1,11 +1,11 @@
 import { READ_COMMENTS } from './../actions';
 
-const INITIAL_COMMENT_STATE = { list: [], detail: {} };
+const INITIAL_COMMENT_STATE = { list: [] };
 
 export default function (state = INITIAL_COMMENT_STATE, action) {
   switch(action.type) {
     case READ_COMMENTS:
-      return {...state, list: state.list.concat(...action.payload.data) };
+      return {...state, list: action.payload.data };
     default:
       return state;
   }
