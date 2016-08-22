@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
 
-class SimpleSlider extends React.Component{
+class Carousel extends React.Component{
   render() {
     return (
       <div className="text-center">
@@ -27,4 +27,4 @@ class SimpleSlider extends React.Component{
   }
 }
 
-export default SimpleSlider;
+export default Carousel;
