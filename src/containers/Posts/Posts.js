@@ -6,14 +6,33 @@ import { Link } from 'react-router'
 import { readInitialPosts, readMorePosts } from './../../actions';
 
 import { PostItem } from './../../components';
+import { DEFAULT_POST_LIMIT } from './../../actions';
 
 class Posts extends React.Component {
+  static defaultProps = {
+    initialized: false,
+    _limit: DEFAULT_POST_LIMIT
+  };
+
+  static propTypes = {
+    posts: React.PropTypes.array,
+    initialized: React.PropTypes.bool.isRequired,
+    _start: React.PropTypes.number,
+    _end: React.PropTypes.number,
+    _limit: React.PropTypes.number.isRequired
+  };
+
+  state = {
+    initialized: this.props.initialized,
+    _limit: this.props._limit
+  };
+
   componentWillMount() {
     if(this.props.initialized) return;
     this.props.readInitialPosts();
   }
 
-  onReadMorePosts = () => this.props.readMorePosts(postLength);
+  onReadMorePosts = (query) => this.props.readMorePosts(query);
 
   render() {
     return (
@@ -33,7 +52,7 @@ class Posts extends React.Component {
         </div>
 
         <button className="col-md-12 btn btn-default"
-          onClick={() => this.onReadMorePosts(this.props._end)}>
+          onClick={() => this.onReadMorePosts({'_start': this.props._end})}>
           로오딩
         </button>
       </div>
