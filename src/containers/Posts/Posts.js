@@ -18,7 +18,6 @@ class Posts extends React.Component {
   }
 
   render() {
-    let posts = this.props.posts.map((post) => <PostItem key={post.id} {...post} />);
     console.log(this.props);
     return (
       <div>
@@ -29,7 +28,10 @@ class Posts extends React.Component {
         </Link>
 
         <div className="row">
-          {posts}
+        { this.props.posts.map((post) => <Link to={"/posts/" + post.id} >
+            <PostItem key={post.id} {...post} />
+          </Link>
+        )}
         </div>
 
         <button className="col-md-12 btn btn-default"
