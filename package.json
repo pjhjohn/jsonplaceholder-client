@@ -59,6 +59,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
     "redux": "^3.5.2",
+    "redux-form": "^5.3.2",
     "redux-promise": "^0.5.3"
   },
   "scripts": {

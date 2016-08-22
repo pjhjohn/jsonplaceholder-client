@@ -3,25 +3,38 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
 
-import { readPosts } from './../../actions';
+import { readInitialPosts, readMorePosts } from './../../actions';
 
 import { PostItem } from './../../components';
+import { DEFAULT_POST_LIMIT } from './../../actions';
 
 class Posts extends React.Component {
-  constructor(props){
-    super(props);
+  static defaultProps = {
+    initialized: false,
+    _limit: DEFAULT_POST_LIMIT
+  };
 
-    this.props.readPosts(0);
-    this.onReadPosts = this.onReadPosts.bind(this);
+  static propTypes = {
+    posts: React.PropTypes.array,
+    initialized: React.PropTypes.bool.isRequired,
+    _start: React.PropTypes.number,
+    _end: React.PropTypes.number,
+    _limit: React.PropTypes.number.isRequired
+  };
+
+  state = {
+    initialized: this.props.initialized,
+    _limit: this.props._limit
+  };
+
+  componentWillMount() {
+    if(this.props.initialized) return;
+    this.props.readInitialPosts();
   }
 
-  onReadPosts(postLength) {
-    this.props.readPosts(postLength);
-  }
+  onReadMorePosts = (query) => this.props.readMorePosts(query);
 
   render() {
-    let posts = this.props.posts.map((post) => <PostItem key={post.id} {...post} />);
-    let startId = this.props.posts.length;
     return (
       <div>
         <h1 className="text-center"> {window.location.pathname} </h1>
@@ -31,11 +44,15 @@ class Posts extends React.Component {
         </Link>
 
         <div className="row">
-          {posts}
+        { this.props.posts.map((post) =>
+          <Link to={"/posts/" + post.id} key={post.id} >
+            <PostItem {...post} />
+          </Link>
+        )}
         </div>
 
         <button className="col-md-12 btn btn-default"
-          onClick={() => this.onReadPosts(startId)}>
+          onClick={() => this.onReadMorePosts({'_start': this.props._end})}>
           로오딩
         </button>
       </div>
@@ -45,12 +62,15 @@ class Posts extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    posts: state.post.list
+    posts: state.post.list,
+    initialized: state.post.initialized,
+    _start: state.post._start,
+    _end: state.post._end
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ readPosts }, dispatch);
+  return bindActionCreators({ readInitialPosts, readMorePosts }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

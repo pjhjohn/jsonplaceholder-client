@@ -2,17 +2,24 @@ import React, {Component} from 'react';
 import Helmet from 'react-helmet';
 
 import Navbar from './../Navbar/Navbar';
+import Footer from './../Footer/Footer';
 
 class App extends Component {
   render() {
     return (
-      <div className="container">
+      <div>
+        {/* React Helmet */}
         <Helmet
           defaultTitle="jsonplaceholder-client"
           titleTemplate="%s | jsonplaceholder-client"
         />
+
+        {/* Application Body */}
         <Navbar />
-        {this.props.children}
+        <div className="container">
+          {this.props.children}
+        </div>
+        <Footer />
       </div>
     );
   }
