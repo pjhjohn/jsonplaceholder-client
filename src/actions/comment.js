@@ -22,7 +22,6 @@ export function readMoreComments(postId, startId){
 }
 
 export function createComment(comment){
-  console.log(comment);
   let request = api.post(`/posts/${comment.postId}/comments`, comment, {headers : {'Content-Type': 'application/json'}});
   return {
     type: CREATE_COMMENT,
