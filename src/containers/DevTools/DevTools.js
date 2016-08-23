@@ -6,6 +6,7 @@ import { createDevTools } from 'redux-devtools';
 // Monitors are separate packages, and you can make a custom one
 import LogMonitor from 'redux-devtools-log-monitor';
 import DockMonitor from 'redux-devtools-dock-monitor';
+import ChartMonitor from 'redux-devtools-chart-monitor';
 
 // createDevTools takes a monitor and produces a DevTools component
 const DevTools = createDevTools(
@@ -15,10 +16,11 @@ const DevTools = createDevTools(
   // Note: DockMonitor is visible by default.
   <DockMonitor toggleVisibilityKey='ctrl-h'
                changePositionKey='ctrl-q'
+               changeMonitorKey='ctrl-g'
                defaultIsVisible={true}>
     <LogMonitor theme='tomorrow' />
+    <ChartMonitor />
   </DockMonitor>
-
 );
 
 export default DevTools;
