@@ -1,6 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
+import Carousel from './../../components/Carousel/Carousel';
 import logo from './../../assets/images/logo.svg';
 
 class Greeting extends React.Component {
@@ -11,6 +12,9 @@ class Greeting extends React.Component {
         <div className="Greeting-header text-center">
           <img src={logo} className="Greeting-logo" alt="logo" />
           <h2 className="margin_zero">Welcome to React</h2>
+        </div>
+        <div>
+          <Carousel/>
         </div>
       </div>
     )
