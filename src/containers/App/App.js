@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 
 import Navbar from './../Navbar/Navbar';
 import Footer from './../Footer/Footer';
+import Devtool from './../DevTools/DevTools';
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
         <div className="container">
           {this.props.children}
         </div>
+        <Devtool />
         <Footer />
       </div>
     );
