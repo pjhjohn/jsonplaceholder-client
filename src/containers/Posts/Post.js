@@ -16,17 +16,20 @@ class Post extends React.Component {
   }
 
   onSubmit = (props) => {
+    let btn = document.getElementById('btn-submit');
+    btn.disabled = true;
     props.postId = this.props.params.id;
     let postLength = this.props.comments.length;
     let nowState = this;
     this.props.createComment(props)
       .then(function () {
         nowState.props.readMoreComments(props.postId, {'_start' : postLength});
+        btn.disabled = false;
       });
   }
 
   render() {
-    const {fields: { name, email, body}, handleSubmit} = this.props;
+    const { fields: { name, email, body }, handleSubmit } = this.props;
     return (
       <div>
         <Helmet title={this.props.post.title} />
@@ -56,7 +59,7 @@ class Post extends React.Component {
               <label> Body </label>
               <input type="form-control" placeholder="body" {...body} />
             </div>
-          <button type="Submit"> Comment Submit </button>
+          <button id="btn-submit" type="Submit"> Comment Submit </button>
           </form>
         </div>
       </div>
