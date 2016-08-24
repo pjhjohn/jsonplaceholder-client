@@ -24,7 +24,9 @@ class Post extends React.Component {
     this.props.createComment(props)
       .then(function () {
         nowState.props.readMoreComments(props.postId, {'_start' : postLength});
+
         btn.disabled = false;
+
       });
   }
 
