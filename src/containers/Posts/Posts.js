@@ -35,8 +35,7 @@ class Posts extends React.Component {
   onReadMorePosts = (query) => this.props.readMorePosts(query);
 
   render() {
-    console.log(this.props);
-    return(
+    return (
       <div>
         <h1 className="text-center"> {window.location.pathname} </h1>
 

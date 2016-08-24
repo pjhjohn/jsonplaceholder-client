@@ -7,7 +7,7 @@ import { Link } from 'react-router'
 
 import { readPost, readComments, createComment, readMoreComments } from './../../actions';
 
-import { PostDetail, Comment} from './../../components';
+import { PostDetail, Comment } from './../../components';
 
 class Post extends React.Component {
   componentWillMount(){
@@ -15,13 +15,13 @@ class Post extends React.Component {
     this.props.readComments(this.props.params.id);
   }
 
-  onSubmit(props) {
+  onSubmit = (props) => {
     props.postId = this.props.params.id;
     let postLength = this.props.comments.length;
     let nowState = this;
     this.props.createComment(props)
       .then(function () {
-        nowState.props.readMoreComments(props.postId, postLength);
+        nowState.props.readMoreComments(props.postId, {'_start' : postLength});
       });
   }
 
@@ -43,14 +43,14 @@ class Post extends React.Component {
         <div>
           <h1> Comment </h1>
           <p> You can add comment about this post! (Enter your name, email and body) </p>
-          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <form onSubmit={handleSubmit(this.onSubmit)}>
             <div className="form-group">
               <label> Name </label>
               <input type="form-control" placeholder="Name" {...name} />
             </div>
             <div className="form-group">
               <label> Email </label>
-              <input type="form-control" placeholder="Email" {...email} />
+              <input type="form-control email" placeholder="Email" {...email} />
             </div>
             <div className="form-group">
               <label> Body </label>
