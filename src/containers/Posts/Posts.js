@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
+import { Button, Row } from 'react-bootstrap';
 
 import { readInitialPosts, readMorePosts } from './../../actions';
 
@@ -35,26 +36,29 @@ class Posts extends React.Component {
   onReadMorePosts = (query) => this.props.readMorePosts(query);
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <h1 className="text-center"> {window.location.pathname} </h1>
 
-        <Link to="/posts/new" className="col-md-12 btn btn-primary">
+        <Link to="/posts/new">
+          <Button bsStyle="primary" block>
           글쓰기
+          </Button>
         </Link>
 
-        <div className="row">
+        <Row>
         { this.props.posts.map((post) =>
           <Link to={"/posts/" + post.id} key={post.id} >
             <PostItem {...post} />
           </Link>
         )}
-        </div>
+        </Row>
 
-        <button className="col-md-12 btn btn-default"
+        <Button bsStyle="default" block
           onClick={() => this.onReadMorePosts({'_start': this.props._end})}>
           로오딩
-        </button>
+        </Button>
       </div>
     );
   }

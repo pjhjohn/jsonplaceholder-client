@@ -1,9 +1,10 @@
 import React from 'react';
+import { Col } from 'react-bootstrap';
 
 class PostDetail extends React.Component {
   render() {
     return (
-      <div className="col-md-12">
+      <Col md={12}>
         <div className="card">
           <div className="card-header">
             <div className="card-title"> #{this.props.id} : {this.props.title} </div>
@@ -12,7 +13,7 @@ class PostDetail extends React.Component {
             {this.props.body}
           </div>
         </div>
-      </div>
+      </Col>
     )
   }
 }

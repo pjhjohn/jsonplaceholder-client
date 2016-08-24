@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
+import { Row } from 'react-bootstrap';
 
 import { readPost, readComments } from './../../actions';
 
@@ -20,9 +21,9 @@ class Post extends React.Component {
         <Helmet title={this.props.post.title} />
         <h1 className="text-center"> {window.location.pathname} </h1>
         <Link to="/posts" className="btn btn-default">back</Link>
-        <div className="row">
+        <Row>
           <PostDetail key={this.props.post.id} {...this.props.post} />
-        </div>
+        </Row>
         <div>
         { this.props.comments.map((comment) =>
           <Comment key={comment.id} {...comment} />
