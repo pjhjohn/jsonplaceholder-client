@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
-import configustore from './store/configuerStore';
+import ConfiguerStore from './store/ConfiguerStore';
 import routes from './routes';
 
 import './index.scss';
 
-const store = configustore();
+const store = ConfiguerStore();
 
 ReactDOM.render((
   <Provider store={store}>
