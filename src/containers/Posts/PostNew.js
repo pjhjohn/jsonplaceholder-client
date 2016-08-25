@@ -15,9 +15,10 @@ class PostNew extends React.Component {
 
   onSubmit = (props) => {
     this.setState({ 'disabled' : true });
-    this.props.createPost(props)
-      .then(() => this.context.router.push('/posts'))
-      .then(() => this.setState({ 'disabled' : false }));
+    this.props.createPost(props).then(() => {
+      this.setState({ 'disabled' : false });
+      this.context.router.push('/posts');
+    });
   }
 
   render() {
