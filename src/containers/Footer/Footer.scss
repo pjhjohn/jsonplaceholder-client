@@ -1,7 +1,21 @@
-/* TODO : Implement Style */
-.footer {
-   background: black;
-   color: white;
-   height: 100px;
-   width: 100%;
+/* Sticky footer styles : https://getbootstrap.com/examples/sticky-footer */
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body  {
+  margin-bottom: $footer-height;
+}
+footer.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: $footer-height;
+  background-color: #222;
+
+  .text-muted {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 20px 0;
+  }
 }
