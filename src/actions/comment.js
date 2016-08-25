@@ -16,8 +16,8 @@ export function readComments(postId){
   }
 }
 
-export function readMoreComments(postId, query){
-  const request = api.get(`posts/${postId}/comments`, Object.assign(COMMENT_QUERY, query));
+export function readMoreComments(query){
+  const request = api.get(`comments?`, Object.assign(COMMENT_QUERY, query));
   return {
     type: READ_MORE_COMMENTS,
     payload: request
