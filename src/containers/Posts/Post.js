@@ -3,30 +3,33 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
+import { Button } from 'react-bootstrap';
 
 import { readPost, readComments, createComment, readMoreComments } from './../../actions';
 
 import { PostDetail, Comment } from './../../components';
 
 class Post extends React.Component {
+  state = {
+    disabled: false
+  };
+
   componentWillMount(){
     this.props.readPost(this.props.params.id);
     this.props.readComments(this.props.params.id);
   }
 
   onSubmit = (props) => {
+    this.setState({ 'disabled' : true });
     props.postId = this.props.params.id;
-    let postLength = this.props.comments.length;
-    let nowState = this;
     this.props.createComment(props)
-      .then(function () {
-        nowState.props.readMoreComments(props.postId, {'_start' : postLength});
-      });
+      .then(() => this.props.readMoreComments({'_start' : this.props.comments.length, 'postId' : this.props.params.id}))
+      .then(() => this.setState({ 'disabled' : false }));
   }
 
   render() {
-    const {fields: { name, email, body}, handleSubmit} = this.props;
+    const { fields: { name, email, body }, handleSubmit } = this.props;
     return (
       <div>
         <Helmet title={this.props.post.title} />
@@ -36,9 +39,9 @@ class Post extends React.Component {
           <PostDetail key={this.props.post.id} {...this.props.post} />
         </div>
         <div>
-        { this.props.comments.map((comment) =>
-          <Comment key={comment.id} {...comment} />
-        )}
+          { this.props.comments.map((comment) =>
+            <Comment key={comment.id} {...comment} />
+          )}
         </div>
         <div>
           <h1> Comment </h1>
@@ -56,7 +59,8 @@ class Post extends React.Component {
               <label> Body </label>
               <input type="form-control" placeholder="body" {...body} />
             </div>
-          <button type="Submit"> Comment Submit </button>
+            <Button bsStyle="primary" type="submit" disabled={this.state.disabled}>Submit</Button>
+            {/*<button id="btn-submit" type="Submit"> Comment Submit </button>*/}
           </form>
         </div>
       </div>
@@ -65,8 +69,8 @@ class Post extends React.Component {
 }
 
 Post = reduxForm({
-    form: 'CommentsNewForm',
-    fields: ['name', 'email', 'body']
+  form: 'CommentsNewForm',
+  fields: ['name', 'email', 'body']
 })(Post);
 
 function mapStateToProps(state) {
