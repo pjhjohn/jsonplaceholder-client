@@ -23,7 +23,7 @@ class Post extends React.Component {
     this.setState({ 'disabled' : true });
     props.postId = this.props.params.id;
     this.props.createComment(props)
-      .then(() => this.props.readMoreComments(this.props.params.id, {'_start' : this.props.comments.length}))
+      .then(() => this.props.readMoreComments({'_start' : this.props.comments.length, 'postId' : this.props.params.id}))
       .then(() => this.setState({ 'disabled' : false }));
   }
 
