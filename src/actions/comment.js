@@ -1,6 +1,7 @@
 import { api } from  './api';
 
 export const READ_COMMENTS = 'READ_COMMENTS';
+export const READ_MORE_COMMENTS = 'READ_MORE_COMMENTS'
 export const CREATE_COMMENT = 'CREATE_COMMENTS';
 
 export const DEFAULT_LIMIT_COMMENT = 3;
@@ -18,7 +19,7 @@ export function readComments(postId){
 export function readMoreComments(postId, query){
   const request = api.get(`posts/${postId}/comments`, Object.assign(COMMENT_QUERY, query));
   return {
-    type: READ_COMMENTS,
+    type: READ_MORE_COMMENTS,
     payload: request
   }
 }
