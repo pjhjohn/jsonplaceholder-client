@@ -1,16 +1,22 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
+import { Button } from 'react-bootstrap';
 
 import { createPost } from './../../actions';
 
 class PostNew extends React.Component {
+  state = {
+    disabled: false
+  };
   static contextTypes = {
     router: PropTypes.object
   };
 
-  onSubmit(props) {
+  onSubmit = (props) => {
+    this.setState({ 'disabled' : true });
     this.props.createPost(props).then(() => {
+      this.setState({ 'disabled' : false });
       this.context.router.push('/posts');
     });
   }
@@ -37,8 +43,10 @@ class PostNew extends React.Component {
           <label>Body</label>
           <textarea className="form-control" type="text" {...body } />
         </div>
-        <button className="btn btn-primary" type="submit" >Submit</button>
-        <Link to="/posts" className="btn btn-danger">Cancel</Link>
+        <Button bsStyle="primary" type="submit" disabled={this.state.disabled}>Submit</Button>
+        <Link to="/posts">
+          <Button bsStyle="danger">Cancel</Button>
+        </Link>
       </form>
     )
   }

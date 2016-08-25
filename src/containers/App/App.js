@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
 
-import Navbar from './../Navbar/Navbar';
+import Header from './../Header/Header';
 import Footer from './../Footer/Footer';
 import DevTools from './../DevTools/DevTools';
 
@@ -16,7 +16,7 @@ class App extends Component {
         />
 
         {/* Application Body */}
-        <Navbar />
+        <Header />
         <div className="container">
           {this.props.children}
         </div>
