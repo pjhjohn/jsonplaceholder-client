@@ -41,7 +41,7 @@ export function readMorePosts(query) {
   };
 }
 
-export function deletePost(postId){
+export function deletePost(postId) {
   const request = api.delete(`/posts/${postId}`);
   return {
     type: DELETE_POST,

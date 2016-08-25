@@ -8,7 +8,7 @@ export const DEFAULT_LIMIT_COMMENT = 3;
 
 const COMMENT_QUERY = {'_limit': DEFAULT_LIMIT_COMMENT};
 
-export function readComments(postId){
+export function readComments(postId) {
   const request = api.get(`/comments?postId=${postId}`);
   return {
     type: READ_COMMENTS,
@@ -16,7 +16,7 @@ export function readComments(postId){
   }
 }
 
-export function readMoreComments(query){
+export function readMoreComments(query) {
   const request = api.get(`/comments`, Object.assign(COMMENT_QUERY, query));
   return {
     type: READ_MORE_COMMENTS,
@@ -24,7 +24,7 @@ export function readMoreComments(query){
   }
 }
 
-export function createComment(comment){
+export function createComment(comment) {
   let request = api.post(`/comments`, comment, {headers : {'Content-Type': 'application/json'}});
   return {
     type: CREATE_COMMENT,

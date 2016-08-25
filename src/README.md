@@ -28,7 +28,7 @@ This sections will be updated considering [Airbnb JavaScript Style Guide](https:
 
 #### Import
 > **Library Path :** `'module_name'` *(e.g. `import React from 'react'`)*  
-> **Relative Path :** starts with `'./'` *(e.g. `import { Tab } from './../../components'`)*  
+> **Relative Path :** starts with `'./'` *(e.g. `import { Comment } from './../../components'`)*  
 > **Line Separation :** newline between import collections  
 > **Import Sequence :** Library Module > Asset > Components&Containers > CSS(Global>Local)  
 

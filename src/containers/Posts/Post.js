@@ -14,7 +14,7 @@ class Post extends React.Component {
   state = {
     disabled: false
   };
-  componentWillMount(){
+  componentWillMount() {
     this.props.readPost(this.props.params.id);
     this.props.readComments(this.props.params.id);
   }
@@ -69,8 +69,8 @@ class Post extends React.Component {
 }
 
 Post = reduxForm({
-    form: 'CommentsNewForm',
-    fields: ['name', 'email', 'body']
+  form: 'CommentsNewForm',
+  fields: ['name', 'email', 'body']
 })(Post);
 
 function mapStateToProps(state) {
