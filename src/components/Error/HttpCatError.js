@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import { Row, Col } from 'react-bootstrap';
 
 class ErrorTemplate extends React.Component {
   static propTypes = {
@@ -13,14 +14,14 @@ class ErrorTemplate extends React.Component {
 
   render() {
     return (
-      <div className="row">
+      <Row>
         <Helmet title={this.props.statusCode} />
-        <div className="col-md-offset-3 col-md-6">
+        <Col mdOffset={3} md={6}>
           <h1 className="text-center">{this.props.statusCode + " : " + this.props.message}</h1>
           <h1 className="text-center"></h1>
           <img src={"https://http.cat/"+this.props.statusCode} alt={this.props.message} className="img-responsive"/>
-        </div>
-      </div>
+        </Col>
+      </Row>
     )
   }
 }

@@ -4,25 +4,27 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
+import { Button, Row } from 'react-bootstrap';
 
 import { readPost, readComments, createComment, readMoreComments } from './../../actions';
 
 import { PostDetail, Comment } from './../../components';
 
 class Post extends React.Component {
+  state = {
+    disabled: false
+  };
   componentWillMount(){
     this.props.readPost(this.props.params.id);
     this.props.readComments(this.props.params.id);
   }
 
   onSubmit = (props) => {
+    this.setState({ 'disabled' : true });
     props.postId = this.props.params.id;
-    let postLength = this.props.comments.length;
-    let nowState = this;
     this.props.createComment(props)
-      .then(function () {
-        nowState.props.readMoreComments(props.postId, {'_start' : postLength});
-      });
+      .then(() => this.props.readMoreComments(this.props.params.id, {'_start' : this.props.comments.length}))
+      .then(() => this.setState({ 'disabled' : false }));
   }
 
   render() {
@@ -31,10 +33,12 @@ class Post extends React.Component {
       <div>
         <Helmet title={this.props.post.title} />
         <h1 className="text-center"> {window.location.pathname} </h1>
-        <Link to="/posts" className="btn btn-default">back</Link>
-        <div className="row">
+        <Link to="/posts">
+          <Button bsStyle="default">back</Button>
+        </Link>
+        <Row>
           <PostDetail key={this.props.post.id} {...this.props.post} />
-        </div>
+        </Row>
         <div>
         { this.props.comments.map((comment) =>
           <Comment key={comment.id} {...comment} />
@@ -56,7 +60,7 @@ class Post extends React.Component {
               <label> Body </label>
               <input type="form-control" placeholder="body" {...body} />
             </div>
-          <button type="Submit"> Comment Submit </button>
+          <Button bsStyle="primary" type="submit" disabled={this.state.disabled}> Comment Submit </Button>
           </form>
         </div>
       </div>
