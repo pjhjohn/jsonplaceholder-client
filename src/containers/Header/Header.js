@@ -27,7 +27,7 @@ class Header extends React.Component {
             </LinkContainer>
           </Nav>
           <Nav pullRight>
-            <LinkContainer to={{ pathname: '/albums' }}>
+            <LinkContainer to={{ pathname: '/about' }}>
               <NavItem eventKey={1}>About</NavItem>
             </LinkContainer>
           </Nav>
