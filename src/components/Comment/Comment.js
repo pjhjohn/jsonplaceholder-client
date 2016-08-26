@@ -1,16 +1,15 @@
 import React from 'react';
 import { Inspector } from 'react-inspector';
+import { Col, Well } from 'react-bootstrap';
 
 class Comment extends React.Component {
   render() {
     return (
-      <div className="card">
-        <div className="card-title text-center"> {this.props.name}({this.props.id}, {this.props.email})</div>
-        <div className="card-header text-center"> {this.props.body} </div>
-        <div className="card-body">
-          <Inspector data={this.props} />
-        </div>
-      </div>
+      <Col md={12}>
+        <Well bsSize="small" style={{backgroundColor: "white"}}>
+          <Inspector data={this.props} expandLevel={1} />
+        </Well>
+      </Col>
     )
   }
 }
