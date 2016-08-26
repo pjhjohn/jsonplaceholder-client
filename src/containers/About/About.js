@@ -35,9 +35,9 @@ class About extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    contributors: state.contributors.contributors,
-    languages: state.languages.languages,
-    pullRequests: state.pullRequests.pullRequests
+    contributors: state.github.contributors,
+    languages: state.github.languages,
+    pullRequests: state.github.pullRequests
   };
 }
 

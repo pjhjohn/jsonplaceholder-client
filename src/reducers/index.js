@@ -8,9 +8,7 @@ const RootReducer = combineReducers({
   post: PostReducer,
   form: formReducer,
   comment: CommentReducer,
-  contributors: AboutReducer,
-  languages: AboutReducer,
-  pullRequests: AboutReducer
+  github: AboutReducer
 });
 
 export default RootReducer;
