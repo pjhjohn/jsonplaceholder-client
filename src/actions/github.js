@@ -3,6 +3,7 @@ import { github } from './api';
 export const LOAD_CONTRIBUTORS = 'LOAD_CONTRIBUTORS';
 export const LOAD_LANGUAGES = 'LOAD_LANGUAGES'
 export const LOAD_PULL_REQUESTS = 'LOAD_PULL_REQUESTS';
+export const LOAD_ISSUES = 'LOAD_ISSUES';
 
 export function loadContributors(query) {
   const request = github.get(query);
@@ -24,6 +25,14 @@ export function loadPullRequests(query) {
   const request = github.get(query);
   return {
     type: LOAD_PULL_REQUESTS,
+    payload: request
+  }
+}
+
+export function loadIssues(query) {
+  const request = github.get(query);
+  return {
+    type: LOAD_ISSUES,
     payload: request
   }
 }
