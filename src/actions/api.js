@@ -6,6 +6,6 @@ export const api = create({
   baseURL: `${BASE_URL}`
 })
 
-export const github = create({
-  baseURL: `https://api.github.com`
+export const githubApi = create({
+  baseURL: `https://api.github.com/repos/pjhjohn/jsonplaceholder-client`
 })

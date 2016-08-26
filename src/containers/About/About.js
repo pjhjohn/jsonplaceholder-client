@@ -4,35 +4,33 @@ import { bindActionCreators } from 'redux';
 import { Inspector } from 'react-inspector';
 import { loadContributors, loadLanguages, loadPullRequests, loadIssues } from './../../actions';
 
+import { Panel } from 'react-bootstrap';
+
 class About extends React.Component {
 
   componentWillMount() {
-    this.props.loadLanguages("/repos/pjhjohn/jsonplaceholder-client/languages");
-    this.props.loadContributors("/repos/pjhjohn/jsonplaceholder-client/contributors");
-    this.props.loadPullRequests("/repos/pjhjohn/jsonplaceholder-client/pulls?state=all");
-    this.props.loadIssues("/repos/pjhjohn/jsonplaceholder-client/issues");
+    this.props.loadLanguages("/languages");
+    this.props.loadContributors("/contributors");
+    this.props.loadPullRequests("/pulls", {'state': 'open'});
+    this.props.loadIssues("/issues", {'state': 'open'});
   }
 
   render() {
     return (
       <div>
         <h1 className="text-center"> ABOUT PAGE </h1>
-        <div>
-          <h2> Contributors </h2>
+        <Panel header="Contributors" bsStyle="primary">
           <Inspector data={this.props.contributors} />
-        </div>
-        <div>
-          <h2> Using Language </h2>
+        </Panel>
+        <Panel header="Languages" bsStyle="info">
           <Inspector data={this.props.languages} />
-        </div>
-        <div>
-          <h2> Pull Requests </h2>
-          <Inspector data={this.props.pullRequests} />
-        </div>
-        <div>
-          <h2> Issues </h2>
+        </Panel>
+        <Panel header="Pull Requests" bsStyle="success">
+         <Inspector data={this.props.pullRequests} />
+        </Panel>
+        <Panel header="Issues" bsStyle="warning">
           <Inspector data={this.props.issues} />
-        </div>
+        </Panel>
       </div>
     )
   }
