@@ -48,7 +48,7 @@ class Posts extends React.Component {
 
         <Row>
         { this.props.posts.map((post) =>
-          <Link to={"/posts/" + post.id} key={post.id} >
+          <Link to={`/posts/${post.id}`} key={post.id} >
             <PostItem {...post} />
           </Link>
         )}
