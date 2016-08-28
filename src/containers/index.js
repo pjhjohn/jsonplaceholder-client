@@ -1,5 +1,6 @@
 export App from './App/App';
 export Navbar from './Header/Header';
+export About from './About/About';
 export Post from './Posts/Post';
 export Posts from './Posts/Posts';
 export PostNew from './Posts/PostNew';
