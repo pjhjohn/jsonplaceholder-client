@@ -1,3 +1,3 @@
 export * from './post';
 export * from './comment';
-export * from './github';
+export * from './about';

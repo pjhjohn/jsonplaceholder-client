@@ -2,17 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Inspector } from 'react-inspector';
-import { loadContributors, loadLanguages, loadPullRequests, loadIssues } from './../../actions';
+import { readContributors, readLanguages, readPullRequests, readIssues } from './../../actions';
 
 import { Panel } from 'react-bootstrap';
 
 class About extends React.Component {
 
   componentWillMount() {
-    this.props.loadLanguages("/languages");
-    this.props.loadContributors("/contributors");
-    this.props.loadPullRequests("/pulls", {'state': 'open'});
-    this.props.loadIssues("/issues", {'state': 'open'});
+    this.props.readLanguages();
+    this.props.readContributors();
+    this.props.readPullRequests({'state': 'open'});
+    this.props.readIssues({'state': 'open'});
   }
 
   render() {
@@ -46,7 +46,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ loadContributors, loadLanguages, loadPullRequests, loadIssues }, dispatch);
+    return bindActionCreators({ readContributors, readLanguages, readPullRequests, readIssues }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(About);
