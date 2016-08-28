@@ -4,13 +4,9 @@ import { Inspector } from 'react-inspector';
 class Comment extends React.Component {
   render() {
     return (
-      <div className="card">
-        <div className="card-title text-center"> {this.props.name}({this.props.id}, {this.props.email})</div>
-        <div className="card-header text-center"> {this.props.body} </div>
-        <div className="card-body">
-          <Inspector data={this.props} />
-        </div>
-      </div>
+      <ul style={{padding: 0}}>{/* To Avoid validateDOMNesting(...): <li> cannot appear as a descendant of <li>. Warning */}
+        <Inspector data={this.props} expandLevel={1} />
+      </ul>
     )
   }
 }
