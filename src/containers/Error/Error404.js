@@ -5,7 +5,7 @@ import { HttpCatError } from './../../components';
 class Error404 extends React.Component {
   render() {
     return (
-      <HttpCatError statusCode="404" message="Page NotFound" />
+      <HttpCatError statusCode="404" message="NotFound" />
     )
   }
 }
