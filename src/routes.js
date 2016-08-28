@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import { App, Posts, Post, PostNew, Error404, Albums, Album, Photo } from './containers';
+import { App, About, Posts, Post, PostNew, Error404, Albums, Album, Photo } from './containers';
 
 import { Greeting } from './components';
 
