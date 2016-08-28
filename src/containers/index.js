@@ -7,3 +7,6 @@ export PostNew from './Posts/PostNew';
 export Error404 from './Error/Error404';
 export Footer from './Footer/Footer';
 export DevTools from './DevTools/DevTools';
+export Album from './Albums/Album';
+export Albums from './Albums/Albums';
+export Photo from './Photos/Photos';
