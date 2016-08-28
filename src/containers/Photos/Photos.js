@@ -9,18 +9,17 @@ import { readPhoto } from './../../actions';
 
 import { PhotoDetail } from './../../components';
 
-class Photo extends React.Component {
+class Photos extends React.Component {
   componentWillMount() {
     this.props.readPhoto(this.props.params.id);
   }
 
   render() {
-    const url = "/albums/"+this.props.photo.albumId;
     return (
       <div>
         <Helmet title={this.props.title} />
         <h1 className="text-center"> {window.location.pathname} </h1>
-        <Link to={url}>
+        <Link to={`/albums/${this.props.photo.albumId}`}>
           <Button bsStyle="default">back</Button>
         </Link>
         <Row>
@@ -41,4 +40,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ readPhoto }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Photo);
+export default connect(mapStateToProps, mapDispatchToProps)(Photos);

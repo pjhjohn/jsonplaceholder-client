@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Panel } from 'react-bootstrap';
 import { Inspector } from 'react-inspector';
 
-class PostItem extends React.Component {
+class AlbumItem extends React.Component {
   render() {
     return (
       <Col md={12}>
@@ -14,4 +14,4 @@ class PostItem extends React.Component {
   }
 }
 
-export default PostItem;
+export default AlbumItem;

@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
 import { Button, Row } from 'react-bootstrap';
 
-import { readInitialAlbum, readMoreAlbum } from './../../actions';
+import { readInitialAlbums, readMoreAlbums } from './../../actions';
 
 import { AlbumItem } from './../../components';
 import { DEFAULT_ALBUM_LIMIT } from './../../actions';
@@ -30,10 +30,10 @@ class Albums extends React.Component {
 
   componentWillMount() {
     if(this.props.initialized) return;
-    this.props.readInitialAlbum();
+    this.props.readInitialAlbums();
   }
 
-  onReadMoreAlbums = (query) => this.props.readMoreAlbum(query);
+  onReadMoreAlbums = (query) => this.props.readMoreAlbums(query);
 
   render() {
     return (
@@ -41,7 +41,7 @@ class Albums extends React.Component {
         <h1 className="text-center"> {window.location.pathname} </h1>
         <Row>
         { this.props.albums.map((album) =>
-          <Link to={"/albums/" + album.id } key={album.id} >
+          <Link to={`/albums/${album.id}`} key={album.id} >
             <AlbumItem {...album} />
           </Link>
         )}
@@ -65,7 +65,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ readInitialAlbum, readMoreAlbum }, dispatch);
+  return bindActionCreators({ readInitialAlbums, readMoreAlbums }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Albums);

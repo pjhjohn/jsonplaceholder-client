@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
 import { Button, Row } from 'react-bootstrap';
 
-import { readInitialPhoto, readMorePhoto } from './../../actions';
+import { readInitialPhotos, readMorePhotos } from './../../actions';
 
 import { PhotoItem } from './../../components';
 import { DEFAULT_PHOTO_LIMIT } from './../../actions';
@@ -26,10 +26,10 @@ class Album extends React.Component {
   };
 
   componentWillMount() {
-    this.props.readInitialPhoto(this.props.params.id);
+    this.props.readInitialPhotos({'albumId': this.props.params.id});
   }
 
-  onReadMorePhotos = (id, query) => this.props.readMorePhoto(id, query);
+  onReadMorePhotos = (query) => this.props.readMorePhotos(query);
 
   render() {
     return (
@@ -40,14 +40,14 @@ class Album extends React.Component {
         </Link>
         <Row>
           { this.props.photos.map((photo) =>
-            <Link to={"/photos/" + photo.id} key={photo.id} >
+            <Link to={`/photos/${photo.id}`} key={photo.id} >
               <PhotoItem {...photo} />
             </Link>
           )}
         </Row>
         <Button bsStyle="default" block
-                onClick={() => this.onReadMorePhotos({'albumId': this.props.photos.id}, {'_start': this.props._end})}>
-          로오딩
+                onClick={() => this.onReadMorePhotos({'albumId': this.props.params.id, '_start': this.props._end})}>
+          로딩로딩
         </Button>
       </div>
     );
@@ -63,7 +63,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ readInitialPhoto, readMorePhoto }, dispatch);
+  return bindActionCreators({ readInitialPhotos, readMorePhotos }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Album);

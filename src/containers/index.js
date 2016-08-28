@@ -8,4 +8,4 @@ export Footer from './Footer/Footer';
 export DevTools from './DevTools/DevTools';
 export Album from './Albums/Album';
 export Albums from './Albums/Albums';
-export Photo from './Albums/Photo';
+export Photo from './Photos/Photos';
