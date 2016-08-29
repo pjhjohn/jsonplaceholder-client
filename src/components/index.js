@@ -6,4 +6,4 @@ export Comment from './Comment/Comment';
 export PhotoDetail from './Photos/PhotoDetail';
 export PhotoItem from './Photos/PhotoItem';
 export AlbumItem from './Albums/AlbumItem';
-export GithubIssues from './GithubIssues/GithubIssues';
+export GithubIssue from './Github/GithubIssue/GithubIssue';

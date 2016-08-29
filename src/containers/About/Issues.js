@@ -1,10 +1,11 @@
 import React from 'react';
-import { GithubIssues } from './../../../components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { readIssues } from './../../../actions';
-
 import { DropdownButton, MenuItem, ListGroup, ListGroupItem } from 'react-bootstrap';
+
+import { readIssues } from './../../actions';
+
+import { GithubIssue } from './../../components';
 
 class Issues extends React.Component {
 
@@ -50,7 +51,7 @@ class Issues extends React.Component {
           {
             this.props.issues.map((issues) =>
             <ListGroupItem key={issues.number} >
-              <GithubIssues {...issues} />
+              <GithubIssue {...issues} />
             </ListGroupItem>
           )}
         </ListGroup>
