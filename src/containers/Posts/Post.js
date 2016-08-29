@@ -32,16 +32,16 @@ class Post extends React.Component {
     const { fields: { name, email, body }, handleSubmit } = this.props;
     return (
       <div>
-        <Helmet title={this.props.post.title} />
+        <Helmet title={`posts/${this.props.post.id}`} />
 
-        <Row style={{ marginBottom: `15px` }}>
+        <Row style={{ marginBottom: `20px` }}>
           <Col md={2}>
             <LinkContainer to={{pathname: '/posts'}}>
               <Button bsStyle="default" style={{width: `100%`}}>BACK</Button>
             </LinkContainer>
           </Col>
           <Col md={8}>
-            <p className="text-center text-title"> {window.location.href} </p>
+            <p className="text-center text-title"> {window.location.pathname} </p>
           </Col>
           <Col md={2}>
             <LinkContainer to={{pathname: '/posts/new'}}>
@@ -50,11 +50,11 @@ class Post extends React.Component {
           </Col>
         </Row>
 
-        <Panel header={window.location.href} bsStyle="primary">
+        <Panel header={window.location.pathname} bsStyle="primary">
           <PostDetail key={this.props.post.id} {...this.props.post} />
         </Panel>
 
-        <Panel header={window.location.href + '/comments'} bsStyle="info">
+        <Panel header={`${window.location.pathname}/comments`} bsStyle="info">
           <ListGroup fill style={{ marginTop: 0 }}>
           { this.props.comments.map((comment) =>
             <ListGroupItem key={comment.id} >
@@ -64,7 +64,7 @@ class Post extends React.Component {
           </ListGroup>
         </Panel>
 
-        <Panel header={window.location.href + '/comments/new'} bsStyle="default">
+        <Panel header={`${window.location.pathname}/comments/new`} bsStyle="default">
           <Form horizontal onSubmit={handleSubmit(this.onSubmit)}>
 
             <FormGroup controlId="formHorizontalEmail">

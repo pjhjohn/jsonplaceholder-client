@@ -17,9 +17,8 @@ class ErrorTemplate extends React.Component {
       <Row>
         <Helmet title={this.props.statusCode} />
         <Col mdOffset={3} md={6}>
-          <h1 className="text-center">{this.props.statusCode + " : " + this.props.message}</h1>
-          <h1 className="text-center"></h1>
-          <img src={"https://http.cat/"+this.props.statusCode} alt={this.props.message} className="img-responsive"/>
+          <h1 className="text-center">{`${this.props.statusCode} : ${this.props.message}`}</h1>
+          <img src={`https://http.cat/${this.props.statusCode}`} alt={this.props.message} className="img-responsive"/>
         </Col>
       </Row>
     )
