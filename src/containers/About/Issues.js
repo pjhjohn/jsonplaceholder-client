@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { DropdownButton, MenuItem, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Debounce } from 'react-throttle';
 
 import { readIssues } from './../../actions';
 
@@ -24,6 +25,7 @@ class Issues extends React.Component {
     const newFilter = Object.assign(this.state.filter, filter);
     this.setState({ filter: newFilter });
     this.props.readIssues(newFilter);
+    console.log(newFilter);
   };
 
   render() {
@@ -50,14 +52,18 @@ class Issues extends React.Component {
             <MenuItem onClick={() => this.updateFilter({ labels: 'invalid' })}> INVALID </MenuItem>
             <MenuItem onClick={() => this.updateFilter({ labels: 'updated' })}> UPDATED </MenuItem>
           </DropdownButton>
-          <input type="text" title="assignee"  placeholder="Assignee" list="assigneeList" onKeyUp={this.convertFilter} />
+          <Debounce time="2000" handler="onKeyUp">
+            <input type="text" title="assignee"  placeholder="Assignee" list="assigneeList" onKeyUp={this.convertFilter} />
+          </Debounce>
           <datalist id="assigneeList">
             <option>gnujoow</option>
             <option>lanieerts</option>
             <option>moonlitangle</option>
             <option>pjhjohn</option>
           </datalist>
-          <input type="text" title="milestone" placeholder="Milestone" onKeyUp={this.convertFilter} />
+          <Debounce time="2000" handler="onKeyUp">
+            <input type="text" title="milestone" placeholder="Milestone" onKeyUp={this.convertFilter} />
+          </Debounce>
         </div>
         <ListGroup>
           { this.props.issues.map((issues) =>
