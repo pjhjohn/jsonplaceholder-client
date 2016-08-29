@@ -10,23 +10,14 @@ import { GithubIssue } from './../../components';
 class Issues extends React.Component {
 
   state = {
-    'state': 'open',
-    'sort': 'created'
+    filter: {}
   };
 
-  updateState = (state) => {
-    this.setState({
-      'state': state
-    });
-    this.props.readIssues(Object.assign({ 'state': state }, { 'sort': this.state.sort }));
-  };
-
-  updateSort = (sort) => {
-    this.setState({
-      'sort': sort
-    });
-    this.props.readIssues(Object.assign({ 'state': this.state.state }, { 'sort': sort }));
-  };
+  updateFilter = (filter) => {
+    const newFilter = Object.assign(this.state.filter, filter);
+    this.setState({ filter: newFilter });
+    this.props.readIssues(newFilter);
+  }
 
   render() {
     return (
@@ -34,22 +25,29 @@ class Issues extends React.Component {
         <h2> ISSUES PAGE </h2>
         <div>
           <DropdownButton title="STATE" bsStyle="primary" id="state">
-            <MenuItem onClick={() => this.updateState('open')}> DEFAULT </MenuItem>
-            <MenuItem onClick={() => this.updateState('all')}> ALL </MenuItem>
-            <MenuItem onClick={() => this.updateState('open')}> OPEN </MenuItem>
-            <MenuItem onClick={() => this.updateState('closed')}> CLOSED </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ state: 'open' })}> DEFAULT </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ state: 'all' })}> ALL </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ state: 'open' })}> OPEN </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ state: 'closed' })}> CLOSED </MenuItem>
           </DropdownButton>
           <DropdownButton title="SORT" bsStyle="info" id="sort">
-            <MenuItem onClick={() => this.updateSort('created')}> DEFAULT </MenuItem>
-            <MenuItem onClick={() => this.updateSort('created')}> CREATED </MenuItem>
-            <MenuItem onClick={() => this.updateSort('updated')}> UPDATED </MenuItem>
-            <MenuItem onClick={() => this.updateSort('comments')}> COMMENTS </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ sort: 'created' })}> DEFAULT </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ sort: 'created' })}> CREATED </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ sort: 'updated' })}> UPDATED </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ sort: 'comments' })}> COMMENTS </MenuItem>
           </DropdownButton>
-          <h2> State : {this.state.state} / Sort : {this.state.sort} </h2>
+          <DropdownButton title="LABELS" bsStyle="success" id="labels">
+            <MenuItem onClick={() => this.updateFilter({ labels: ''})}> DEFAULT </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ labels: 'bug' })}> BUG </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ labels: 'duplicate' })}> DUPLICATE </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ labels: 'enhancement' })}> ENHANCEMENT </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ labels: 'help wanted' })}> HELP WANTED </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ labels: 'invalid' })}> INVALID </MenuItem>
+            <MenuItem onClick={() => this.updateFilter({ labels: 'updated' })}> UPDATED </MenuItem>
+          </DropdownButton>
         </div>
         <ListGroup>
-          {
-            this.props.issues.map((issues) =>
+          { this.props.issues.map((issues) =>
             <ListGroupItem key={issues.number} >
               <GithubIssue {...issues} />
             </ListGroupItem>
