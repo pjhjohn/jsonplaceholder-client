@@ -13,11 +13,18 @@ class Issues extends React.Component {
     filter: {}
   };
 
+  convertFilter = (filter) => {
+    let newFilter = { [filter.target.title]: filter.target.value };
+    if(filter.target.value === "")
+      newFilter = { [filter.target.title]: 'none' };
+    this.updateFilter(newFilter);
+  };
+
   updateFilter = (filter) => {
     const newFilter = Object.assign(this.state.filter, filter);
     this.setState({ filter: newFilter });
     this.props.readIssues(newFilter);
-  }
+  };
 
   render() {
     return (
@@ -25,13 +32,11 @@ class Issues extends React.Component {
         <h2> ISSUES PAGE </h2>
         <div>
           <DropdownButton title="STATE" bsStyle="primary" id="state">
-            <MenuItem onClick={() => this.updateFilter({ state: 'open' })}> DEFAULT </MenuItem>
             <MenuItem onClick={() => this.updateFilter({ state: 'all' })}> ALL </MenuItem>
             <MenuItem onClick={() => this.updateFilter({ state: 'open' })}> OPEN </MenuItem>
             <MenuItem onClick={() => this.updateFilter({ state: 'closed' })}> CLOSED </MenuItem>
           </DropdownButton>
           <DropdownButton title="SORT" bsStyle="info" id="sort">
-            <MenuItem onClick={() => this.updateFilter({ sort: 'created' })}> DEFAULT </MenuItem>
             <MenuItem onClick={() => this.updateFilter({ sort: 'created' })}> CREATED </MenuItem>
             <MenuItem onClick={() => this.updateFilter({ sort: 'updated' })}> UPDATED </MenuItem>
             <MenuItem onClick={() => this.updateFilter({ sort: 'comments' })}> COMMENTS </MenuItem>
@@ -45,6 +50,14 @@ class Issues extends React.Component {
             <MenuItem onClick={() => this.updateFilter({ labels: 'invalid' })}> INVALID </MenuItem>
             <MenuItem onClick={() => this.updateFilter({ labels: 'updated' })}> UPDATED </MenuItem>
           </DropdownButton>
+          <input type="text" title="assignee"  placeholder="Assignee" list="assigneeList" onKeyUp={this.convertFilter} />
+          <datalist id="assigneeList">
+            <option>gnujoow</option>
+            <option>lanieerts</option>
+            <option>moonlitangle</option>
+            <option>pjhjohn</option>
+          </datalist>
+          <input type="text" title="milestone" placeholder="Milestone" onKeyUp={this.convertFilter} />
         </div>
         <ListGroup>
           { this.props.issues.map((issues) =>
