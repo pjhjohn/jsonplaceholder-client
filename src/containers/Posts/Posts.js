@@ -1,8 +1,10 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
-import { Button, Row } from 'react-bootstrap';
+import { Row, Col, Button, } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import { readInitialPosts, readMorePosts } from './../../actions';
 
@@ -38,13 +40,18 @@ class Posts extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="text-center"> {window.location.pathname} </h1>
+        <Helmet title={`posts`} />
 
-        <Link to="/posts/new">
-          <Button bsStyle="primary" block>
-          글쓰기
-          </Button>
-        </Link>
+        <Row style={{ marginBottom: `20px` }}>
+          <Col mdOffset={2} md={8}>
+            <p className="text-center text-title"> {window.location.pathname} </p>
+          </Col>
+          <Col md={2}>
+            <LinkContainer to={{pathname: '/posts/new'}}>
+              <Button bsStyle="primary" style={{width: `100%`}}>WRITE POST</Button>
+            </LinkContainer>
+          </Col>
+        </Row>
 
         <Row>
         { this.props.posts.map((post) =>
@@ -54,10 +61,13 @@ class Posts extends React.Component {
         )}
         </Row>
 
-        <Button bsStyle="default" block
-          onClick={() => this.onReadMorePosts({'_start': this.props._end})}>
-          로오딩
-        </Button>
+        <Row style={{ marginBottom: `20px` }}>
+          <Col md={12}>
+            <Button bsStyle="primary" block onClick={() => this.onReadMorePosts({'_start': this.props._end})}>
+              MORE POSTS
+            </Button>
+          </Col>
+        </Row>
       </div>
     );
   }
