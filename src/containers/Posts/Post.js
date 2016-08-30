@@ -49,8 +49,8 @@ class Post extends React.Component {
             </LinkContainer>
           </Col>
           <Col md={2}>
-            <LinkContainer to={{pathname: `/posts/${this.props.params.id}/modify`}}>
-              <Button bsStyle="primary" style={{width: `100%`}}>MODIFY POST</Button>
+            <LinkContainer to={{pathname: `/posts/${this.props.params.id}/edit`}}>
+              <Button bsStyle="primary" style={{width: `100%`}}>EDIT POST</Button>
             </LinkContainer>
           </Col>
         </Row>

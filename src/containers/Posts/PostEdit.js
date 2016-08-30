@@ -5,9 +5,9 @@ import { Link } from 'react-router';
 import { Button } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 
-import { readPost, modifyPost } from './../../actions';
+import { readPost, updatePost } from './../../actions';
 
-class PostModify extends React.Component {
+class PostEdit extends React.Component {
   state = {
     disabled: false
   };
@@ -15,7 +15,7 @@ class PostModify extends React.Component {
     router: PropTypes.object
   };
 
-  componentWillMount(){
+  componentWillMount() {
     this.props.readPost(this.props.params.id);
   }
 
@@ -24,7 +24,7 @@ class PostModify extends React.Component {
     props.id = this.props.post.id;
     props.userId = this.props.post.userId;
     console.log(props);
-    this.props.modifyPost(props).then(() => {
+    this.props.updatePost(props).then(() => {
       this.context.router.push(`/posts/${props.id}`);
     });
   };
@@ -33,7 +33,7 @@ class PostModify extends React.Component {
     const { fields: { title, body }, handleSubmit } = this.props;
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <h1>PostModify Test Page</h1>
+        <h1>Post Edit Test Page</h1>
         <p> Please input title and body </p>
         <div className="form-group">
           <label>Title</label>
@@ -52,10 +52,10 @@ class PostModify extends React.Component {
   }
 }
 
-PostModify = reduxForm({
-  form: 'PostsModifyForm',
+PostEdit = reduxForm({
+  form: 'PostEditForm',
   fields: ['title', 'body']
-}, null, { readPost, modifyPost })(PostModify);
+}, null, { readPost, updatePost })(PostEdit);
 
 function mapStateToProps(state) {
   return {
@@ -64,9 +64,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ readPost, modifyPost }, dispatch);
+  return bindActionCreators({ readPost, updatePost }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostModify);
+export default connect(mapStateToProps, mapDispatchToProps)(PostEdit);
 
 
