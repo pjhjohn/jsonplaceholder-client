@@ -40,12 +40,17 @@ class Post extends React.Component {
               <Button bsStyle="default" style={{width: `100%`}}>BACK</Button>
             </LinkContainer>
           </Col>
-          <Col md={8}>
+          <Col md={6}>
             <p className="text-center text-title"> {window.location.pathname} </p>
           </Col>
           <Col md={2}>
             <LinkContainer to={{pathname: '/posts/new'}}>
               <Button bsStyle="primary" style={{width: `100%`}}>WRITE POST</Button>
+            </LinkContainer>
+          </Col>
+          <Col md={2}>
+            <LinkContainer to={{pathname: `/posts/${this.props.params.id}/modify`}}>
+              <Button bsStyle="primary" style={{width: `100%`}}>MODIFY POST</Button>
             </LinkContainer>
           </Col>
         </Row>
