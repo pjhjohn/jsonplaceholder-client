@@ -37,11 +37,11 @@ class PostEdit extends React.Component {
         <p> Please input title and body </p>
         <div className="form-group">
           <label>Title</label>
-          <input className="form-control" type="text" {...title } />
+          <input className="form-control" type="text" {...title } value={this.props.post.title} />
         </div>
         <div className="form-group">
           <label>Body</label>
-          <textarea className="form-control" type="text" {...body } />
+          <textarea className="form-control" type="text" {...body } value={this.props.post.body} />
         </div>
         <Button bsStyle="primary" type="submit" disabled={this.state.disabled}>Submit</Button>
         <Link to="/posts">
