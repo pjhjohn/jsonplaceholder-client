@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { DropdownButton, MenuItem, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Debounce } from 'react-throttle';
 
-import { readIssues } from './../../actions';
+import { readContributors, readIssues } from './../../actions';
 
 import { GithubIssue } from './../../components';
 
@@ -13,6 +13,10 @@ class Issues extends React.Component {
   state = {
     filter: {}
   };
+
+  componentWillMount() {
+    this.props.readContributors();
+  }
 
   convertFilter = (filter) => {
     let newFilter = { [filter.target.title]: filter.target.value };
@@ -29,6 +33,9 @@ class Issues extends React.Component {
   };
 
   render() {
+    if(!this.props.contributors.length)
+      return (<div>LOADING</div>);
+    console.log(this.props.issues);
     return (
       <div>
         <h2> ISSUES PAGE </h2>
@@ -56,10 +63,9 @@ class Issues extends React.Component {
             <input type="text" title="assignee"  placeholder="Assignee" list="assigneeList" onKeyUp={this.convertFilter} />
           </Debounce>
           <datalist id="assigneeList">
-            <option>gnujoow</option>
-            <option>lanieerts</option>
-            <option>moonlitangle</option>
-            <option>pjhjohn</option>
+          { this.props.contributors.map((contributors) =>
+            <option key={contributors.id}> {contributors.login} </option>
+          )}
           </datalist>
           <Debounce time="2000" handler="onKeyUp">
             <input type="text" title="milestone" placeholder="Milestone" onKeyUp={this.convertFilter} />
@@ -79,12 +85,21 @@ class Issues extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    contributors: state.github.contributors,
     issues: state.github.issues
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ readIssues }, dispatch);
+  return bindActionCreators({ readContributors, readIssues }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Issues);
+
+//
+// <option>gnujoow</option>
+// <option>lanieerts</option>
+// <option>moonlitangle</option>
+// <option>pjhjohn</option>
+//
+
