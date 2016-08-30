@@ -16,7 +16,7 @@ class App extends Component {
           titleTemplate="%s | jsonplaceholder-client"
         />
         {/* GIthub Fork Ribbon */}
-        <GitHubForkRibbon href="//www.google.com"
+        <GitHubForkRibbon href="https://github.com/pjhjohn/jsonplaceholder-client"
                           target="_blank"
                           position="right">
           Fork me on GitHub
