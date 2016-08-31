@@ -1,14 +1,12 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import { App, About, Issues, Posts, Post, PostNew, Error404, Albums, Album, Photo } from './containers';
-
-import { Greeting } from './components';
+import { App, Home, About, Issues, Posts, Post, PostNew, Error404, Albums, Album, Photo } from './containers';
 
 export default(
   <Route path="/" component={App}>
-    <IndexRoute component={Greeting} />
-    <Route path="home" component={Greeting} />
+    <IndexRoute component={Home} />
+    <Route path="home" component={Home} />
     <Route path="about" component={About}>
       <Route path="issues" component={Issues} />
     </Route>
