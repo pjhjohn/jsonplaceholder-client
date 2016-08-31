@@ -93,11 +93,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Issues);
-
-//
-// <option>gnujoow</option>
-// <option>lanieerts</option>
-// <option>moonlitangle</option>
-// <option>pjhjohn</option>
-//
-
