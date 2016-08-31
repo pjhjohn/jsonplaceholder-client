@@ -29,13 +29,12 @@ class Issues extends React.Component {
     const newFilter = Object.assign(this.state.filter, filter);
     this.setState({ filter: newFilter });
     this.props.readIssues(newFilter);
-    console.log(newFilter);
   };
 
   render() {
+    console.log(this.state.filter);
     if(!this.props.contributors.length)
       return (<div>LOADING</div>);
-    console.log(this.props.issues);
     return (
       <div>
         <h2> ISSUES PAGE </h2>
