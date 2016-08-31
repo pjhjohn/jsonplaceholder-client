@@ -23,7 +23,6 @@ class PostEdit extends React.Component {
     this.setState({ 'disabled' : true });
     props.id = this.props.post.id;
     props.userId = this.props.post.userId;
-    console.log(props);
     this.props.updatePost(props).then(() => {
       this.context.router.push(`/posts/${props.id}`);
     });
@@ -32,16 +31,16 @@ class PostEdit extends React.Component {
   render() {
     const { fields: { title, body }, handleSubmit } = this.props;
     return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <form onSubmit={handleSubmit(this.onSubmit)}>
         <h1>Post Edit Test Page</h1>
         <p> Please input title and body </p>
         <div className="form-group">
           <label>Title</label>
-          <input className="form-control" type="text" {...title } value={this.props.post.title} />
+          <input className="form-control" type="text" {...title} />
         </div>
         <div className="form-group">
           <label>Body</label>
-          <textarea className="form-control" type="text" {...body } value={this.props.post.body} />
+          <textarea className="form-control" type="text" {...body} />
         </div>
         <Button bsStyle="primary" type="submit" disabled={this.state.disabled}>Submit</Button>
         <Link to="/posts">
@@ -59,6 +58,7 @@ PostEdit = reduxForm({
 
 function mapStateToProps(state) {
   return {
+    initialValues: state.post.detail,
     post: state.post.detail
   };
 }
