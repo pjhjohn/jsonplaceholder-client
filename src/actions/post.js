@@ -42,8 +42,8 @@ export function readMorePosts(query) {
   };
 }
 
-export function updatePost(query) {
-  const request = api.put(`/posts/${query.id}`, query);
+export function updatePost(postId, query) {
+  const request = api.put(`/posts/${postId}`, query);
   return {
     type: UPDATE_POST,
     payload: request

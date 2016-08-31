@@ -21,10 +21,9 @@ class PostEdit extends React.Component {
 
   onSubmit = (props) => {
     this.setState({ 'disabled' : true });
-    props.id = this.props.post.id;
     props.userId = this.props.post.userId;
-    this.props.updatePost(props).then(() => {
-      this.context.router.push(`/posts/${props.id}`);
+    this.props.updatePost(this.props.post.id, props).then(() => {
+      this.context.router.push(`/posts/${this.props.post.id}`);
     });
   };
 
