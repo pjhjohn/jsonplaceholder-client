@@ -32,7 +32,6 @@ class Issues extends React.Component {
   };
 
   render() {
-    console.log(this.state.filter);
     if(!this.props.contributors.length)
       return (<div>LOADING</div>);
     return (
