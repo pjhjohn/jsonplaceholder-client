@@ -77,6 +77,7 @@
     "start:client": "node ./scripts/start.js",
     "start:json-server": "json-server --watch data.json --port 3001",
     "start": "concurrently --kill-others \"npm run start:client\" \"npm run start:json-server\"",
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "build": "node ./scripts/build.js"
   },
   "eslintConfig": {
