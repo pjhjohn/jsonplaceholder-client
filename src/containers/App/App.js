@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
+import GitHubForkRibbon from 'react-github-fork-ribbon'
 
 import Header from './../Header/Header';
 import Footer from './../Footer/Footer';
@@ -14,6 +15,12 @@ class App extends Component {
           defaultTitle="jsonplaceholder-client"
           titleTemplate="%s | jsonplaceholder-client"
         />
+        {/* GIthub Fork Ribbon */}
+        <GitHubForkRibbon href="https://github.com/pjhjohn/jsonplaceholder-client"
+                          target="_blank"
+                          position="right">
+          Fork me on GitHub
+        </GitHubForkRibbon>
 
         {/* Application Body */}
         <Header />

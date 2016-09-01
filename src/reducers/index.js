@@ -5,6 +5,7 @@ import CommentReducer from './comment';
 
 import AboutReducer from './about';
 import AlbumReducer from './album';
+import ReadmeReducer from './readme';
 import PhotoReducer from './photo';
 
 const RootReducer = combineReducers({
@@ -13,7 +14,8 @@ const RootReducer = combineReducers({
   comment: CommentReducer,
   github: AboutReducer,
   album: AlbumReducer,
-  photo: PhotoReducer
+  photo: PhotoReducer,
+  readme: ReadmeReducer
 });
 
 export default RootReducer;
