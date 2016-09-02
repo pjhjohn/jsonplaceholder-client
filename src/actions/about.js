@@ -14,8 +14,7 @@ export function readContributors() {
 export function readIssues(query) {
   const request = githubApi.get(`/issues`, query)
     .then((response) => {
-      if(!response.ok)
-        response.data = [];
+      if(!response.ok) response.data = [];
       return response;
     });
   return {

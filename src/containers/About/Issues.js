@@ -18,13 +18,6 @@ class Issues extends React.Component {
     this.props.readContributors();
   }
 
-  convertFilter = (filter) => {
-    let newFilter = { [filter.target.title]: filter.target.value };
-    if(filter.target.value === "")
-      newFilter = { [filter.target.title]: 'none' };
-    this.updateFilter(newFilter);
-  };
-
   updateFilter = (filter) => {
     const newFilter = Object.assign(this.state.filter, filter);
     this.setState({ filter: newFilter });
@@ -32,8 +25,7 @@ class Issues extends React.Component {
   };
 
   render() {
-    if(!this.props.contributors.length)
-      return (<div>LOADING</div>);
+    if(!this.props.contributors.length) return (<div>LOADING</div>);
     return (
       <div>
         <h2> ISSUES PAGE </h2>
@@ -57,16 +49,18 @@ class Issues extends React.Component {
             <MenuItem onClick={() => this.updateFilter({ labels: 'invalid' })}> INVALID </MenuItem>
             <MenuItem onClick={() => this.updateFilter({ labels: 'updated' })}> UPDATED </MenuItem>
           </DropdownButton>
-          <Debounce time="2000" handler="onKeyUp">
-            <input type="text" title="assignee"  placeholder="Assignee" list="assigneeList" onKeyUp={this.convertFilter} />
+          <Debounce time="1000" handler="onKeyUp">
+            <input type="text" title="assignee"  placeholder="Assignee" list="assigneeList"
+                   onKeyUp={(event) => this.updateFilter(event.target.value===""? {} : { [event.target.title]: event.target.value})} />
           </Debounce>
           <datalist id="assigneeList">
           { this.props.contributors.map((contributors) =>
             <option key={contributors.id}> {contributors.login} </option>
           )}
           </datalist>
-          <Debounce time="2000" handler="onKeyUp">
-            <input type="text" title="milestone" placeholder="Milestone" onKeyUp={this.convertFilter} />
+          <Debounce time="1000" handler="onKeyUp">
+            <input type="text" title="milestone" placeholder="Milestone"
+                   onKeyUp={(event) => this.updateFilter(event.target.value===""? {} : { [event.target.title]: event.target.value})} />
           </Debounce>
         </div>
         <ListGroup>
