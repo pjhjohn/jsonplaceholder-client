@@ -20,6 +20,8 @@ class Issues extends React.Component {
 
   updateFilter = (filter) => {
     const newFilter = Object.assign(this.state.filter, filter);
+    for(let value in newFilter)
+      if(newFilter[value] === "") delete newFilter[value];
     this.setState({ filter: newFilter });
     this.props.readIssues(newFilter);
   };
@@ -51,7 +53,7 @@ class Issues extends React.Component {
           </DropdownButton>
           <Debounce time="1000" handler="onKeyUp">
             <input type="text" title="assignee"  placeholder="Assignee" list="assigneeList"
-                   onKeyUp={(event) => this.updateFilter(event.target.value===""? {} : { [event.target.title]: event.target.value})} />
+                   onKeyUp={(event) => this.updateFilter({[event.target.title]: event.target.value})} />
           </Debounce>
           <datalist id="assigneeList">
           { this.props.contributors.map((contributors) =>
@@ -60,7 +62,7 @@ class Issues extends React.Component {
           </datalist>
           <Debounce time="1000" handler="onKeyUp">
             <input type="text" title="milestone" placeholder="Milestone"
-                   onKeyUp={(event) => this.updateFilter(event.target.value===""? {} : { [event.target.title]: event.target.value})} />
+                   onKeyUp={(event) => this.updateFilter({[event.target.title]: event.target.value})} />
           </Debounce>
         </div>
         <ListGroup>
