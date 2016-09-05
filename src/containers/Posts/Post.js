@@ -11,6 +11,16 @@ import { readPost, readComments, createComment, readMoreComments } from './../..
 import { PostDetail, Comment } from './../../components';
 
 class Post extends React.Component {
+  static defaultProps = {
+    post: {},
+    comments: {}
+  };
+
+  static propTypes = {
+    post: React.PropTypes.object.isRequired,
+    comments: React.PropTypes.array.isRequired
+  };
+
   state = {
     disabled: false
   };

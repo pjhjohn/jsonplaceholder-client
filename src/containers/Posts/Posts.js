@@ -9,31 +9,26 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { readInitialPosts, readMorePosts } from './../../actions';
 
 import { PostItem } from './../../components';
-import { DEFAULT_POST_LIMIT } from './../../actions';
 
 class Posts extends React.Component {
   static defaultProps = {
+    posts: {},
     initialized: false,
-    _limit: DEFAULT_POST_LIMIT
+    _start: 0,
+    _end: 0
   };
 
   static propTypes = {
-    posts: React.PropTypes.array,
+    posts: React.PropTypes.array.isRequired,
     initialized: React.PropTypes.bool.isRequired,
-    _start: React.PropTypes.number,
-    _end: React.PropTypes.number,
-    _limit: React.PropTypes.number.isRequired
-  };
-
-  state = {
-    initialized: this.props.initialized,
-    _limit: this.props._limit
+    _start: React.PropTypes.number.isRequired,
+    _end: React.PropTypes.number.isRequired,
   };
 
   componentWillMount() {
     if(this.props.initialized) return;
     this.props.readInitialPosts();
-  }
+  };
 
   onReadMorePosts = (query) => this.props.readMorePosts(query);
 

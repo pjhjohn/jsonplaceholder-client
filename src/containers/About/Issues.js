@@ -9,6 +9,15 @@ import { readContributors, readIssues } from './../../actions';
 import { GithubIssue } from './../../components';
 
 class Issues extends React.Component {
+  static defaultProps = {
+    contributors: {},
+    issues: {}
+  };
+
+  static propTypes = {
+    contributors: React.PropTypes.array.isRequired,
+    issues: React.PropTypes.array.isRequired
+  };
 
   state = {
     filter: {}
@@ -16,7 +25,7 @@ class Issues extends React.Component {
 
   componentWillMount() {
     this.props.readContributors();
-  }
+  };
 
   updateFilter = (key, value) => {
     const newFilter = Object.assign(this.state.filter, { [key] : value });
