@@ -3,6 +3,11 @@ import Helmet from 'react-helmet';
 import { Row, Col } from 'react-bootstrap';
 
 class ErrorTemplate extends React.Component {
+  static defaultProps = {
+    statusCode: '200',
+    message: "OK"
+  };
+
   static propTypes = {
     statusCode: React.PropTypes.oneOf([
       '100','101','200','201','202','204','206','207','300','301','302','303','304','305','307','400','401',

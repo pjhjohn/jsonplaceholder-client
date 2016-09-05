@@ -2,6 +2,22 @@ import React from 'react';
 import { Col, Panel } from 'react-bootstrap';
 
 class PhotoItem extends React.Component {
+  static defaultProps = {
+    albumId: 0,
+    id: 0,
+    title: "",
+    url: "",
+    thumbnailUrl: ""
+  };
+
+  static propTypes = {
+    albumId: React.PropTypes.number.isRequired,
+    id: React.PropTypes.number.isRequired,
+    title: React.PropTypes.string.isRequired,
+    url: React.PropTypes.string.isRequired,
+    thumbnailUrl: React.PropTypes.string.isRequired
+  };
+
   render() {
     return (
       <Col md={3}>
