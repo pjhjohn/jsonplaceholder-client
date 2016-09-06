@@ -1,14 +1,16 @@
 import React from 'react';
-
-import { Panel } from 'react-bootstrap';
+import { Inspector } from 'react-inspector';
+import { Card, CardHeader, CardText } from 'material-ui/Card';
 
 class GithubIssue extends React.Component {
   render() {
     return (
-      <Panel header={`Number : ${this.props.number}`} bsStyle="primary">
-        <p> {`Title : ${this.props.title}`} </p>
-        <p> {`Body : ${this.props.body}`} </p>
-      </Panel>
+      <Card>
+        <CardHeader title={this.props.number}/>
+        <CardText>
+          <Inspector data={this.props} expandLevel={0} />
+        </CardText>
+      </Card>
     );
   }
 }

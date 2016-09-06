@@ -4,6 +4,7 @@ export About from './About/About';
 export Issues from './About/Issues';
 export Post from './Posts/Post';
 export Posts from './Posts/Posts';
+export PostEdit from './Posts/PostEdit';
 export PostNew from './Posts/PostNew';
 export Error404 from './Error/Error404';
 export Footer from './Footer/Footer';

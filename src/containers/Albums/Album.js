@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
-import { Button, Row } from 'react-bootstrap';
+import { Row, Col } from 'react-grid-system';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { readInitialPhotos, readMorePhotos } from './../../actions';
 
@@ -34,21 +35,29 @@ class Album extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="text-center"> {window.location.pathname} </h1>
-        <Link to="/albums">
-          <Button bsStyle="default">back</Button>
-        </Link>
+        <Row style={{ marginBottom: `20px` }}>
+          <Col md={2}>
+            <Link to={`/albums`}>
+              <RaisedButton label="BACK" fullWidth={true} primary={true} />
+            </Link>
+          </Col>
+          <Col md={8}>
+            <div className="text-title"> {window.location.pathname} </div>
+          </Col>
+          <Col md={2} />
+        </Row>
+
         <Row>
           { this.props.photos.map((photo) =>
             <Link to={`/photos/${photo.id}`} key={photo.id} >
-              <PhotoItem {...photo} />
+              <Col md={3}>
+                <PhotoItem {...photo} />
+              </Col>
             </Link>
           )}
         </Row>
-        <Button bsStyle="default" block
-                onClick={() => this.onReadMorePhotos({'albumId': this.props.params.id, '_start': this.props._end})}>
-          로딩로딩
-        </Button>
+
+        <RaisedButton label="MORE PHOTOS" fullWidth={true} primary={true} onClick={() => this.onReadMorePhotos({'albumId': this.props.params.id, '_start': this.props._end})} />
       </div>
     );
   }

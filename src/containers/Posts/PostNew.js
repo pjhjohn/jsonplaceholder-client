@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
-import { Button } from 'react-bootstrap';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { createPost } from './../../actions';
 
@@ -43,9 +43,9 @@ class PostNew extends React.Component {
           <label>Body</label>
           <textarea className="form-control" type="text" {...body } />
         </div>
-        <Button bsStyle="primary" type="submit" disabled={this.state.disabled}>Submit</Button>
-        <Link to="/posts">
-          <Button bsStyle="danger">Cancel</Button>
+        <RaisedButton type="submit" label="SUBMIT" fullWidth={true} primary={true} disabled={this.state.disabled} />
+        <Link to={`/posts`}>
+          <RaisedButton label="CANCEL" fullWidth={true} secondary={true} />
         </Link>
       </form>
     )
