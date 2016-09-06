@@ -21,7 +21,7 @@ class PhotoItem extends React.Component {
 
   render() {
     return (
-      <Card>
+      <Card style={{ marginBottom: `20px` }}>
         <CardHeader title={this.props.id}/>
         <CardMedia>
           <img src={this.props.thumbnailUrl} alt={this.props.title} />

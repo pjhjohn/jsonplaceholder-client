@@ -68,19 +68,24 @@ class Post extends React.Component {
           </Col>
         </Row>
 
-        <Card>
-          <CardHeader title={window.location.pathname}/>
-          <CardText>
-            <PostDetail {...this.props.post} />
-          </CardText>
-        </Card>
+        <Row style={{ marginBottom: `20px` }}>
+          <Col md={12}>
+            <Card>
+              <CardHeader title={window.location.pathname}/>
+              <CardText>
+                <PostDetail {...this.props.post} />
+              </CardText>
+            </Card>
+          </Col>
+        </Row>
 
-        <Card>
-          <CardHeader title={`${window.location.pathname}/comments`}/>
+        <Row>
+          <Col md={12}>
           { this.props.comments.map((comment) =>
             <Comment key={comment.id} {...comment} />
           )}
-        </Card>
+          </Col>
+        </Row>
 
         {/*<Panel header={`${window.location.pathname}/comments/new`} bsStyle="default">*/}
           {/*<Form horizontal onSubmit={handleSubmit(this.onSubmit)}>*/}

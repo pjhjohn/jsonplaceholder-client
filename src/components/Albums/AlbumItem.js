@@ -17,7 +17,7 @@ class AlbumItem extends React.Component {
 
   render() {
     return (
-      <Card>
+      <Card style={{ marginBottom: `20px` }}>
         <CardHeader title={this.props.id}/>
         <CardMedia>
           <img src={`https://placehold.it/150x150?text=dummy`} alt={this.props.title} />
