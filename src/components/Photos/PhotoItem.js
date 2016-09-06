@@ -1,15 +1,19 @@
 import React from 'react';
-import { Col, Panel } from 'react-bootstrap';
+import { Inspector } from 'react-inspector';
+import { Card, CardHeader, CardMedia, CardText } from 'material-ui/Card';
 
 class PhotoItem extends React.Component {
   render() {
     return (
-      <Col md={3}>
-        <Panel header={this.props.id} bsStyle="primary">
-          <h5>{this.props.title}</h5>
-          <img src={this.props.thumbnailUrl} alt={this.props.title}/>
-        </Panel>
-      </Col>
+      <Card>
+        <CardHeader title={this.props.id}/>
+        <CardMedia>
+          <img src={this.props.thumbnailUrl} alt={this.props.title} />
+        </CardMedia>
+        <CardText style={{height: "85px"}}>
+          <Inspector data={this.props} expandLevel={0} />
+        </CardText>
+      </Card>
     )
   }
 }

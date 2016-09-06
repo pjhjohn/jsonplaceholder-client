@@ -3,8 +3,8 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
-import { Row, Col, Button, } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Row, Col } from 'react-grid-system';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { readInitialPosts, readMorePosts } from './../../actions';
 
@@ -43,31 +43,28 @@ class Posts extends React.Component {
         <Helmet title={`posts`} />
 
         <Row style={{ marginBottom: `20px` }}>
-          <Col mdOffset={2} md={8}>
-            <p className="text-center text-title"> {window.location.pathname} </p>
+          <Col md={2}>
+            <Link to={`/`}>
+              <RaisedButton label="BACK" fullWidth={true} primary={true} />
+            </Link>
+          </Col>
+          <Col md={8}>
+            <div className="text-title"> {window.location.pathname} </div>
           </Col>
           <Col md={2}>
-            <LinkContainer to={{pathname: '/posts/new'}}>
-              <Button bsStyle="primary" style={{width: `100%`}}>WRITE POST</Button>
-            </LinkContainer>
+            <Link to={`/posts/new`}>
+              <RaisedButton label="WRITE POST" fullWidth={true} primary={true} />
+            </Link>
           </Col>
         </Row>
 
-        <Row>
         { this.props.posts.map((post) =>
           <Link to={`/posts/${post.id}`} key={post.id} >
             <PostItem {...post} />
           </Link>
         )}
-        </Row>
 
-        <Row style={{ marginBottom: `20px` }}>
-          <Col md={12}>
-            <Button bsStyle="primary" block onClick={() => this.onReadMorePosts({'_start': this.props._end})}>
-              MORE POSTS
-            </Button>
-          </Col>
-        </Row>
+        <RaisedButton label="MORE POSTS" fullWidth={true} primary={true} onClick={() => this.onReadMorePosts({'_start': this.props._end})} />
       </div>
     );
   }

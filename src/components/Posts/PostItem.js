@@ -1,16 +1,17 @@
 import React from 'react';
 import { Inspector } from 'react-inspector';
-import { Col, Panel } from 'react-bootstrap';
+import { Card, CardHeader, CardText } from 'material-ui/Card';
 
 class PostItem extends React.Component {
   render() {
     return (
-      <Col md={3}>
-        <Panel header={`${window.location.pathname}/${this.props.id}`} bsStyle="primary" style={{height: `240px`}}>
+      <Card>
+        <CardHeader title={`${window.location.pathname}/${this.props.id}`}/>
+        <CardText>
           <Inspector data={this.props} expandLevel={0} />
-        </Panel>
-      </Col>
-    )
+        </CardText>
+      </Card>
+    );
   }
 }
 

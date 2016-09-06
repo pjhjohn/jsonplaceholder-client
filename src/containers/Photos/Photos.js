@@ -3,7 +3,8 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
-import { Button, Row } from 'react-bootstrap';
+import { Row, Col } from 'react-grid-system';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { readPhoto } from './../../actions';
 
@@ -18,12 +19,22 @@ class Photos extends React.Component {
     return (
       <div>
         <Helmet title={this.props.title} />
-        <h1 className="text-center"> {window.location.pathname} </h1>
-        <Link to={`/albums/${this.props.photo.albumId}`}>
-          <Button bsStyle="default">back</Button>
-        </Link>
+        <Row style={{ marginBottom: `20px` }}>
+          <Col md={2}>
+            <Link to={`/albums/${this.props.photo.albumId}`}>
+              <RaisedButton label="BACK" fullWidth={true} primary={true} />
+            </Link>
+          </Col>
+          <Col md={8}>
+            <div className="text-title"> {window.location.pathname} </div>
+          </Col>
+          <Col md={2} />
+        </Row>
+
         <Row>
-          <PhotoDetail key={this.props.photo.id} {...this.props.photo} />
+          <Col md={12}>
+            <PhotoDetail key={this.props.photo.id} {...this.props.photo} />
+          </Col>
         </Row>
       </div>
     );

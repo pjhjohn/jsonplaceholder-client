@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
-import { Button, Row } from 'react-bootstrap';
+import { Row, Col } from 'react-grid-system';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { readInitialAlbums, readMoreAlbums } from './../../actions';
 
@@ -38,18 +39,29 @@ class Albums extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="text-center"> {window.location.pathname} </h1>
+        <Row style={{ marginBottom: `20px` }}>
+          <Col md={2}>
+            <Link to={`/`}>
+              <RaisedButton label="BACK" fullWidth={true} primary={true} />
+            </Link>
+          </Col>
+          <Col md={8}>
+            <div className="text-title"> {window.location.pathname} </div>
+          </Col>
+          <Col md={2} />
+        </Row>
+
         <Row>
         { this.props.albums.map((album) =>
           <Link to={`/albums/${album.id}`} key={album.id} >
-            <AlbumItem {...album} />
+            <Col md={3}>
+              <AlbumItem {...album} />
+            </Col>
           </Link>
         )}
         </Row>
-        <Button bsStyle="default" block
-          onClick={() => this.onReadMoreAlbums({'_start': this.props._end})}>
-          로딩로딩
-        </Button>
+
+        <RaisedButton label="MORE ALBUMS" fullWidth={true} primary={true} onClick={() => this.onReadMoreAlbums({'_start': this.props._end})} />
       </div>
     );
   }

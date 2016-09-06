@@ -1,6 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-grid-system';
+import { Card, CardHeader, CardMedia } from 'material-ui/Card';
 
 class ErrorTemplate extends React.Component {
   static propTypes = {
@@ -16,9 +17,14 @@ class ErrorTemplate extends React.Component {
     return (
       <Row>
         <Helmet title={this.props.statusCode} />
-        <Col mdOffset={3} md={6}>
-          <h1 className="text-center">{`${this.props.statusCode} : ${this.props.message}`}</h1>
-          <img src={`https://http.cat/${this.props.statusCode}`} alt={this.props.message} className="img-responsive"/>
+        <Col md={2} />
+        <Col md={8}>
+          <Card>
+            <CardHeader title={`${this.props.statusCode} : ${this.props.message}`}/>
+            <CardMedia>
+              <img src={`https://http.cat/${this.props.statusCode}`} alt={this.props.message}  />
+            </CardMedia>
+          </Card>
         </Col>
       </Row>
     )
