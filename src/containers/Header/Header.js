@@ -1,38 +1,45 @@
 import React from 'react';
 
-import { Link } from 'react-router';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+
+const styles = {
+  title: {
+    cursor: 'pointer',
+  },
+};
+
+const tabs = [ `home`, `posts`, `albums`, `about` ];
 
 class Header extends React.Component {
+  static contextTypes = {
+    router: React.PropTypes.object
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {open: false, active: window.location.pathname.split("/")[1]||tabs[0]};
+  }
+
+  navigate = (path) => {
+    this.setState({open: false, active: path});
+    this.context.router.push(`/${path}`);
+  };
+
   render() {
     return (
-      <Navbar inverse>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to={`/`}>jsonplaceholder-client</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <LinkContainer to={{ pathname: '/home' }}>
-              <NavItem eventKey={1}>Home</NavItem>
-            </LinkContainer>
-            <LinkContainer to={{ pathname: '/posts' }}>
-              <NavItem eventKey={2}>Post</NavItem>
-            </LinkContainer>
-            <LinkContainer to={{ pathname: '/albums' }}>
-              <NavItem eventKey={3}>Album</NavItem>
-            </LinkContainer>
-          </Nav>
-          <Nav pullRight>
-            <LinkContainer to={{ pathname: '/about' }}>
-              <NavItem eventKey={1}>About</NavItem>
-            </LinkContainer>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+      <div>
+        <AppBar
+          title={<span style={styles.title} onTouchTap={() => this.navigate(`home`)}>jsonplaceholder-client</span>}
+          onLeftIconButtonTouchTap={() => this.setState({open: !this.state.open})}>
+        </AppBar>
+        <Drawer open={this.state.open} docked={false} onRequestChange={(open) => this.setState({open})}>
+          { tabs.map((tab) =>
+            <MenuItem key={tab} checked={this.state.active===tab} onTouchTap={() => this.navigate(tab)}>{tab.toUpperCase()}</MenuItem>
+          )}
+        </Drawer>
+      </div>
     );
   }
 }

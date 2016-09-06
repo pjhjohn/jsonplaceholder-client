@@ -1,9 +1,8 @@
 import React from 'react';
-import { Inspector } from 'react-inspector';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Panel } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
+import { Card, CardText } from 'material-ui/Card';
 
 import { readReadme } from './../../actions';
 
@@ -25,13 +24,11 @@ class Home extends React.Component {
       <div>Loading....</div>
     );
     return (
-      <div>
-        <h1 className="text-center">Hello Nofetan</h1>
-        <Panel header="Inspector">
-          <Inspector data={this.props.readme}/>
-        </Panel>
-        { (!this.props.readme.content) ? loading : <ReactMarkdown source={atob(this.props.readme.content)} /> }
-      </div>
+      <Card>
+        <CardText>
+          { (!this.props.readme.content) ? loading : <ReactMarkdown source={atob(this.props.readme.content)} /> }
+        </CardText>
+      </Card>
     )
   }
 }

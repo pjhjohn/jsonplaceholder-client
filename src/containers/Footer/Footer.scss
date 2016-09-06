@@ -1,11 +1,10 @@
 /* Sticky footer styles : https://getbootstrap.com/examples/sticky-footer */
-
 html {
   position: relative;
   min-height: 100%;
 }
 body  {
-  margin-bottom: $footer-height;
+  margin-bottom: $footer-height + 20px;
 }
 footer.footer {
   position: absolute;

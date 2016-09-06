@@ -3,8 +3,10 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
-import { Row, Col, Panel, ListGroup, ListGroupItem, Button, Form, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Row, Col } from 'react-grid-system';
+import RaisedButton from 'material-ui/RaisedButton';
+import { Card, CardHeader, CardText } from 'material-ui/Card';
+import { Link } from 'react-router'
 
 import { readPost, readComments, createComment, readMoreComments } from './../../actions';
 
@@ -39,94 +41,95 @@ class Post extends React.Component {
   };
 
   render() {
-    const { fields: { name, email, body }, handleSubmit } = this.props;
+    // const { fields: { name, email, body }, handleSubmit } = this.props;
     return (
       <div>
         <Helmet title={`posts/${this.props.post.id}`} />
 
         <Row style={{ marginBottom: `20px` }}>
           <Col md={2}>
-            <LinkContainer to={{pathname: '/posts'}}>
-              <Button bsStyle="default" style={{width: `100%`}}>BACK</Button>
-            </LinkContainer>
+            <Link to={`/posts`}>
+              <RaisedButton label="BACK" fullWidth={true} primary={true} />
+            </Link>
           </Col>
-          <Col md={6}>
-            <p className="text-center text-title"> {window.location.pathname} </p>
-          </Col>
-          <Col md={2}>
-            <LinkContainer to={{pathname: `/posts/${this.props.params.id}/edit`}}>
-              <Button bsStyle="primary" style={{width: `100%`}}>EDIT POST</Button>
-            </LinkContainer>
+          <Col md={2} />
+          <Col md={4}>
+            <div className="text-title"> {window.location.pathname} </div>
           </Col>
           <Col md={2}>
-            <LinkContainer to={{pathname: '/posts/new'}}>
-              <Button bsStyle="primary" style={{width: `100%`}}>WRITE POST</Button>
-            </LinkContainer>
+            <Link to={`/posts/${this.props.params.id}/edit`}>
+              <RaisedButton label="EDIT POST" fullWidth={true} secondary={true} />
+            </Link>
+          </Col>
+          <Col md={2}>
+            <Link to={`/posts/new`}>
+              <RaisedButton label="WRITE POST" fullWidth={true} primary={true} />
+            </Link>
           </Col>
         </Row>
 
-        <Panel header={window.location.pathname} bsStyle="primary">
-          <PostDetail key={this.props.post.id} {...this.props.post} />
-        </Panel>
+        <Card>
+          <CardHeader title={window.location.pathname}/>
+          <CardText>
+            <PostDetail {...this.props.post} />
+          </CardText>
+        </Card>
 
-        <Panel header={`${window.location.pathname}/comments`} bsStyle="info">
-          <ListGroup fill style={{ marginTop: 0 }}>
+        <Card>
+          <CardHeader title={`${window.location.pathname}/comments`}/>
           { this.props.comments.map((comment) =>
-            <ListGroupItem key={comment.id} >
-              <Comment {...comment} />
-            </ListGroupItem>
+            <Comment key={comment.id} {...comment} />
           )}
-          </ListGroup>
-        </Panel>
+        </Card>
 
-        <Panel header={`${window.location.pathname}/comments/new`} bsStyle="default">
-          <Form horizontal onSubmit={handleSubmit(this.onSubmit)}>
-
-            <FormGroup controlId="formHorizontalEmail">
-              <Col componentClass={ControlLabel} sm={2}>
-                Email
-              </Col>
-              <Col sm={10}>
-                <FormControl type="email" placeholder="Email" {...email} />
-              </Col>
-            </FormGroup>
-
-            <FormGroup controlId="formHorizontalName">
-              <Col componentClass={ControlLabel} sm={2}>
-                Name
-              </Col>
-              <Col sm={10}>
-                <FormControl type="text" placeholder="Name" {...name} />
-              </Col>
-            </FormGroup>
-
-            <FormGroup controlId="formHorizontalBody">
-              <Col componentClass={ControlLabel} sm={2}>
-                Body
-              </Col>
-              <Col sm={10}>
-                <FormControl componentClass="textarea" type="text" placeholder="Body" {...body} />
-              </Col>
-            </FormGroup>
-
-            <FormGroup style={{marginBottom: 0}}>
-              <Col smOffset={2} sm={10}>
-                <Button style={{width: `100%`}} type="submit" bsStyle="default" disabled={this.state.disabled}>
-                  Submit
-                </Button>
-              </Col>
-            </FormGroup>
-          </Form>
-        </Panel>
+        {/*<Panel header={`${window.location.pathname}/comments/new`} bsStyle="default">*/}
+          {/*<Form horizontal onSubmit={handleSubmit(this.onSubmit)}>*/}
+          {/**/}
+            {/*<FormGroup controlId="formHorizontalEmail">*/}
+              {/*<Col componentClass={ControlLabel} sm={2}>*/}
+                {/*Email*/}
+              {/*</Col>*/}
+              {/*<Col sm={10}>*/}
+                {/*<FormControl type="email" placeholder="Email" {...email} />*/}
+              {/*</Col>*/}
+            {/*</FormGroup>*/}
+            {/**/}
+            {/*<FormGroup controlId="formHorizontalName">*/}
+              {/*<Col componentClass={ControlLabel} sm={2}>*/}
+                {/*Name*/}
+              {/*</Col>*/}
+              {/*<Col sm={10}>*/}
+                {/*<FormControl type="text" placeholder="Name" {...name} />*/}
+              {/*</Col>*/}
+            {/*</FormGroup>*/}
+            {/**/}
+            {/*<FormGroup controlId="formHorizontalBody">*/}
+              {/*<Col componentClass={ControlLabel} sm={2}>*/}
+                {/*Body*/}
+              {/*</Col>*/}
+              {/*<Col sm={10}>*/}
+                {/*<FormControl componentClass="textarea" type="text" placeholder="Body" {...body} />*/}
+              {/*</Col>*/}
+            {/*</FormGroup>*/}
+            {/**/}
+            {/*<FormGroup style={{marginBottom: 0}}>*/}
+              {/*<Col smOffset={2} sm={10}>*/}
+                {/*<Button style={{width: `100%`}} type="submit" bsStyle="default" disabled={this.state.disabled}>*/}
+                  {/*Submit*/}
+                {/*</Button>*/}
+              {/*</Col>*/}
+            {/*</FormGroup>*/}
+          {/*</Form>*/}
+        {/*</Panel>*/}
       </div>
     );
   }
 }
 
-Post = reduxForm({
-  form: 'CommentsNewForm',
-  fields: ['name', 'email', 'body']
-})(Post);
+// Post = reduxForm({
+//   form: 'CommentsNewForm',
+//   fields: ['name', 'email', 'body']
+// })(Post);
 
 function mapStateToProps(state) {
   return {
