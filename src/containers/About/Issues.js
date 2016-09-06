@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { DropdownButton, MenuItem, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Debounce } from 'react-throttle';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import TextField from 'material-ui/TextField';
+import { Row, Col } from 'react-grid-system';
 
 import { readContributors, readIssues } from './../../actions';
 
@@ -11,7 +14,13 @@ import { GithubIssue } from './../../components';
 class Issues extends React.Component {
 
   state = {
-    filter: {}
+    filter: {},
+    value: {
+      state: "all",
+      sort: "created",
+      labels: "",
+      assignee: ""
+    }
   };
 
   componentWillMount() {
@@ -30,47 +39,57 @@ class Issues extends React.Component {
     return (
       <div>
         <h2> ISSUES PAGE </h2>
-        <div>
-          <DropdownButton title="STATE" bsStyle="primary" id="state">
-            <MenuItem onClick={() => this.updateFilter('state', 'all')}> ALL </MenuItem>
-            <MenuItem onClick={() => this.updateFilter('state', 'open')}> OPEN </MenuItem>
-            <MenuItem onClick={() => this.updateFilter('state', 'closed')}> CLOSED </MenuItem>
-          </DropdownButton>
-          <DropdownButton title="SORT" bsStyle="info" id="sort">
-            <MenuItem onClick={() => this.updateFilter('sort', 'created')}> CREATED </MenuItem>
-            <MenuItem onClick={() => this.updateFilter('sort', 'updated')}> UPDATED </MenuItem>
-            <MenuItem onClick={() => this.updateFilter('sort', 'comments')}> COMMENTS </MenuItem>
-          </DropdownButton>
-          <DropdownButton title="LABELS" bsStyle="success" id="labels">
-            <MenuItem onClick={() => this.updateFilter('labels', '')}> DEFAULT </MenuItem>
-            <MenuItem onClick={() => this.updateFilter('labels', 'bug')}> BUG </MenuItem>
-            <MenuItem onClick={() => this.updateFilter('labels', 'duplicate')}> DUPLICATE </MenuItem>
-            <MenuItem onClick={() => this.updateFilter('labels', 'enhancement')}> ENHANCEMENT </MenuItem>
-            <MenuItem onClick={() => this.updateFilter('labels', 'help wanted')}> HELP WANTED </MenuItem>
-            <MenuItem onClick={() => this.updateFilter('labels', 'invalid')}> INVALID </MenuItem>
-            <MenuItem onClick={() => this.updateFilter('labels', 'updated')}> UPDATED </MenuItem>
-          </DropdownButton>
-          <Debounce time="1000" handler="onKeyUp">
-            <input type="text" title="assignee"  placeholder="Assignee" list="assigneeList"
-                   onKeyUp={(event) => this.updateFilter(event.target.title, event.target.value)} />
-          </Debounce>
-          <datalist id="assigneeList">
-          { this.props.contributors.map((contributors) =>
-            <option key={contributors.id}> {contributors.login} </option>
-          )}
-          </datalist>
-          <Debounce time="1000" handler="onKeyUp">
-            <input type="text" title="milestone" placeholder="Milestone"
-                   onKeyUp={(event) => this.updateFilter(event.target.title, event.target.value)} />
-          </Debounce>
-        </div>
-        <ListGroup>
-          { this.props.issues.map((issues) =>
-            <ListGroupItem key={issues.number} >
-              <GithubIssue {...issues} />
-            </ListGroupItem>
-          )}
-        </ListGroup>
+        <Row>
+          <Col md={3}>
+            <SelectField value={this.state.value.state} onChange={(event, index, value) => this.updateFilter('state', value)}>
+              <MenuItem value="all" primaryText="ALL" />
+              <MenuItem value="open" primaryText="OPEN" />
+              <MenuItem value="closed" primaryText="CLOSED" />
+            </SelectField>
+          </Col>
+          <Col md={3}>
+            <SelectField value={this.state.value.sort} onChange={(event, index, value) => this.updateFilter('sort', value)}>
+              <MenuItem value="created" primaryText="CREATED" />
+              <MenuItem value="updated" primaryText="UPDATED" />
+              <MenuItem value="comments" primaryText="COMMENTS" />
+            </SelectField>
+          </Col>
+          <Col md={3}>
+            <SelectField value={this.state.value.labels} onChange={(event, index, value) => this.updateFilter('labels', value)}>
+              <MenuItem value="" primaryText="SELECT LABEL" />
+              <MenuItem value="bug" primaryText="BUG" />
+              <MenuItem value="duplicate" primaryText="DUPLICATE" />
+              <MenuItem value="enhancement" primaryText="ENHANCEMENT" />
+              <MenuItem value="help wanted" primaryText="HELP WANTED" />
+              <MenuItem value="invalid" primaryText="INVALID" />
+              <MenuItem value="updated" primaryText="UPDATED" />
+            </SelectField>
+          </Col>
+          <Col md={3}>
+            <SelectField value={this.state.value.assignee} onChange={(event, index, value) => this.updateFilter('assignee', value)}>
+              <MenuItem value="" primaryText="SELECT ASSIGNEE" />
+              { this.props.contributors.map((contributor) =>
+                <MenuItem key={contributor.login} value={contributor.login} primaryText={contributor.login} />
+              )}
+            </SelectField>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12}>
+            <Debounce time="1000" handler="onKeyUp">
+              <TextField
+                style={{width: "100%"}}
+                title="milestone"
+                hintText="milestone"
+                floatingLabelText="Floating Label Text"
+                onKeyUp={(event) => this.updateFilter(event.target.title, event.target.value)}
+              />
+            </Debounce>
+          </Col>
+        </Row>
+        { this.props.issues.map((issues) =>
+          <GithubIssue key={issues.number} {...issues} />
+        )}
       </div>
     );
   }

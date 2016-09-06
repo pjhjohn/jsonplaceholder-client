@@ -9,7 +9,6 @@ src/
   reducers/
   index.js
   routes.js
-  _bootstrap.scss
   _variables.scss
   index.scss
   README.md
