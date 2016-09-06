@@ -7,15 +7,22 @@ import { Card, CardText } from 'material-ui/Card';
 import { readReadme } from './../../actions';
 
 class Home extends React.Component {
+  static defaultProps = {
+    readme: {}
+  };
+
+  static propTypes = {
+    readme: React.PropTypes.object.isRequired
+  };
+
   componentWillMount() {
     this.props.readReadme();
-  }
+  };
 
   render() {
     const loading = (
       <div>Loading....</div>
     );
-
     return (
       <Card>
         <CardText>

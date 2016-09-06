@@ -11,9 +11,17 @@ import { readPhoto } from './../../actions';
 import { PhotoDetail } from './../../components';
 
 class Photos extends React.Component {
+  static defaultProps = {
+    photo: {},
+  };
+
+  static propTypes = {
+    photo: React.PropTypes.object.isRequired
+  };
+
   componentWillMount() {
     this.props.readPhoto(this.props.params.id);
-  }
+  };
 
   render() {
     return (

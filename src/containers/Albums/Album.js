@@ -8,22 +8,18 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { readInitialPhotos, readMorePhotos } from './../../actions';
 
 import { PhotoItem } from './../../components';
-import { DEFAULT_PHOTO_LIMIT } from './../../actions';
 
 class Album extends React.Component {
   static defaultProps = {
-    _limit: DEFAULT_PHOTO_LIMIT
+    photos: {},
+    _start: 0,
+    _end: 0,
   };
 
   static propTypes = {
-    photos: React.PropTypes.array,
-    _start: React.PropTypes.number,
-    _end: React.PropTypes.number,
-    _limit: React.PropTypes.number.isRequired
-  };
-
-  state = {
-    _limit: this.props._limit
+    photos: React.PropTypes.array.isRequired,
+    _start: React.PropTypes.number.isRequired,
+    _end: React.PropTypes.number.isRequired,
   };
 
   componentWillMount() {

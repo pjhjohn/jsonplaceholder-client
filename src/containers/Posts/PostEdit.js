@@ -8,16 +8,25 @@ import { bindActionCreators } from 'redux';
 import { readPost, updatePost } from './../../actions';
 
 class PostEdit extends React.Component {
+  static defaultProps = {
+    post: {}
+  }
+
+  static propTypes = {
+    post: React.PropTypes.object.isRequired
+  };
+
   state = {
     disabled: false
   };
+
   static contextTypes = {
     router: PropTypes.object
   };
 
   componentWillMount() {
     this.props.readPost(this.props.params.id);
-  }
+  };
 
   onSubmit = (props) => {
     this.setState({ 'disabled' : true });
