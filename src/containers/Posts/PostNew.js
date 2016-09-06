@@ -9,6 +9,7 @@ class PostNew extends React.Component {
   state = {
     disabled: false
   };
+
   static contextTypes = {
     router: PropTypes.object
   };
@@ -19,12 +20,12 @@ class PostNew extends React.Component {
       this.setState({ 'disabled' : false });
       this.context.router.push('/posts');
     });
-  }
+  };
 
   render() {
     const { fields: { userId, id, title, body }, handleSubmit } = this.props;
     return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <form onSubmit={handleSubmit(this.onSubmit)}>
         <h1>PostNew Test Page</h1>
         <p> Please input user-id, id, title and body </p>
         <div className="form-group">

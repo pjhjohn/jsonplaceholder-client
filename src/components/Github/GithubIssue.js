@@ -3,6 +3,19 @@ import { Inspector } from 'react-inspector';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 
 class GithubIssue extends React.Component {
+  static defaultProps = {
+    number: 0,
+    title: "",
+    body: ""
+  };
+
+  static propTypes=  {
+    number: React.PropTypes.number.isRequired,
+    title: React.PropTypes.string.isRequired,
+    body: React.PropTypes.string.isRequired
+  };
+
+
   render() {
     return (
       <Card>
