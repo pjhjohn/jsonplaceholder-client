@@ -27,7 +27,7 @@ class App extends Component {
 
           {/* Application Body */}
           <Header />
-          <Container>
+          <Container style={{paddingTop: "20px", fontFamily: "Roboto"}}>
             {this.props.children}
           </Container>
           <Footer />

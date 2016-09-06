@@ -1,15 +1,19 @@
 import React from 'react';
-import { Col, Panel } from 'react-bootstrap';
 import { Inspector } from 'react-inspector';
+import { Card, CardHeader, CardMedia, CardText } from 'material-ui/Card';
 
 class AlbumItem extends React.Component {
   render() {
     return (
-      <Col md={12}>
-        <Panel header={this.props.id} bsStyle="primary">
-          <Inspector data={this.props} />
-        </Panel>
-      </Col>
+      <Card>
+        <CardHeader title={this.props.id}/>
+        <CardMedia>
+          <img src={`https://placehold.it/150x150?text=dummy`} alt={this.props.title} />
+        </CardMedia>
+        <CardText style={{height: "43px"}}>
+          <Inspector data={this.props} expandLevel={0} />
+        </CardText>
+      </Card>
     )
   }
 }

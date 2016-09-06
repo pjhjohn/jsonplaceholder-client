@@ -43,12 +43,16 @@ class Posts extends React.Component {
         <Helmet title={`posts`} />
 
         <Row style={{ marginBottom: `20px` }}>
-          <Col md={2} />
+          <Col md={2}>
+            <Link to={`/`}>
+              <RaisedButton label="BACK" fullWidth={true} primary={true} />
+            </Link>
+          </Col>
           <Col md={8}>
-            <p className="text-title"> {window.location.pathname} </p>
+            <div className="text-title"> {window.location.pathname} </div>
           </Col>
           <Col md={2}>
-            <Link to='/posts/new'>
+            <Link to={`/posts/new`}>
               <RaisedButton label="WRITE POST" fullWidth={true} primary={true} />
             </Link>
           </Col>
