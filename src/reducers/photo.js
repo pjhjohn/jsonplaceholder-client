@@ -10,14 +10,14 @@ export default function (state = INITIAL_PHOTO_STATE, action) {
       };
     case READ_INITIAL_PHOTOS:
       return { ...state,
-        list: action.payload.data,
-        _start: action.payload.data[0].id,
-        _end: action.payload.data.slice(-1)[0].id
+        list:action.payload.data,
+        _start:action.payload.data[0].id,
+        _end:action.payload.data.length
       };
     case READ_MORE_PHOTOS:
       return { ...state,
         list: state.list.concat(...action.payload.data),
-        _end: action.payload.data.slice(-1)[0].id
+        _end: action.payload.end
       };
     default:
       return state;
