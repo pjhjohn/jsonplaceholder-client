@@ -62,14 +62,19 @@ class Posts extends React.Component {
             </Link>
           </Col>
         </Row>
+
+        <Row>
         { this.props.posts.map((post) =>
           <Link to={`/posts/${post.id}`} key={post.id} >
-            <PostItem {...post} />
+            <Col md={12}>
+              <PostItem {...post} />
+            </Col>
           </Link>
         )}
         {(this.state.loadingSignal) ? loading :
           <RaisedButton label="MORE POSTS" fullWidth={true} primary={true} onClick={() => this.onReadMorePosts({'_start': this.props._end})} />
         }
+        </Row>
       </div>
     );
   }
