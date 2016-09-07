@@ -5,6 +5,7 @@ import { reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-grid-system';
 import RaisedButton from 'material-ui/RaisedButton';
+import CircularProgress from 'material-ui/CircularProgress';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import { Link } from 'react-router'
 
@@ -24,12 +25,16 @@ class Post extends React.Component {
   };
 
   state = {
-    disabled: false
+    disabled: false,
+    initializedPost: false,
+    initializedComments: false
   };
 
   componentWillMount() {
-    this.props.readPost(this.props.params.id);
-    this.props.readComments(this.props.params.id);
+    this.props.readPost(this.props.params.id)
+      .then(()=>this.setState({initializedPost: true}));
+    this.props.readComments(this.props.params.id)
+      .then(()=>this.setState({initializedComments: true}));
   };
 
   onSubmit = (props) => {
@@ -41,11 +46,11 @@ class Post extends React.Component {
   };
 
   render() {
-    // const { fields: { name, email, body }, handleSubmit } = this.props;
+    const loading = (<center> <CircularProgress /> </center> );
+    if(!this.state.initializedPost || !this.state.initializedComments) return (loading);
     return (
       <div>
-        <Helmet title={`posts/${this.props.post.id}`} />
-
+        <Helmet title={`posts/${this.props.post.id}]`} />
         <Row style={{ marginBottom: `20px` }}>
           <Col md={2}>
             <Link to={`/posts`}>

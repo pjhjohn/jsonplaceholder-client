@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Debounce } from 'react-throttle';
+import CircularProgress from 'material-ui/CircularProgress';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
@@ -29,22 +30,28 @@ class Issues extends React.Component {
       sort: "created",
       labels: "",
       assignee: ""
-    }
+    },
+    initialized: false,
+    loadingSignal: false
   };
 
   componentWillMount() {
-    this.props.readContributors();
+    this.props.readContributors()
+      .then(() => this.setState({initialized: true}));
   };
 
   updateFilter = (key, value) => {
+    this.setState({loadingSignal: true});
     const newFilter = Object.assign(this.state.filter, { [key] : value });
     if(!value) delete newFilter[key];
     this.setState({ filter: newFilter });
-    this.props.readIssues(newFilter);
+    this.props.readIssues(newFilter)
+      .then(() => this.setState({loadingSignal: false}));
   };
 
   render() {
-    if(!this.props.contributors.length) return (<div>LOADING</div>);
+    const loading = (<center> <CircularProgress /> </center> );
+    if(!this.state.initialized) return (loading);
     return (
       <div>
         <h2> ISSUES PAGE </h2>
@@ -96,9 +103,11 @@ class Issues extends React.Component {
             </Debounce>
           </Col>
         </Row>
-        { this.props.issues.map((issues) =>
-          <GithubIssue key={issues.number} {...issues} />
-        )}
+        <Row>
+          {(this.state.loadingSignal) ? loading :
+            this.props.issues.map((issues) => <GithubIssue key={issues.number} {...issues} />)
+          }
+        </Row>
       </div>
     );
   }

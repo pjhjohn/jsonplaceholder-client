@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ReactMarkdown from 'react-markdown';
+import CircularProgress from 'material-ui/CircularProgress';
 import { Card, CardText } from 'material-ui/Card';
+
 
 import { readReadme } from './../../actions';
 
@@ -20,9 +22,7 @@ class Home extends React.Component {
   };
 
   render() {
-    const loading = (
-      <div>Loading....</div>
-    );
+    const loading = (<center> <CircularProgress /> </center> );
     return (
       <Card>
         <CardText>

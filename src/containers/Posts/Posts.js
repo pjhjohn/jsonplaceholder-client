@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
 import { Row, Col } from 'react-grid-system';
 import RaisedButton from 'material-ui/RaisedButton';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import { readInitialPosts, readMorePosts } from './../../actions';
 
@@ -25,14 +26,23 @@ class Posts extends React.Component {
     _end: React.PropTypes.number.isRequired,
   };
 
+  state = {
+    loadingSignal: false
+  };
+
   componentWillMount() {
     if(this.props.initialized) return;
     this.props.readInitialPosts();
   };
 
-  onReadMorePosts = (query) => this.props.readMorePosts(query);
+  onReadMorePosts = (query) => {
+    this.setState({ loadingSignal: true });
+    this.props.readMorePosts(query).then(() => this.setState({loadingSignal: false}));
+  };
 
   render() {
+    const loading = (<center> <CircularProgress /> </center> );
+    if(!this.props.initialized) return (loading);
     return (
       <div>
         <Helmet title={`posts`} />
@@ -52,14 +62,14 @@ class Posts extends React.Component {
             </Link>
           </Col>
         </Row>
-
         { this.props.posts.map((post) =>
           <Link to={`/posts/${post.id}`} key={post.id} >
             <PostItem {...post} />
           </Link>
         )}
-
-        <RaisedButton label="MORE POSTS" fullWidth={true} primary={true} onClick={() => this.onReadMorePosts({'_start': this.props._end})} />
+        {(this.state.loadingSignal) ? loading :
+          <RaisedButton label="MORE POSTS" fullWidth={true} primary={true} onClick={() => this.onReadMorePosts({'_start': this.props._end})} />
+        }
       </div>
     );
   }
