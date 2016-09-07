@@ -9,7 +9,7 @@ import { Row, Col } from 'react-grid-system';
 
 import { readContributors, readIssues } from './../../actions';
 
-import { GithubIssue } from './../../components';
+import { GithubItem } from './../../components';
 
 class Issues extends React.Component {
   static defaultProps = {
@@ -97,7 +97,7 @@ class Issues extends React.Component {
           </Col>
         </Row>
         { this.props.issues.map((issues) =>
-          <GithubIssue key={issues.number} {...issues} />
+          <GithubItem key={issues.number} {...issues} />
         )}
       </div>
     );

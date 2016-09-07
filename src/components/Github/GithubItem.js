@@ -2,7 +2,7 @@ import React from 'react';
 import { Inspector } from 'react-inspector';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 
-class GithubIssue extends React.Component {
+class GithubItem extends React.Component {
   static defaultProps = {
     number: 0,
     title: "",
@@ -28,4 +28,4 @@ class GithubIssue extends React.Component {
   }
 }
 
-export default GithubIssue;
+export default GithubItem;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import { App, Home, About, Issues, Posts, Post, PostNew, PostEdit, Error404, Albums, Album, Photo } from './containers';
+import { App, Home, About, Issues, PullRequests, Posts, Post, PostNew, PostEdit, Error404, Albums, Album, Photo } from './containers';
 
 export default(
   <Route path="/" component={App}>
@@ -9,6 +9,7 @@ export default(
     <Route path="home" component={Home} />
     <Route path="about" component={About}>
       <Route path="issues" component={Issues} />
+      <Route path="pulls" component={PullRequests} />
     </Route>
     <Route path="posts" component={Posts} />
     <Route path="posts/new" component={PostNew} />
