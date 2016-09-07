@@ -46,7 +46,7 @@ class Post extends React.Component {
   };
 
   render() {
-    const loading = (<div style={{textAlign:`center`, width:`100%`}}> <CircularProgress /> </div>);
+    const loading = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
     if(!this.state.initializedPost || !this.state.initializedComments) return (loading);
     return (
       <div>

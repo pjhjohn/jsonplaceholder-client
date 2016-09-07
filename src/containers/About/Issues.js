@@ -41,16 +41,15 @@ class Issues extends React.Component {
   };
 
   updateFilter = (key, value) => {
-    this.setState({isLoading: true});
     const newFilter = Object.assign(this.state.filter, { [key] : value });
     if(!value) delete newFilter[key];
-    this.setState({ filter: newFilter });
+    this.setState({ filter: newFilter, isLoading: true });
     this.props.readIssues(newFilter)
       .then(() => this.setState({isLoading: false}));
   };
 
   render() {
-    const loading = (<div style={{textAlign:`center`, width:`100%`}}> <CircularProgress /> </div>);
+    const loading = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
     if(!this.state.initialized) return (loading);
     return (
       <div>

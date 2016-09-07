@@ -43,7 +43,7 @@ class Albums extends React.Component {
   };
 
   render() {
-    const loading = (<div style={{textAlign:`center`, width:`100%`}}> <CircularProgress /> </div>);
+    const loading = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
     if(!this.props.initialized) return (loading);
     return (
       <div>
