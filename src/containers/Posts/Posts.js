@@ -53,11 +53,15 @@ class Posts extends React.Component {
           </Col>
         </Row>
 
+        <Row>
         { this.props.posts.map((post) =>
           <Link to={`/posts/${post.id}`} key={post.id} >
-            <PostItem {...post} />
+            <Col md={12}>
+              <PostItem {...post} />
+            </Col>
           </Link>
         )}
+        </Row>
 
         <RaisedButton label="MORE POSTS" fullWidth={true} primary={true} onClick={() => this.onReadMorePosts({'_start': this.props._end})} />
       </div>
