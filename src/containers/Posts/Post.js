@@ -46,8 +46,8 @@ class Post extends React.Component {
   };
 
   render() {
-    const loading = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
-    if(!this.state.initializedPost || !this.state.initializedComments) return (loading);
+    const progress = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
+    if(!this.state.initializedPost || !this.state.initializedComments) return (progress);
     return (
       <div>
         <Helmet title={`posts/${this.props.post.id}]`} />

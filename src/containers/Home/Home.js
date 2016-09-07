@@ -22,11 +22,11 @@ class Home extends React.Component {
   };
 
   render() {
-    const loading = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
+    const progress = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
     return (
       <Card>
         <CardText>
-          { (!this.props.readme.content) ? loading : <ReactMarkdown source={atob(this.props.readme.content)} /> }
+          { (!this.props.readme.content) ? progress : <ReactMarkdown source={atob(this.props.readme.content)} /> }
         </CardText>
       </Card>
     )

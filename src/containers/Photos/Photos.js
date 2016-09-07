@@ -29,8 +29,8 @@ class Photos extends React.Component {
   };
 
   render() {
-    const loading = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
-    if(!this.state.initialized) return (loading);
+    const progress = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
+    if(!this.state.initialized) return (progress);
     return (
       <div>
         <Helmet title={this.props.title} />

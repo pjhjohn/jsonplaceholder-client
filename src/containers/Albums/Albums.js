@@ -28,7 +28,7 @@ class Albums extends React.Component {
   state = {
     initialized: this.props.initialized,
     _limit: this.props._limit,
-    isLoading: false
+    loading: false
   };
 
   componentWillMount() {
@@ -37,14 +37,14 @@ class Albums extends React.Component {
   };
 
   onReadMoreAlbums = (query) => {
-    this.setState({isLoading: true});
+    this.setState({loading: true});
     this.props.readMoreAlbums(query)
-      .then(() => this.setState({isLoading: false}));
+      .then(() => this.setState({loading: false}));
   };
 
   render() {
-    const loading = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
-    if(!this.props.initialized) return (loading);
+    const progress = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
+    if(!this.props.initialized) return (progress);
     return (
       <div>
         <Row style={{ marginBottom: `20px` }}>
@@ -69,7 +69,7 @@ class Albums extends React.Component {
         )}
         </Row>
 
-        {(this.state.isLoading) ? loading :
+        {(this.state.loading) ? progress :
           <RaisedButton label="MORE ALBUMS" fullWidth={true} primary={true} onClick={() => this.onReadMoreAlbums({'_start': this.props._end})} />
         }
       </div>

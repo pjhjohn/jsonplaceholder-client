@@ -32,7 +32,7 @@ class Issues extends React.Component {
       assignee: ""
     },
     initialized: false,
-    isLoading: false
+    loading: false
   };
 
   componentWillMount() {
@@ -43,14 +43,14 @@ class Issues extends React.Component {
   updateFilter = (key, value) => {
     const newFilter = Object.assign(this.state.filter, { [key] : value });
     if(!value) delete newFilter[key];
-    this.setState({ filter: newFilter, isLoading: true });
+    this.setState({ filter: newFilter, loading: true });
     this.props.readIssues(newFilter)
-      .then(() => this.setState({isLoading: false}));
+      .then(() => this.setState({loading: false}));
   };
 
   render() {
-    const loading = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
-    if(!this.state.initialized) return (loading);
+    const progress = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
+    if(!this.state.initialized) return (progress);
     return (
       <div>
         <h2> ISSUES PAGE </h2>
@@ -103,7 +103,7 @@ class Issues extends React.Component {
           </Col>
         </Row>
         <Row>
-          {(this.state.isLoading) ? loading :
+          {(this.state.loading) ? progress :
             this.props.issues.map((issues) => <GithubIssue key={issues.number} {...issues} />)
           }
         </Row>
