@@ -24,7 +24,7 @@ class Album extends React.Component {
   };
 
   state = {
-    loadingSignal: false,
+    isLoading: false,
     initialized: false
   };
 
@@ -34,13 +34,13 @@ class Album extends React.Component {
   }
 
   onReadMorePhotos = (query) => {
-    this.setState({loadingSignal: true});
+    this.setState({isLoading: true});
     this.props.readMorePhotos(query)
-      .then(() => this.setState({loadingSignal: false}));
+      .then(() => this.setState({isLoading: false}));
   };
 
   render() {
-    const loading = (<center> <CircularProgress /> </center> );
+    const loading = (<div style={{textAlign:`center`, width:`100%`}}> <CircularProgress /> </div>);
     if(!this.state.initialized) return (loading);
     return (
       <div>
@@ -66,7 +66,7 @@ class Album extends React.Component {
           )}
         </Row>
 
-        {(this.state.loadingSignal) ? loading :
+        {(this.state.isLoading) ? loading :
           <RaisedButton label="MORE PHOTOS" fullWidth={true} primary={true}
                         onClick={() => this.onReadMorePhotos({'albumId': this.props.params.id, '_start': this.props._end})} />
         }

@@ -22,7 +22,7 @@ class Home extends React.Component {
   };
 
   render() {
-    const loading = (<center> <CircularProgress /> </center> );
+    const loading = (<div style={{textAlign:`center`, width:`100%`}}> <CircularProgress /> </div>);
     return (
       <Card>
         <CardText>

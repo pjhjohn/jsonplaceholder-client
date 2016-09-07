@@ -27,7 +27,7 @@ class Posts extends React.Component {
   };
 
   state = {
-    loadingSignal: false
+    isLoading: false
   };
 
   componentWillMount() {
@@ -36,12 +36,12 @@ class Posts extends React.Component {
   };
 
   onReadMorePosts = (query) => {
-    this.setState({ loadingSignal: true });
-    this.props.readMorePosts(query).then(() => this.setState({loadingSignal: false}));
+    this.setState({ isLoading: true });
+    this.props.readMorePosts(query).then(() => this.setState({isLoading: false}));
   };
 
   render() {
-    const loading = (<center> <CircularProgress /> </center> );
+    const loading = (<div style={{textAlign:`center`, width:`100%`}}> <CircularProgress /> </div>);
     if(!this.props.initialized) return (loading);
     return (
       <div>
@@ -71,7 +71,7 @@ class Posts extends React.Component {
             </Col>
           </Link>
         )}
-        {(this.state.loadingSignal) ? loading :
+        {(this.state.isLoading) ? loading :
           <RaisedButton label="MORE POSTS" fullWidth={true} primary={true} onClick={() => this.onReadMorePosts({'_start': this.props._end})} />
         }
         </Row>
