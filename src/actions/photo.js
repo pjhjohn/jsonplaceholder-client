@@ -16,7 +16,7 @@ export function readPhoto(photoId) {
 }
 
 export function readInitialPhotos(query) {
-  const request = api.get(`/photos`, Object.assign(BASE_QUERY, query));
+  const request = api.get(`/photos`, Object.assign(query, BASE_QUERY));
   return {
     type: READ_INITIAL_PHOTOS,
     payload: request
@@ -24,7 +24,10 @@ export function readInitialPhotos(query) {
 }
 
 export function readMorePhotos(query) {
-  const request = api.get(`/photos`, Object.assign(BASE_QUERY, query));
+  const request = api.get(`/photos`, Object.assign(query, BASE_QUERY)).then((response)=> {
+    response.end = query._start + response.data.length;
+    return response
+  });
   return {
     type: READ_MORE_PHOTOS,
     payload: request
