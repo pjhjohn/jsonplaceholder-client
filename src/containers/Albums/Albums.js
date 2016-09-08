@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
 import { Row, Col } from 'react-grid-system';
 import RaisedButton from 'material-ui/RaisedButton';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import { readInitialAlbums, readMoreAlbums } from './../../actions';
 
@@ -26,17 +27,24 @@ class Albums extends React.Component {
 
   state = {
     initialized: this.props.initialized,
-    _limit: this.props._limit
+    _limit: this.props._limit,
+    loading: false
   };
 
   componentWillMount() {
     if(this.props.initialized) return;
     this.props.readInitialAlbums();
-  }
+  };
 
-  onReadMoreAlbums = (query) => this.props.readMoreAlbums(query);
+  onReadMoreAlbums = (query) => {
+    this.setState({loading: true});
+    this.props.readMoreAlbums(query)
+      .then(() => this.setState({loading: false}));
+  };
 
   render() {
+    const progress = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
+    if(!this.props.initialized) return (progress);
     return (
       <div>
         <Row style={{ marginBottom: `20px` }}>
@@ -61,7 +69,9 @@ class Albums extends React.Component {
         )}
         </Row>
 
-        <RaisedButton label="MORE ALBUMS" fullWidth={true} primary={true} onClick={() => this.onReadMoreAlbums({'_start': this.props._end})} />
+        {(this.state.loading) ? progress :
+          <RaisedButton label="MORE ALBUMS" fullWidth={true} primary={true} onClick={() => this.onReadMoreAlbums({'_start': this.props._end})} />
+        }
       </div>
     );
   }

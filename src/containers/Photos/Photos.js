@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
 import { Row, Col } from 'react-grid-system';
 import RaisedButton from 'material-ui/RaisedButton';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import { readPhoto } from './../../actions';
 
@@ -19,11 +20,17 @@ class Photos extends React.Component {
     photo: React.PropTypes.object.isRequired
   };
 
+  state = {
+    initialized: false
+  };
+
   componentWillMount() {
-    this.props.readPhoto(this.props.params.id);
+    this.props.readPhoto(this.props.params.id).then(() => this.setState({initialized: true}));
   };
 
   render() {
+    const progress = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
+    if(!this.state.initialized) return (progress);
     return (
       <div>
         <Helmet title={this.props.title} />
