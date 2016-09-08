@@ -2,6 +2,7 @@ import { githubApi } from './api';
 
 export const READ_CONTRIBUTORS = 'READ_CONTRIBUTORS';
 export const READ_ISSUES = 'READ_ISSUES';
+export const READ_PULLREQUESTS = 'READ_PULLREQUESTS';
 
 export function readContributors() {
   const request = githubApi.get(`/contributors`);
@@ -19,6 +20,14 @@ export function readIssues(query) {
     });
   return {
     type: READ_ISSUES,
+    payload: request
+  }
+}
+
+export function readPullRequests(query) {
+  const request = githubApi.get(`/pulls`, query);
+  return {
+    type: READ_PULLREQUESTS,
     payload: request
   }
 }

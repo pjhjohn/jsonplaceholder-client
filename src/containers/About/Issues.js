@@ -10,7 +10,7 @@ import { Row, Col } from 'react-grid-system';
 
 import { readContributors, readIssues } from './../../actions';
 
-import { GithubIssue } from './../../components';
+import { GithubItem } from './../../components';
 
 class Issues extends React.Component {
   static defaultProps = {
