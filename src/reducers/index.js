@@ -7,6 +7,7 @@ import AboutReducer from './about';
 import AlbumReducer from './album';
 import ReadmeReducer from './readme';
 import PhotoReducer from './photo';
+import ToastrReducer from './toastr';
 
 const RootReducer = combineReducers({
   post: PostReducer,
@@ -15,7 +16,8 @@ const RootReducer = combineReducers({
   github: AboutReducer,
   album: AlbumReducer,
   photo: PhotoReducer,
-  readme: ReadmeReducer
+  readme: ReadmeReducer,
+  toastr: ToastrReducer
 });
 
 export default RootReducer;

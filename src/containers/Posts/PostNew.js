@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { createPost } from './../../actions';
+import { createPost, callToastr } from './../../actions';
 
 class PostNew extends React.Component {
   state = {
@@ -16,7 +16,9 @@ class PostNew extends React.Component {
 
   onSubmit = (props) => {
     this.setState({ 'disabled' : true });
-    this.props.createPost(props).then(() => {
+    this.props.createPost(props).then((response) => {
+      console.log(response);
+      this.props.callToastr(`posting`, response.payload.status);
       this.setState({ 'disabled' : false });
       this.context.router.push('/posts');
     });
@@ -56,4 +58,4 @@ class PostNew extends React.Component {
 export default reduxForm({
   form: 'PostsNewForm',
   fields: ['userId', 'id', 'title', 'body']
-}, null, { createPost })(PostNew);
+}, null, { createPost, callToastr })(PostNew);

@@ -13,3 +13,4 @@ export Album from './Albums/Album';
 export Albums from './Albums/Albums';
 export Photo from './Photos/Photos';
 export Home from './Home/Home';
+export Toastr from './Toastr/Toastr';
