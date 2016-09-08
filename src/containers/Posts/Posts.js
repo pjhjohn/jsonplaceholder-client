@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
 import { Row, Col } from 'react-grid-system';
 import RaisedButton from 'material-ui/RaisedButton';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import { readInitialPosts, readMorePosts } from './../../actions';
 
@@ -25,14 +26,23 @@ class Posts extends React.Component {
     _end: React.PropTypes.number.isRequired,
   };
 
+  state = {
+    loading: false
+  };
+
   componentWillMount() {
     if(this.props.initialized) return;
     this.props.readInitialPosts();
   };
 
-  onReadMorePosts = (query) => this.props.readMorePosts(query);
+  onReadMorePosts = (query) => {
+    this.setState({ loading: true });
+    this.props.readMorePosts(query).then(() => this.setState({loading: false}));
+  };
 
   render() {
+    const progress = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
+    if(!this.props.initialized) return (progress);
     return (
       <div>
         <Helmet title={`posts`} />
@@ -61,9 +71,10 @@ class Posts extends React.Component {
             </Col>
           </Link>
         )}
+        {(this.state.loading) ? progress :
+          <RaisedButton label="MORE POSTS" fullWidth={true} primary={true} onClick={() => this.onReadMorePosts({'_start': this.props._end})} />
+        }
         </Row>
-
-        <RaisedButton label="MORE POSTS" fullWidth={true} primary={true} onClick={() => this.onReadMorePosts({'_start': this.props._end})} />
       </div>
     );
   }

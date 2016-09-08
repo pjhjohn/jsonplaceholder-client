@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
 import { Row, Col } from 'react-grid-system';
 import RaisedButton from 'material-ui/RaisedButton';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import { readInitialPhotos, readMorePhotos } from './../../actions';
 
@@ -22,13 +23,25 @@ class Album extends React.Component {
     _end: React.PropTypes.number.isRequired,
   };
 
+  state = {
+    loading: false,
+    initialized: false
+  };
+
   componentWillMount() {
-    this.props.readInitialPhotos({'albumId': this.props.params.id});
+    this.props.readInitialPhotos({'albumId': this.props.params.id})
+      .then(() => this.setState({initialized: true}));
   }
 
-  onReadMorePhotos = (query) => this.props.readMorePhotos(query);
+  onReadMorePhotos = (query) => {
+    this.setState({loading: true});
+    this.props.readMorePhotos(query)
+      .then(() => this.setState({loading: false}));
+  };
 
   render() {
+    const progress = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
+    if(!this.state.initialized) return (progress);
     return (
       <div>
         <Row style={{ marginBottom: `20px` }}>
@@ -53,7 +66,10 @@ class Album extends React.Component {
           )}
         </Row>
 
-        <RaisedButton label="MORE PHOTOS" fullWidth={true} primary={true} onClick={() => this.onReadMorePhotos({'albumId': this.props.params.id, '_start': this.props._end})} />
+        {(this.state.loading) ? progress :
+          <RaisedButton label="MORE PHOTOS" fullWidth={true} primary={true}
+                        onClick={() => this.onReadMorePhotos({'albumId': this.props.params.id, '_start': this.props._end})} />
+        }
       </div>
     );
   }
