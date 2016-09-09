@@ -25,7 +25,7 @@ class Issues extends React.Component {
 
   state = {
     filter: {},
-    value: {
+    fieldValues: {
       state: "open",
       sort: "created",
       labels: "",
@@ -44,8 +44,7 @@ class Issues extends React.Component {
 
   updateFilter = (key, value) => {
     const newFilter = Object.assign(this.state.filter, { [key] : value });
-    const changeValue = Object.assign(this.state.value, { [key] : value });
-    this.setState(changeValue);
+    this.setState(Object.assign(this.state.fieldValues, { [key] : value }));
     if(!value) delete newFilter[key];
     this.setState({ filter: newFilter, loading: true });
     this.props.readIssues(newFilter)
@@ -60,21 +59,21 @@ class Issues extends React.Component {
         <h2> ISSUES PAGE </h2>
         <Row>
           <Col md={3}>
-            <SelectField value={this.state.value.state} onChange={(event, index, value) => this.updateFilter('state', value)}>
+            <SelectField value={this.state.fieldValues.state} onChange={(event, index, value) => this.updateFilter('state', value)}>
               <MenuItem value="all" primaryText="ALL" />
               <MenuItem value="open" primaryText="OPEN" />
               <MenuItem value="closed" primaryText="CLOSED" />
             </SelectField>
           </Col>
           <Col md={3}>
-            <SelectField value={this.state.value.sort} onChange={(event, index, value) => this.updateFilter('sort', value)}>
+            <SelectField value={this.state.fieldValues.sort} onChange={(event, index, value) => this.updateFilter('sort', value)}>
               <MenuItem value="created" primaryText="CREATED" />
               <MenuItem value="updated" primaryText="UPDATED" />
               <MenuItem value="comments" primaryText="COMMENTS" />
             </SelectField>
           </Col>
           <Col md={3}>
-            <SelectField value={this.state.value.labels} onChange={(event, index, value) => this.updateFilter('labels', value)}>
+            <SelectField value={this.state.fieldValues.labels} onChange={(event, index, value) => this.updateFilter('labels', value)}>
               <MenuItem value="" primaryText="SELECT LABEL" />
               <MenuItem value="bug" primaryText="BUG" />
               <MenuItem value="duplicate" primaryText="DUPLICATE" />
@@ -85,7 +84,7 @@ class Issues extends React.Component {
             </SelectField>
           </Col>
           <Col md={3}>
-            <SelectField value={this.state.value.assignee} onChange={(event, index, value) => this.updateFilter('assignee', value)}>
+            <SelectField value={this.state.fieldValues.assignee} onChange={(event, index, value) => this.updateFilter('assignee', value)}>
               <MenuItem value="" primaryText="SELECT ASSIGNEE" />
               { this.props.contributors.map((contributor) =>
                 <MenuItem key={contributor.login} value={contributor.login} primaryText={contributor.login} />
