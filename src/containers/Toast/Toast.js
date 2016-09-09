@@ -4,30 +4,35 @@ import { connect } from 'react-redux';
 
 const ToastMessageFactory = React.createFactory(ToastMessage.animation);
 
-class Toastr extends React.Component {
+const POSTING = 'posting';
+const EDITING = 'editing';
+const NOTHING = 'nothing';
+
+class Toast extends React.Component {
   static defaultProps = {
-    action: ``,
-    status: 404
+    type: NOTHING,
+    httpStatus: 200
   };
 
   static propTypes = {
-    action: React.PropTypes.string.isRequired,
-    status: React.PropTypes.number.isRequired
+    type: React.PropTypes.string.isRequired,
+    httpStatus: React.PropTypes.number.isRequired
   };
 
   componentWillUpdate(nextProps) {
-    console.log(nextProps);
-    switch (nextProps.action) {
-      case `posting`: {
-        if (nextProps.status === 201) this.refs.container.success(`Success! :)`, `Posting Result`);
+    switch (nextProps.type) {
+      case POSTING: {
+        if (nextProps.httpStatus === 201) this.refs.container.success(`Success! :)`, `Posting Result`);
         else this.refs.container.error(`Error! :(`, `Posting Result`);
         break;
       }
-      case `editing`: {
-        if (nextProps.status === 200) this.refs.container.success(`Success! :)`, `Editing Result`);
+      case EDITING: {
+        if (nextProps.httpStatus === 200) this.refs.container.success(`Success! :)`, `Editing Result`);
         else this.refs.container.error(`Error! :(`, `Editing Result`);
         break;
       }
+      case NOTHING:
+        break;
       default:
         break;
     }
@@ -43,9 +48,9 @@ class Toastr extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    action: state.toastr.action,
-    status: state.toastr.status
+    type: state.toast.type,
+    httpStatus: state.toast.httpStatus
   };
 }
 
-export default connect(mapStateToProps)(Toastr);
+export default connect(mapStateToProps)(Toast);

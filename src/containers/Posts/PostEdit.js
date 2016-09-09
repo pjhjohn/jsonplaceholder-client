@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import { bindActionCreators } from 'redux';
 
-import { readPost, updatePost, callToastr } from './../../actions';
+import { readPost, updatePost, notify } from './../../actions';
 
 class PostEdit extends React.Component {
   static defaultProps = {
@@ -32,7 +32,7 @@ class PostEdit extends React.Component {
     this.setState({ 'disabled' : true });
     props.userId = this.props.post.userId;
     this.props.updatePost(this.props.post.id, props).then((response) => {
-      this.props.callToastr(`editing`, response.payload.status);
+      this.props.notify(`editing`, response.payload.status);
       this.context.router.push(`/posts/${this.props.post.id}`);
     });
   };
@@ -73,7 +73,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ readPost, updatePost, callToastr }, dispatch);
+  return bindActionCreators({ readPost, updatePost, notify }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostEdit);
