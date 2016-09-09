@@ -7,6 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from './../Header/Header';
 import Footer from './../Footer/Footer';
 import DevTools from './../DevTools/DevTools';
+import Toast from '../Toast/Toast';
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
             defaultTitle="jsonplaceholder-client"
             titleTemplate="%s | jsonplaceholder-client"
           />
+          <Toast />
           {/* GIthub Fork Ribbon */}
           <GitHubForkRibbon href="https://github.com/pjhjohn/jsonplaceholder-client"
                             target="_blank"

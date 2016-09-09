@@ -1,11 +1,9 @@
 import React, { PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
-import { bindActionCreators } from 'redux';
 
-import { readPost, updatePost } from './../../actions';
+import { readPost, updatePost, notify } from './../../actions';
 
 class PostEdit extends React.Component {
   static defaultProps = {
@@ -31,7 +29,8 @@ class PostEdit extends React.Component {
   onSubmit = (props) => {
     this.setState({ 'disabled' : true });
     props.userId = this.props.post.userId;
-    this.props.updatePost(this.props.post.id, props).then(() => {
+    this.props.updatePost(this.props.post.id, props).then((response) => {
+      this.props.notify(`editing`, response.payload.status);
       this.context.router.push(`/posts/${this.props.post.id}`);
     });
   };
@@ -59,22 +58,9 @@ class PostEdit extends React.Component {
   }
 }
 
-PostEdit = reduxForm({
+export default reduxForm({
   form: 'PostEditForm',
   fields: ['title', 'body']
-}, null, { readPost, updatePost })(PostEdit);
-
-function mapStateToProps(state) {
-  return {
-    initialValues: state.post.detail,
-    post: state.post.detail
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ readPost, updatePost }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostEdit);
+}, state => ({initialValues: state.post.detail, post: state.post.detail}), { readPost, updatePost, notify })(PostEdit);
 
 
