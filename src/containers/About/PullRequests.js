@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import SelectField from 'material-ui/SelectField';
+import CircularProgress from 'material-ui/CircularProgress';
 import MenuItem from 'material-ui/MenuItem';
 import { Row, Col } from 'react-grid-system';
 
@@ -10,25 +11,38 @@ import { readPullRequests } from './../../actions';
 import { GithubItem } from './../../components';
 
 class PullRequests extends React.Component {
+  static defaultProps = {
+    pullRequests: {}
+  };
 
   state = {
     filter: {},
     value: {
-      state: "all",
-      sort: "created",
-      labels: "",
-      assignee: ""
-    }
+      state: "open",
+      sort: "created"
+    },
+    initialized: false,
+    loading: false
+  };
+
+  componentWillMount() {
+    this.props.readPullRequests(this.state.filter)
+      .then(() => this.setState({initialized: true}));
   };
 
   updateFilter = (key, value) => {
     const newFilter = Object.assign(this.state.filter, { [key] : value });
+    const changeValue = Object.assign(this.state.value, { [key] : value });
+    this.setState(changeValue);
     if(!value) delete newFilter[key];
-    this.setState({ filter: newFilter });
-    this.props.readPullRequests(newFilter);
+    this.setState({ filter: newFilter, loading: true });
+    this.props.readPullRequests(newFilter)
+      .then(() => this.setState({loading: false}));
   };
 
   render() {
+    const progress = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
+    if(!this.state.initialized) return (progress);
     return (
       <div>
         <h2> PULL REQUESTS PAGE </h2>
@@ -50,9 +64,11 @@ class PullRequests extends React.Component {
             </Col>
           </Row>
         </div>
-          { this.props.pullRequests.map((pulls) =>
-              <GithubItem key={pulls.number} {...pulls} />
-          )}
+          <Row>
+            {(this.state.loading) ? progress :
+              this.props.pullRequests.map((issues) => <GithubItem key={issues.number} {...issues} />)
+            }
+          </Row>
       </div>
     );
   }

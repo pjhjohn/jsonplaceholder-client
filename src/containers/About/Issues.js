@@ -26,7 +26,7 @@ class Issues extends React.Component {
   state = {
     filter: {},
     value: {
-      state: "all",
+      state: "open",
       sort: "created",
       labels: "",
       assignee: ""
@@ -36,12 +36,16 @@ class Issues extends React.Component {
   };
 
   componentWillMount() {
-    this.props.readContributors()
+    this.props.readIssues(this.state.filter)
       .then(() => this.setState({initialized: true}));
+    this.props.readContributors()
+      .then(() => this.setState({initialized: true}));;
   };
 
   updateFilter = (key, value) => {
     const newFilter = Object.assign(this.state.filter, { [key] : value });
+    const changeValue = Object.assign(this.state.value, { [key] : value });
+    this.setState(changeValue);
     if(!value) delete newFilter[key];
     this.setState({ filter: newFilter, loading: true });
     this.props.readIssues(newFilter)
@@ -104,7 +108,7 @@ class Issues extends React.Component {
         </Row>
         <Row>
           {(this.state.loading) ? progress :
-            this.props.issues.map((issues) => <GithubIssue key={issues.number} {...issues} />)
+            this.props.issues.map((issues) => <GithubItem key={issues.number} {...issues} />)
           }
         </Row>
       </div>
