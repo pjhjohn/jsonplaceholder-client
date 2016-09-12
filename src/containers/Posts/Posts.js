@@ -1,5 +1,4 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
@@ -9,7 +8,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 
 import { readInitialPosts, readMorePosts } from './../../actions';
 
-import { PostItem } from './../../components';
+import { SimpleNavigator, PostItem } from './../../components';
 
 class Posts extends React.Component {
   static defaultProps = {
@@ -45,23 +44,7 @@ class Posts extends React.Component {
     if(!this.props.initialized) return (progress);
     return (
       <div>
-        <Helmet title={`posts`} />
-
-        <Row style={{ marginBottom: `20px` }}>
-          <Col md={2}>
-            <Link to={`/`}>
-              <RaisedButton label="BACK" fullWidth={true} primary={true} />
-            </Link>
-          </Col>
-          <Col md={8}>
-            <div className="text-title"> {window.location.pathname} </div>
-          </Col>
-          <Col md={2}>
-            <Link to={`/posts/new`}>
-              <RaisedButton label="WRITE POST" fullWidth={true} primary={true} />
-            </Link>
-          </Col>
-        </Row>
+        <SimpleNavigator path={window.location.pathname} back write />
 
         <Row>
         { this.props.posts.map((post) =>
@@ -71,10 +54,11 @@ class Posts extends React.Component {
             </Col>
           </Link>
         )}
+        </Row>
+
         {(this.state.loading) ? progress :
           <RaisedButton label="MORE POSTS" fullWidth={true} primary={true} onClick={() => this.onReadMorePosts({'_start': this.props._end})} />
         }
-        </Row>
       </div>
     );
   }

@@ -1,15 +1,15 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Row, Col } from 'react-grid-system';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router'
-import { Row, Col } from 'react-grid-system';
-import RaisedButton from 'material-ui/RaisedButton';
+
 import CircularProgress from 'material-ui/CircularProgress';
 
 import { readPhoto } from './../../actions';
 
-import { PhotoDetail } from './../../components';
+import { SimpleNavigator, PhotoDetail } from './../../components';
+
 
 class Photos extends React.Component {
   static defaultProps = {
@@ -33,18 +33,7 @@ class Photos extends React.Component {
     if(!this.state.initialized) return (progress);
     return (
       <div>
-        <Helmet title={this.props.title} />
-        <Row style={{ marginBottom: `20px` }}>
-          <Col md={2}>
-            <Link to={`/albums/${this.props.photo.albumId}`}>
-              <RaisedButton label="BACK" fullWidth={true} primary={true} />
-            </Link>
-          </Col>
-          <Col md={8}>
-            <div className="text-title"> {window.location.pathname} </div>
-          </Col>
-          <Col md={2} />
-        </Row>
+        <SimpleNavigator path={window.location.pathname} back />
 
         <Row>
           <Col md={12}>
