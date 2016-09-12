@@ -7,6 +7,7 @@ const ToastMessageFactory = React.createFactory(ToastMessage.animation);
 const POSTING = 'posting';
 const EDITING = 'editing';
 const NOTHING = 'nothing';
+const COMMENT = 'comment';
 
 class Toast extends React.Component {
   static defaultProps = {
@@ -29,6 +30,11 @@ class Toast extends React.Component {
       case EDITING: {
         if (nextProps.httpStatus === 200) this.refs.container.success(`Success! :)`, `Editing Result`);
         else this.refs.container.error(`Error! :(`, `Editing Result`);
+        break;
+      }
+      case COMMENT: {
+        if (nextProps.httpStatus === 201) this.refs.container.success(`Successfully Commented`, `Comment Result`);
+        else this.refs.container.error(`Error! :(`, `Comment Result`);
         break;
       }
       case NOTHING:

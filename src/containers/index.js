@@ -2,6 +2,7 @@ export App from './App/App';
 export Navbar from './Header/Header';
 export About from './About/About';
 export Issues from './About/Issues';
+export PullRequests from './About/PullRequests';
 export Post from './Posts/Post';
 export Posts from './Posts/Posts';
 export PostEdit from './Posts/PostEdit';

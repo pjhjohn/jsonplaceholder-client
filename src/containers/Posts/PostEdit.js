@@ -1,66 +1,87 @@
-import React, { PropTypes } from 'react';
-import { reduxForm } from 'redux-form';
-import { Link } from 'react-router';
-import RaisedButton from 'material-ui/RaisedButton';
+import React from 'react';
+import Helmet from 'react-helmet';
+import { Row, Col } from 'react-grid-system';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Field, reduxForm } from 'redux-form';
+import { TextField } from 'redux-form-material-ui';
+
+import FlatButton from 'material-ui/FlatButton';
+import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 
 import { readPost, updatePost, notify } from './../../actions';
 
 class PostEdit extends React.Component {
   static defaultProps = {
     post: {}
-  }
+  };
 
   static propTypes = {
     post: React.PropTypes.object.isRequired
   };
 
-  state = {
-    disabled: false
-  };
-
   static contextTypes = {
-    router: PropTypes.object
+    router: React.PropTypes.object
   };
 
   componentWillMount() {
     this.props.readPost(this.props.params.id);
   };
 
-  onSubmit = (props) => {
-    this.setState({ 'disabled' : true });
-    props.userId = this.props.post.userId;
-    this.props.updatePost(this.props.post.id, props).then((response) => {
+  componentDidMount() {
+    this.refs.field2focus.getRenderedComponent().getRenderedComponent().focus();
+  }
+
+  onSubmit = (data) => {
+    data.userId = this.props.post.userId;
+    this.props.updatePost(this.props.post.id, data).then((response) => {
       this.props.notify(`editing`, response.payload.status);
       this.context.router.push(`/posts/${this.props.post.id}`);
     });
   };
 
   render() {
-    const { fields: { title, body }, handleSubmit } = this.props;
+    const { handleSubmit, pristine, submitting } = this.props;
     return (
-      <form onSubmit={handleSubmit(this.onSubmit)}>
-        <h1>Post Edit Test Page</h1>
-        <p> Please input title and body </p>
-        <div className="form-group">
-          <label>Title</label>
-          <input className="form-control" type="text" {...title} />
-        </div>
-        <div className="form-group">
-          <label>Body</label>
-          <textarea className="form-control" type="text" {...body} />
-        </div>
-        <RaisedButton type="submit" label="SUBMIT" fullWidth={true} primary={true} disabled={this.state.disabled} />
-        <Link to={`/posts`}>
-          <RaisedButton label="CANCEL" fullWidth={true} secondary={true} />
-        </Link>
-      </form>
-    )
+      <Row>
+        <Col md={2}/>
+        <Col md={8}>
+          <Card>
+            <Helmet title={`Edit Post`} />
+            <CardTitle title={`Edit Post`} />
+            <form onSubmit={handleSubmit(this.onSubmit)}>
+              <CardText>
+                <Row>
+                  <Col md={12}>
+                    <Field fullWidth={true} component={TextField} name="title" floatingLabelText="Title" ref="field2focus" withRef />
+                    <Field fullWidth={true} component={TextField} name="body" floatingLabelText="Body" />
+                  </Col>
+                </Row>
+              </CardText>
+              <CardActions style={{ paddingRight: 0, textAlign: 'right' }}>
+                <FlatButton type="button" label="Cancel" onTouchTap={() => this.context.router.push(`/posts/${this.props.post.id}`)} />
+                <FlatButton type="submit" label="Submit" primary={true} disabled={pristine||submitting} />
+              </CardActions>
+            </form>
+          </Card>
+        </Col>
+        <Col md={2}/>
+      </Row>
+    );
   }
 }
 
-export default reduxForm({
-  form: 'PostEditForm',
-  fields: ['title', 'body']
-}, state => ({initialValues: state.post.detail, post: state.post.detail}), { readPost, updatePost, notify })(PostEdit);
+function mapStateToProps(state) {
+  return {initialValues: state.post.detail, post: state.post.detail};
+}
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ readPost, updatePost, notify }, dispatch);
+}
 
+PostEdit = reduxForm({
+  form: 'PostsEditForm'
+})(PostEdit);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostEdit);
