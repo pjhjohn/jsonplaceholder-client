@@ -1,14 +1,19 @@
 import React from 'react';
+import { Row, Col } from 'react-grid-system';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import SelectField from 'material-ui/SelectField';
+
 import CircularProgress from 'material-ui/CircularProgress';
+import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import { Row, Col } from 'react-grid-system';
+import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
 
 import { readPullRequests } from './../../actions';
 
-import { GithubItem } from './../../components';
+import { SimpleNavigator, GithubItem } from './../../components';
+
 
 class PullRequests extends React.Component {
   static defaultProps = {
@@ -40,34 +45,33 @@ class PullRequests extends React.Component {
   };
 
   render() {
+    const paperStyle = { paddingLeft: 16, paddingRight: 16 };
+    const dividerStyle = { marginLeft: -16, marginRight: -16 };
     const progress = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
     if(!this.state.initialized) return (progress);
     return (
       <div>
-        <h2> PULL REQUESTS PAGE </h2>
-        <div>
-          <Row>
-            <Col md={3}>
-              <SelectField value={this.state.fieldValues.state} onChange={(event, index, value) => this.updateFilter('state', value)}>
-                <MenuItem value="all" primaryText="ALL" />
-                <MenuItem value="open" primaryText="OPEN" />
-                <MenuItem value="closed" primaryText="CLOSED" />
-              </SelectField>
+        <SimpleNavigator path={window.location.pathname} />
+        <Paper zDepth={1} style={paperStyle}>
+          <SelectField value={this.state.fieldValues.state} onChange={(event, index, value) => this.updateFilter('state', value)} underlineShow={false} fullWidth>
+            <MenuItem value="all" primaryText="ALL" />
+            <MenuItem value="open" primaryText="OPEN" />
+            <MenuItem value="closed" primaryText="CLOSED" />
+          </SelectField>
+          <Divider style={dividerStyle} />
+          <SelectField value={this.state.fieldValues.sort} onChange={(event, index, value) => this.updateFilter('sort', value)} underlineShow={false} fullWidth>
+            <MenuItem value="created" primaryText="CREATED" />
+            <MenuItem value="updated" primaryText="UPDATED" />
+            <MenuItem value="popularity" primaryText="POPULARITY" />
+          </SelectField>
+        </Paper>
+        <Row>
+          {(this.state.loading) ? progress : this.props.pullRequests.map((issues) =>
+            <Col md={12} key={issues.number}>
+              <GithubItem {...issues} />
             </Col>
-            <Col md={3}>
-              <SelectField value={this.state.fieldValues.sort} onChange={(event, index, value) => this.updateFilter('sort', value)}>
-                <MenuItem value="created" primaryText="CREATED" />
-                <MenuItem value="updated" primaryText="UPDATED" />
-                <MenuItem value="popularity" primaryText="POPULARITY" />
-              </SelectField>
-            </Col>
-          </Row>
-        </div>
-          <Row>
-            {(this.state.loading) ? progress :
-              this.props.pullRequests.map((issues) => <GithubItem key={issues.number} {...issues} />)
-            }
-          </Row>
+          )}
+        </Row>
       </div>
     );
   }

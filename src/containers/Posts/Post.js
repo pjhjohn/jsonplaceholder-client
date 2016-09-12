@@ -1,6 +1,4 @@
 import React from 'react';
-import Helmet from 'react-helmet';
-import { Link } from 'react-router';
 import { Row, Col } from 'react-grid-system';
 
 import { connect } from 'react-redux';
@@ -9,13 +7,12 @@ import { Field, reduxForm } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
 
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import { Card, CardHeader, CardTitle, CardText, CardActions } from 'material-ui/Card';
 
 import { readPost, readComments, createComment, readMoreComments, notify } from './../../actions';
 
-import { PostDetail, Comment } from './../../components';
+import { SimpleNavigator, PostDetail, Comment } from './../../components';
 
 class Post extends React.Component {
   static defaultProps = {
@@ -54,28 +51,7 @@ class Post extends React.Component {
     if(!this.state.initializedPost || !this.state.initializedComments) return (progress);
     return (
       <div>
-        <Helmet title={`posts/${this.props.post.id}]`} />
-        <Row style={{ marginBottom: `20px` }}>
-          <Col md={2}>
-            <Link to={`/posts`}>
-              <RaisedButton label="BACK" fullWidth={true} primary={true} />
-            </Link>
-          </Col>
-          <Col md={2} />
-          <Col md={4}>
-            <div className="text-title"> {window.location.pathname} </div>
-          </Col>
-          <Col md={2}>
-            <Link to={`/posts/${this.props.params.id}/edit`}>
-              <RaisedButton label="EDIT POST" fullWidth={true} secondary={true} />
-            </Link>
-          </Col>
-          <Col md={2}>
-            <Link to={`/posts/new`}>
-              <RaisedButton label="WRITE POST" fullWidth={true} primary={true} />
-            </Link>
-          </Col>
-        </Row>
+        <SimpleNavigator path={window.location.pathname} back edit write writePath={`/posts/new`} />
 
         <Row style={{ marginBottom: `20px` }}>
           <Col md={12}>
@@ -107,7 +83,6 @@ class Post extends React.Component {
                   </Row>
                 </CardText>
                 <CardActions style={{ paddingRight: 0, textAlign: 'right' }}>
-                  <FlatButton type="button" label="Cancel" onTouchTap={() => this.context.router.push(`/posts/${this.props.post.id}`)} />
                   <FlatButton type="submit" label="Submit" primary={true} disabled={pristine||submitting} />
                 </CardActions>
               </form>

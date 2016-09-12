@@ -6,3 +6,4 @@ export PhotoDetail from './Photos/PhotoDetail';
 export PhotoItem from './Photos/PhotoItem';
 export AlbumItem from './Albums/AlbumItem';
 export GithubItem from './Github/GithubItem';
+export SimpleNavigator from './Utils/SimpleNavigator';

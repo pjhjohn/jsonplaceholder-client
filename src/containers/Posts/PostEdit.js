@@ -60,7 +60,7 @@ class PostEdit extends React.Component {
                 </Row>
               </CardText>
               <CardActions style={{ paddingRight: 0, textAlign: 'right' }}>
-                <FlatButton type="button" label="Cancel" onTouchTap={() => this.context.router.push(`/posts/${this.props.post.id}`)} />
+                <FlatButton type="button" label="Cancel" onTouchTap={() => this.context.router.goBack()} />
                 <FlatButton type="submit" label="Submit" primary={true} disabled={pristine||submitting} />
               </CardActions>
             </form>
