@@ -1,12 +1,15 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ReactMarkdown from 'react-markdown';
-import CircularProgress from 'material-ui/CircularProgress';
-import { Card, CardText } from 'material-ui/Card';
 
+import Paper from 'material-ui/Paper';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import { readReadme } from './../../actions';
+
+import { SimpleNavigator } from './../../components';
 
 class Home extends React.Component {
   static defaultProps = {
@@ -22,13 +25,15 @@ class Home extends React.Component {
   };
 
   render() {
+    const paperStyle = { padding: `8px 16px` };
     const progress = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
     return (
-      <Card>
-        <CardText>
+      <div>
+        <SimpleNavigator path={window.location.pathname} />
+        <Paper zDepth={1} style={paperStyle}>
           { (!this.props.readme.content) ? progress : <ReactMarkdown source={atob(this.props.readme.content)} /> }
-        </CardText>
-      </Card>
+        </Paper>
+      </div>
     )
   }
 }
