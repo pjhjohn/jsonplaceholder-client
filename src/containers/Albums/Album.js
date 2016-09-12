@@ -1,14 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
 import { Row, Col } from 'react-grid-system';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 
 import { readInitialPhotos, readMorePhotos } from './../../actions';
 
-import { PhotoItem } from './../../components';
+import { SimpleNavigator, PhotoItem } from './../../components';
+
 
 class Album extends React.Component {
   static defaultProps = {
@@ -44,17 +47,7 @@ class Album extends React.Component {
     if(!this.state.initialized) return (progress);
     return (
       <div>
-        <Row style={{ marginBottom: `20px` }}>
-          <Col md={2}>
-            <Link to={`/albums`}>
-              <RaisedButton label="BACK" fullWidth={true} primary={true} />
-            </Link>
-          </Col>
-          <Col md={8}>
-            <div className="text-title"> {window.location.pathname} </div>
-          </Col>
-          <Col md={2} />
-        </Row>
+        <SimpleNavigator path={window.location.pathname} back />
 
         <Row>
           { this.props.photos.map((photo) =>
