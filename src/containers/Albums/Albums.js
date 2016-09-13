@@ -69,8 +69,10 @@ class Albums extends React.Component {
 }
 
 function mapStateToProps(state) {
+  const albums = [];
+  Object.keys(state.album.data).sort((a, b) => parseInt(a, 10) - parseInt(b, 10)).forEach((key) => albums.push(state.album.data[key]));
   return {
-    albums: state.album.list,
+    albums: albums,
     initialized: state.album.initialized,
     _start: state.album._start,
     _end: state.album._end

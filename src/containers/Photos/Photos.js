@@ -47,7 +47,7 @@ class Photos extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    photo: state.photo.detail,
+    photo: state.photo.data[state.photo.active],
   };
 }
 
