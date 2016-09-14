@@ -10,36 +10,33 @@ import FlatButton from 'material-ui/FlatButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import { Card, CardHeader, CardTitle, CardText, CardActions } from 'material-ui/Card';
 
-import { readPost, readComments, createComment, readMoreComments, notify } from './../../actions';
+import { readPost, createComment, readInitialComments, readMoreComments, notify } from './../../actions';
 
 import { SimpleNavigator, PostDetail, Comment } from './../../components';
 
 class Post extends React.Component {
-  static defaultProps = {
-    post: {},
-    comments: {}
-  };
-
   static propTypes = {
-    post: React.PropTypes.object.isRequired,
-    comments: React.PropTypes.array.isRequired
+    post: React.PropTypes.object,
+    comments: React.PropTypes.array
   };
 
   state = {
-    initializedPost: false,
-    initializedComments: false
+    loadingPost: true,
+    loadingComments: true
   };
 
   componentWillMount() {
     this.props.readPost(this.props.params.id)
-      .then(()=>this.setState({initializedPost: true}));
-    this.props.readComments(this.props.params.id)
-      .then(()=>this.setState({initializedComments: true}));
+      .then(()=>this.setState({loadingPost: false}));
+    this.props.readInitialComments(this.props.params.id)
+      .then(()=>this.setState({loadingComments: false}));
   };
 
   onSubmit = (data) => {
     data.postId = this.props.params.id;
+    this.setState({loadingComments: true});
     this.props.createComment(data).then((response) => {
+      this.setState({loadingComments: false});
       this.props.notify(`comment`, response.payload.status);
       this.props.readMoreComments({'_start' : this.props.comments.length, 'postId' : this.props.params.id});
     });
@@ -48,7 +45,7 @@ class Post extends React.Component {
   render() {
     const { handleSubmit, pristine, submitting } = this.props;
     const progress = (<CircularProgress style={{textAlign:`center`, width:`100%`}} />);
-    if(!this.state.initializedPost || !this.state.initializedComments) return (progress);
+    if(this.state.loadingPost) return (progress);
     return (
       <div>
         <SimpleNavigator path={window.location.pathname} back edit write writePath={`/posts/new`} />
@@ -90,6 +87,8 @@ class Post extends React.Component {
           </Col>
         </Row>
 
+        { this.state.loadingComments? progress : null }
+
         <Row>
           <Col md={12}>
           { this.props.comments.map((comment) =>
@@ -107,14 +106,16 @@ Post = reduxForm({
 })(Post);
 
 function mapStateToProps(state) {
+  const comments = [];
+  Object.keys(state.comment.data).sort((a, b) => parseInt(b, 10) - parseInt(a, 10)).forEach((key) => comments.push(state.comment.data[key]));
   return {
-    post: state.post.detail,
-    comments: state.comment.list.slice().reverse()
+    post: state.post.data[state.post.active],
+    comments: comments
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ readPost, readComments, readMoreComments, createComment, notify }, dispatch);
+  return bindActionCreators({ readPost, readInitialComments, readMoreComments, createComment, notify }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

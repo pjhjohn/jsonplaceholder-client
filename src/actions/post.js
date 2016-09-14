@@ -8,6 +8,7 @@ export const UPDATE_POST = 'UPDATE_POST';
 export const DELETE_POST = 'DELETE_POST';
 
 export const DEFAULT_POST_LIMIT = 16;
+
 const BASE_QUERY = {'_limit': DEFAULT_POST_LIMIT};
 
 export function createPost(post) {
@@ -26,16 +27,16 @@ export function readPost(postId) {
   };
 }
 
-export function readInitialPosts() {
-  const request = api.get(`/posts`, BASE_QUERY);
+export function readInitialPosts(query={}) {
+  const request = api.get(`/posts`, { ...BASE_QUERY, ...query });
   return {
     type: READ_INITIAL_POSTS,
     payload: request
   };
 }
 
-export function readMorePosts(query) {
-  const request = api.get(`/posts`, Object.assign(BASE_QUERY, query));
+export function readMorePosts(query={}) {
+  const request = api.get(`/posts`, { ...BASE_QUERY, ...query });
   return {
     type: READ_MORE_POSTS,
     payload: request
