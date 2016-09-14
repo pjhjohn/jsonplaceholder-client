@@ -37,7 +37,7 @@ class Post extends React.Component {
     this.setState({loadingComments: true});
     this.props.createComment(data).then((response) => {
       this.setState({loadingComments: false});
-      this.props.notify(`comment`, response.payload.status);
+      this.props.notify(`comment`, response.payload.status, Date());
       this.props.readMoreComments({'_start' : this.props.comments.length, 'postId' : this.props.params.id});
     });
   };
