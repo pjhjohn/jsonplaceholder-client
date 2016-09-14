@@ -65,8 +65,10 @@ class Posts extends React.Component {
 }
 
 function mapStateToProps(state) {
+  const posts = [];
+  Object.keys(state.post.data).sort((a, b) => parseInt(a, 10) - parseInt(b, 10)).forEach((key) => posts.push(state.post.data[key]));
   return {
-    posts: state.post.list,
+    posts: posts,
     initialized: state.post.initialized,
     _start: state.post._start,
     _end: state.post._end
