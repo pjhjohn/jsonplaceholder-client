@@ -24,7 +24,7 @@ class PostNew extends React.Component {
   onSubmit = (data) => {
     this.props.createPost(data).then((response) => {
       console.log(response);
-      this.props.notify(`posting`, response.payload.status, Date());
+      this.props.notify(`posting`, response.payload.status);
       this.context.router.push(`/posts/${response.payload.data.id}`);
     });
   };

@@ -1,6 +1,6 @@
 import { NOTIFICATION } from './../actions';
 
-const INITIAL_TOAST_STATE = { type: `nothing`, httpStatus: 200, date: Date() };
+const INITIAL_TOAST_STATE = { type: `nothing`, httpStatus: 200, date: ``};
 
 export default function ( state = INITIAL_TOAST_STATE, action) {
   switch(action.type){

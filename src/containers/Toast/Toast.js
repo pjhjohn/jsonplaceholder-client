@@ -13,29 +13,29 @@ class Toast extends React.Component {
   static defaultProps = {
     type: NOTHING,
     httpStatus: 200,
-    date: Date()
-};
+    date: ``
+  };
 
   static propTypes = {
     type: React.PropTypes.string.isRequired,
     httpStatus: React.PropTypes.number.isRequired,
-    date: React.PropTypes.any.isRequired
+    date: React.PropTypes.string.isRequired
   };
 
   componentWillUpdate(nextProps) {
     switch (nextProps.type) {
       case POSTING: {
-        if (nextProps.httpStatus === 201) this.refs.container.success(`Success! :) at ` + this.props.date, `Posting Result`);
+        if (nextProps.httpStatus === 201) this.refs.container.success(`Success! :) at ${nextProps.date}`, `Posting Result`);
         else this.refs.container.error(`Error! :(`, `Posting Result`);
         break;
       }
       case EDITING: {
-        if (nextProps.httpStatus === 200) this.refs.container.success(`Success! :) at ` + this.props.date, `Editing Result`);
+        if (nextProps.httpStatus === 200) this.refs.container.success(`Success! :) at ${nextProps.date}`, `Editing Result`);
         else this.refs.container.error(`Error! :(`, `Editing Result`);
         break;
       }
       case COMMENT: {
-        if (nextProps.httpStatus === 201) this.refs.container.success(`Successfully Commented at ` + this.props.date, `Comment Result`);
+        if (nextProps.httpStatus === 201) this.refs.container.success(`Successfully Commented at ${nextProps.date}`, `Comment Result`);
         else this.refs.container.error(`Error! :(`, `Comment Result`);
         break;
       }
@@ -58,7 +58,7 @@ function mapStateToProps(state) {
   return {
     type: state.toast.type,
     httpStatus: state.toast.httpStatus,
-    data : state.toast.date
+    date : state.toast.date
   };
 }
 

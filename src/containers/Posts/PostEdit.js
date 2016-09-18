@@ -36,7 +36,7 @@ class PostEdit extends React.Component {
   onSubmit = (data) => {
     data.userId = this.props.post.userId;
     this.props.updatePost(this.props.post.id, data).then((response) => {
-      this.props.notify(`editing`, response.payload.status, Date());
+      this.props.notify(`editing`, response.payload.status);
       this.context.router.push(`/posts/${this.props.post.id}`);
     });
   };
