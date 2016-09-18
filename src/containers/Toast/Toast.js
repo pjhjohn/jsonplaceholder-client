@@ -12,28 +12,30 @@ const COMMENT = 'comment';
 class Toast extends React.Component {
   static defaultProps = {
     type: NOTHING,
-    httpStatus: 200
+    httpStatus: 200,
+    date: ``
   };
 
   static propTypes = {
     type: React.PropTypes.string.isRequired,
-    httpStatus: React.PropTypes.number.isRequired
+    httpStatus: React.PropTypes.number.isRequired,
+    date: React.PropTypes.string.isRequired
   };
 
   componentWillUpdate(nextProps) {
     switch (nextProps.type) {
       case POSTING: {
-        if (nextProps.httpStatus === 201) this.refs.container.success(`Success! :)`, `Posting Result`);
+        if (nextProps.httpStatus === 201) this.refs.container.success(`Success! :) at ${nextProps.date}`, `Posting Result`);
         else this.refs.container.error(`Error! :(`, `Posting Result`);
         break;
       }
       case EDITING: {
-        if (nextProps.httpStatus === 200) this.refs.container.success(`Success! :)`, `Editing Result`);
+        if (nextProps.httpStatus === 200) this.refs.container.success(`Success! :) at ${nextProps.date}`, `Editing Result`);
         else this.refs.container.error(`Error! :(`, `Editing Result`);
         break;
       }
       case COMMENT: {
-        if (nextProps.httpStatus === 201) this.refs.container.success(`Successfully Commented`, `Comment Result`);
+        if (nextProps.httpStatus === 201) this.refs.container.success(`Successfully Commented at ${nextProps.date}`, `Comment Result`);
         else this.refs.container.error(`Error! :(`, `Comment Result`);
         break;
       }
@@ -46,7 +48,7 @@ class Toast extends React.Component {
 
   render() {
     return (
-      <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-top-right"/>
+      <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-top-right" preventDuplicates={false}/>
     );
   }
 }
@@ -55,7 +57,8 @@ class Toast extends React.Component {
 function mapStateToProps(state) {
   return {
     type: state.toast.type,
-    httpStatus: state.toast.httpStatus
+    httpStatus: state.toast.httpStatus,
+    date : state.toast.date
   };
 }
 
