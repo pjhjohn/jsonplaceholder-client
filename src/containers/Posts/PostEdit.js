@@ -84,7 +84,10 @@ PostEdit = reduxForm({
 })(PostEdit);
 
 function mapStateToProps(state) {
-  return {initialValues: state.post.detail, post: state.post.detail};
+  return {
+    initialValues: state.post.data[state.post.active],
+    post: state.post.data[state.post.active]
+  };
 }
 
 function mapDispatchToProps(dispatch) {
