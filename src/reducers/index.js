@@ -1,23 +1,23 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { reducer as FormReducer } from 'redux-form';
+import { reducer as ToastrReducer } from 'react-redux-toastr'
+
 import PostReducer from './post';
 import CommentReducer from './comment';
-
-import AboutReducer from './about';
 import AlbumReducer from './album';
-import ReadmeReducer from './readme';
 import PhotoReducer from './photo';
-import ToastReducer from './toast';
+import AboutReducer from './about';
+import ReadmeReducer from './readme';
 
 const RootReducer = combineReducers({
   post: PostReducer,
-  form: formReducer,
   comment: CommentReducer,
-  github: AboutReducer,
   album: AlbumReducer,
   photo: PhotoReducer,
+  github: AboutReducer,
   readme: ReadmeReducer,
-  toast: ToastReducer
+  form: FormReducer,
+  toastr: ToastrReducer
 });
 
 export default RootReducer;

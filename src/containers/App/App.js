@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Helmet from 'react-helmet';
 import { Container } from 'react-grid-system';
 import GitHubForkRibbon from 'react-github-fork-ribbon'
+import ReduxToastr from 'react-redux-toastr'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Header from './../Header/Header';
 import Footer from './../Footer/Footer';
 import DevTools from './../DevTools/DevTools';
-import Toast from '../Toast/Toast';
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <MuiThemeProvider>
@@ -19,13 +19,16 @@ class App extends Component {
             defaultTitle="jsonplaceholder-client"
             titleTemplate="%s | jsonplaceholder-client"
           />
-          <Toast />
+
           {/* GIthub Fork Ribbon */}
           <GitHubForkRibbon href="https://github.com/pjhjohn/jsonplaceholder-client"
                             target="_blank"
                             position="right">
             Fork me on GitHub
           </GitHubForkRibbon>
+
+          {/* Toast Message */}
+          <ReduxToastr/>
 
           {/* Application Body */}
           <Header />

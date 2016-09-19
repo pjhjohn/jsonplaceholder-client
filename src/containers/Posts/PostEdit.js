@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { Row, Col } from 'react-grid-system';
 
 import { connect } from 'react-redux';
+import { actions as toastrActions } from 'react-redux-toastr'
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
@@ -10,20 +11,13 @@ import { TextField } from 'redux-form-material-ui';
 import FlatButton from 'material-ui/FlatButton';
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 
-import { readPost, updatePost, notify } from './../../actions';
+import { readPost, updatePost } from './../../actions';
 
 class PostEdit extends React.Component {
-  static defaultProps = {
-    post: {}
-  };
-
-  static propTypes = {
-    post: React.PropTypes.object.isRequired
-  };
-
-  static contextTypes = {
-    router: React.PropTypes.object
-  };
+  constructor(props) {
+    super(props);
+    this.notify = bindActionCreators(toastrActions, this.props.dispatch);
+  }
 
   componentWillMount() {
     this.props.readPost(this.props.params.id);
@@ -36,7 +30,8 @@ class PostEdit extends React.Component {
   onSubmit = (data) => {
     data.userId = this.props.post.userId;
     this.props.updatePost(this.props.post.id, data).then((response) => {
-      this.props.notify(`editing`, response.payload.status);
+      if(response.payload.ok) this.notify.success(`Success`, `Successfully Edited`);
+      else this.notify.error(`Error`, `Failed to Edit`);
       this.context.router.push(`/posts/${this.props.post.id}`);
     });
   };
@@ -72,16 +67,28 @@ class PostEdit extends React.Component {
   }
 }
 
+PostEdit.contextTypes = {
+  router: React.PropTypes.object
+};
+
+PostEdit.propTypes = {
+  post: React.PropTypes.object.isRequired
+};
+
+PostEdit.defaultProps = {
+  post: {}
+};
+
+PostEdit = reduxForm({
+  form: 'PostsEditForm'
+})(PostEdit);
+
 function mapStateToProps(state) {
   return {initialValues: state.post.detail, post: state.post.detail};
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ readPost, updatePost, notify }, dispatch);
+  return bindActionCreators({ readPost, updatePost }, dispatch);
 }
-
-PostEdit = reduxForm({
-  form: 'PostsEditForm'
-})(PostEdit);
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostEdit);

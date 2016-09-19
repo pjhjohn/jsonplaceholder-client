@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { Row, Col } from 'react-grid-system';
 
 import { connect } from 'react-redux';
+import { actions as toastrActions } from 'react-redux-toastr'
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
@@ -10,12 +11,13 @@ import { TextField } from 'redux-form-material-ui';
 import FlatButton from 'material-ui/FlatButton';
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 
-import { createPost, notify } from './../../actions';
+import { createPost } from './../../actions';
 
 class PostNew extends React.Component {
-  static contextTypes = {
-    router: React.PropTypes.object
-  };
+  constructor(props) {
+    super(props);
+    this.notify = bindActionCreators(toastrActions, this.props.dispatch);
+  }
 
   componentDidMount() {
     this.refs.field2focus.getRenderedComponent().getRenderedComponent().focus();
@@ -24,7 +26,8 @@ class PostNew extends React.Component {
   onSubmit = (data) => {
     this.props.createPost(data).then((response) => {
       console.log(response);
-      this.props.notify(`posting`, response.payload.status);
+      if(response.payload.ok) this.notify.success(`Success`, `Successfully Posted`);
+      else this.notify.error(`Error`, `Failed to Post`);
       this.context.router.push(`/posts/${response.payload.data.id}`);
     });
   };
@@ -61,12 +64,16 @@ class PostNew extends React.Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ createPost, notify }, dispatch);
-}
+PostNew.contextTypes = {
+  router: React.PropTypes.object
+};
 
 PostNew = reduxForm({
   form: 'PostsNewForm'
 })(PostNew);
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ createPost }, dispatch);
+}
 
 export default connect(null, mapDispatchToProps)(PostNew);

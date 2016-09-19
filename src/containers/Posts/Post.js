@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-grid-system';
 
 import { connect } from 'react-redux';
+import { actions as toastrActions } from 'react-redux-toastr'
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
@@ -10,20 +11,19 @@ import FlatButton from 'material-ui/FlatButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import { Card, CardHeader, CardTitle, CardText, CardActions } from 'material-ui/Card';
 
-import { readPost, createComment, readInitialComments, readMoreComments, notify } from './../../actions';
+import { readPost, createComment, readInitialComments, readMoreComments } from './../../actions';
 
 import { SimpleNavigator, PostDetail, Comment } from './../../components';
 
 class Post extends React.Component {
-  static propTypes = {
-    post: React.PropTypes.object,
-    comments: React.PropTypes.array
-  };
-
-  state = {
-    loadingPost: true,
-    loadingComments: true
-  };
+  constructor(props) {
+    super(props);
+    this.notify = bindActionCreators(toastrActions, this.props.dispatch);
+    this.state = {
+      loadingPost: true,
+      loadingComments: true
+    };
+  }
 
   componentWillMount() {
     this.props.readPost(this.props.params.id)
@@ -37,7 +37,8 @@ class Post extends React.Component {
     this.setState({loadingComments: true});
     this.props.createComment(data).then((response) => {
       this.setState({loadingComments: false});
-      this.props.notify(`comment`, response.payload.status);
+      if(response.payload.ok) this.notify.success(`Success`, `Successfully Commented`);
+      else this.notify.error(`Error`, `Failed to Comment`);
       this.props.readMoreComments({'_start' : this.props.comments.length, 'postId' : this.props.params.id});
     });
   };
@@ -101,6 +102,11 @@ class Post extends React.Component {
   }
 }
 
+Post.propTypes = {
+  post: React.PropTypes.object,
+  comments: React.PropTypes.array
+};
+
 Post = reduxForm({
   form: 'CommentsNewForm'
 })(Post);
@@ -115,7 +121,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ readPost, readInitialComments, readMoreComments, createComment, notify }, dispatch);
+  return bindActionCreators({ readPost, readInitialComments, readMoreComments, createComment }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);
